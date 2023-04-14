@@ -1,131 +1,77 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Auth = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [phonenumber, setPhoneNumber] = useState("");
+  const [error, setError] = useState(null);
 
-  const registerUser = async () => {
-    try {
-      const response = await axios.post("/api/register", {
-        username,
-        password,
-        address,
-        phonenumber,
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError(null);
 
-  const loginUser = async () => {
     try {
-      const response = await axios.post("/api/login", {
-        username,
-        password,
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password, address, phonenumber }),
       });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
-  const updateUser = async () => {
-    try {
-      const response = await axios.put("/api/update", {
-        id: "user-id",
-        role: "admin",
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error);
+      }
 
-  const deleteUser = async () => {
-    try {
-      const response = await axios.delete("/api/deleteUser", {
-        data: {
-          id: "user-id",
-        },
-      });
-      console.log(response.data);
+      const { token } = await response.json();
+      sessionStorage.setItem("token", token);
+      console.log("Registration successful");
     } catch (error) {
+      setError(error.message);
       console.error(error);
     }
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="address">Address:</label>
-        <input
-          type="text"
-          id="address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="phonenumber">Phone Number:</label>
-        <input
-          type="text"
-          id="phonenumber"
-          value={phonenumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-      </div>
-      <button onClick={registerUser}>Register User</button>
+    <form onSubmit={handleSubmit}>
+      <label className="username">Username:</label>
+      <input
+        type="text"
+        id="username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <label className="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <label className="address">Address:</label>
+      <input
+        type="text"
+        id="address"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+      />
+      <label className="phone-number">Phone Number:</label>
+      <input
+        type="text"
+        id="phone-number"
+        value={phonenumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
+      />
 
-      <h1>Login</h1>
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button onClick={loginUser}>Login User</button>
+      <Link to="/">
+        <button type="submit">Register</button>
+      </Link>
 
-      <h1>Update Role</h1>
-      <button onClick={updateUser}>Update Role to Admin</button>
-
-      <h1>Delete User</h1>
-      <button onClick={deleteUser}>Delete User</button>
-    </div>
+      {error && error.message === "Username already exists" && (
+        <p>Please choose a different username</p>
+      )}
+    </form>
   );
 };
 

@@ -29,7 +29,7 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
             </Link>
           </button>
           <button className="navcontact-button">
-            <Link to="/register">
+            <Link to="/Auth">
               <img src={user} alt="#" />
             </Link>
           </button>
