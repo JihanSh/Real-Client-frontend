@@ -3,7 +3,14 @@ import './Cart.css'
 
 const Cart = () => {
   return (
-    <div>Cart</div>
+    <div className='cart-wrapper'>
+      <div>
+        <h1>Cart</h1>
+      </div>
+      <div>
+        
+      </div>
+    </div>
   )
 }
 
