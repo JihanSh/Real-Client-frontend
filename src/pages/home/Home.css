@@ -1,0 +1,175 @@
+.home-section{
+    width: 1250px;
+    margin: auto;
+}
+.sale-section{
+    display: flex;
+    background-color: #e8e5e5 ;
+    margin: 20px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.img-sale-section img{
+    width: 500px;
+     margin: 20px;
+    
+}
+.line-sale-section{
+    text-align: center;
+}
+.line-sale-section .line{
+   color: #FF7D00;
+}
+.line-sale-section h2{
+    padding-bottom: 20px;
+    font-size: 35px;
+}
+.line-sale-section .sale-link{
+    color: white;
+    background-color: #FF7D00;
+    padding:5px 30px 5px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+.line-category-section{
+    margin-top: 40px;
+    color:#0B486A;
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+}
+.line-category-section:after {
+    content: ""; /* This is necessary for the pseudo element to work. */ 
+    display: block; /* This will put the pseudo element on its own line. */
+    margin: 0 auto; /* This will center the border. */
+    width: 13%; /* Change this to whatever width you want. */
+    padding-top: 5px; /* This creates some space between the element and the border. */
+    border-bottom: 2px solid #FF7D00; /* This creates the border. Replace black with whatever color you want. */
+}
+.line-latest-section{
+    margin-top: 30px;
+    color:#0B486A;
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+}
+.line-latest-section:after {
+    content: ""; /* This is necessary for the pseudo element to work. */ 
+    display: block; /* This will put the pseudo element on its own line. */
+    margin: 0 auto; /* This will center the border. */
+    width: 15%; /* Change this to whatever width you want. */
+    padding-top: 5px; /* This creates some space between the element and the border. */
+    border-bottom: 2px solid #FF7D00; /* This creates the border. Replace black with whatever color you want. */
+}
+.category-section{
+    width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+
+}
+.img1-category img{
+    width:265px;
+    margin: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: filter 0.3s ease-in-out;
+    
+}
+
+.img1-category:hover img {
+    filter: brightness(70%);
+}
+
+.img1-category .overlay1 {
+    position: absolute;
+    top: 68%;
+    left: 33%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.img1-category:hover .overlay1 {
+    opacity: 1;
+}
+.img2-category img{
+    width:275px;
+    margin: 20px;
+    border-radius: 50%;
+}
+
+.img2-category:hover img {
+    filter: brightness(70%);
+}
+
+.img2-category .overlay2 {
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.img2-category:hover .overlay2 {
+    opacity: 1;
+}
+.img3-category img{
+    width:280px;
+    margin: 20px;
+    border-radius: 50%;
+}
+
+.img3-category:hover img {
+    filter: brightness(70%);
+}
+
+.img3-category .overlay3 {
+    position:absolute;
+    top: 68%;
+    left: 66%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.img3-category:hover .overlay3 {
+    opacity: 1;
+}
+.products-section{
+   padding-left: 50px;
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   gap: 5px;
+   text-align: center;
+}
+button.MuiButton-text{
+    color:#FF7D00;
+    font-size: 15px;
+}
+.product-card{
+    margin-top: 50px;
+   
+}
+.product-card .product-link{
+    text-decoration: none;
+}
+.MuiTypography-h5{
+    color:#0B486A
+
+}
+.MuiTypography-h5:hover{
+    color:#FF7D00
+
+}

@@ -5,8 +5,10 @@ import About from "./pages/about/About";
 import Cart from "./pages/cart/Cart";
 import Shop from "./pages/shop/Shop";
 import Product from "./pages/product/Product";
+import Category from "./pages/category/Category";
 import { HeaderNavbar, MenuBar } from '../src/component/Header/HeaderNavbar';
 import { useState } from "react";
+
 
 function App() {
   const [menubar, setMenuBar] = useState(false);
@@ -22,6 +24,7 @@ function App() {
         <Route path="cart" element={<Cart />} />
         <Route path="shop" element={<Shop />} />
         <Route path="product" element={<Product />} />
+        <Route path="category" element={<Category />} />
       </Routes>
     </BrowserRouter>
     </>
