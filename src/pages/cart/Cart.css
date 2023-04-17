@@ -1,0 +1,155 @@
+* {
+    font-family: sans-serif;
+}
+.react-confirm-alert > div:first-child {
+    background-color: white;
+    border: #0B486A solid 1px;
+    width: 90%;
+    padding: 50px 30px 50px 70px;
+}
+.react-confirm-alert-body {
+    font-size: 20px;
+    font-weight: 400;
+    color: #0B486A;
+  }
+.react-confirm-alert-body h1{
+    color: #0B486A;
+    margin-bottom: 20px;
+}
+.react-confirm-alert-button-group{
+    display: flex;
+    gap: 60%;
+}
+.react-confirm-alert-button-group button:nth-child(1){
+    width: 15%;
+    background-color: #0B486A;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+.react-confirm-alert-button-group button:nth-child(2){
+    width: 15%;
+    background-color: #0B486A;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+.react-confirm-alert-button-group button:nth-child(1):hover {
+    background-color: #FF7D00;
+}
+.react-confirm-alert-button-group button:nth-child(2):hover {
+    background-color: #FF7D00;
+}
+.cart-header {
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 5%;
+}
+.cart-title {
+    font-size: 50px;
+    color: #0B486A;
+}
+.cart-button-icon{
+    background-color: transparent;
+    border: none;
+    margin-left: 50px;
+}
+.cart-Xicon{
+    color: #FF7D00;
+    font-size: 30px;
+    cursor: pointer;
+}
+.cart-table{
+    margin-bottom: 5%;
+}
+.cart-item-image img{
+    width: 100px;
+    height: 100px;
+}
+.cart-totals{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 5%;
+}
+.cart-totals-title{
+    font-size: 50px;
+    color: #0B486A;
+    margin-bottom: 10px
+}
+.cart-totals-first{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border: #0B486A solid 2px;
+    width: 50%;
+    font-size: 25px;
+}
+.cart-totals-second-button{
+    padding: 10px;
+    width: 52%;
+    background-color: #0B486A;
+    color: white;
+    border: #0B486A solid 1px;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+  @media only screen and (max-width: 699px) {
+    .cart-table{
+        margin-bottom: 15%;
+    }
+    .cart-totals{
+        margin-bottom: 10%;
+    }
+    .cart-totals-first{
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        border: #0B486A solid 2px;
+        width: 91%;
+        font-size: 25px;
+        margin-top: 10%;
+    }
+    .cart-totals-second-button{
+        padding: 10px;
+        width: 100%;
+        background-color: #0B486A;
+        color: white;
+        border: #0B486A solid 1px;
+        cursor: pointer;
+        font-size: 20px;
+    }
+    .react-confirm-alert > div:first-child {
+        margin-left: auto;
+        margin-right: auto;
+        background-color: white;
+        border: #0B486A solid 1px;
+        width: 50%;
+        padding-left: 45px;
+    }
+    .react-confirm-alert-button-group{
+        display: flex;
+        gap: 20%;
+    }
+    .react-confirm-alert-button-group button:nth-child(1){
+        width: 40%;
+        background-color: #0B486A;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .react-confirm-alert-button-group button:nth-child(2){
+        width: 40%;
+        background-color: #0B486A;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+    }
+  }
+

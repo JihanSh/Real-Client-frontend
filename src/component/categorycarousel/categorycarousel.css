@@ -1,0 +1,31 @@
+.slick-slider{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: #0B486A solid 2px;
+    padding-bottom: 15px;
+}
+
+.title-carousel{
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: #0B486A;
+    font-weight: bold;
+    cursor: pointer;
+    padding-left: 30%;
+}
+.title-carousel:hover{
+    color: #FF7D00;
+}
+@media only screen and (max-width: 699px) {
+    .title-carousel{
+        background-color: transparent;
+        border: none;
+        font-size: 10px;
+        color: #0B486A;
+        font-weight: bold;
+        cursor: pointer;
+        padding-left: 10%;
+    }
+}
