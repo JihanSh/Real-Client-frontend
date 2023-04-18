@@ -19,12 +19,12 @@ function App() {
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} /> 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/"  exact element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="cart" element={<Cart />} />
         <Route path="shop" element={<Shop />} />
-        <Route path="product" element={<Product />} />
-        <Route path="category" element={<Category />} />
+        <Route path="product/:productId" element={<Product />} />
+        <Route path="category/:categoryId" element={<Category />} />
       </Routes>
     </BrowserRouter>
     </>
