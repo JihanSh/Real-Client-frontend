@@ -18,6 +18,42 @@
 .title-carousel:hover{
     color: #FF7D00;
 }
+.title-carousel:focus{
+    color: #FF7D00;
+}
+.products-section{
+    padding: 1% 10% 10% 15%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    text-align: center;
+ }
+ 
+ .product-card{
+    margin-top: 50px;
+ }
+ .product-card .product-link{
+    text-decoration: none;
+ }
+ .MuiTypography-h5{
+    color:#0B486A
+ 
+ }
+ .MuiTypography-h5:hover{
+    color:#FF7D00
+ 
+ }
+ .pagination{
+    margin: 10px;
+    padding-left: 40px;
+}
+ .addto-cart{
+    text-decoration: none;
+    color:#FF7D00;
+    font-size: 15px;
+}
+
+
 @media only screen and (max-width: 699px) {
     .title-carousel{
         background-color: transparent;
@@ -27,5 +63,13 @@
         font-weight: bold;
         cursor: pointer;
         padding-left: 10%;
+    }
+    .products-section{
+        width: 410px;
+        display: grid;
+        grid-template-columns: 1fr ;
+        gap: 5px;
+        text-align: center;
+        justify-content: center;
     }
 }

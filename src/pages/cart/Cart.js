@@ -200,7 +200,7 @@ const Cart = () => {
         </Paper>
       </div>
       <div className="cart-totals">
-        <h1 className="cart-totals-title">Cart Total</h1>
+        {/* <h1 className="cart-totals-title">Cart Total</h1> */}
         <div className="cart-totals-first">
           <p>Total</p>
           <p>{totalData.bill}</p>
