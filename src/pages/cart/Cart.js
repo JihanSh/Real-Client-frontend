@@ -15,7 +15,8 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 const Cart = () => {
-  const userId = "6430c1f5d7942484d04adb9c";
+const userId = sessionStorage.getItem('Id');
+
   const [tableData, setTableData] = useState([]);
   const [totalData, settotalData] = useState([]);
   const [orderStatus, setOrderStatus] = useState(null);
@@ -42,26 +43,7 @@ const Cart = () => {
     { id: "size", label: "Size", minWidth: 100 },
     { id: "price", label: "Price", minWidth: 100 },
   ];
-  // const handleRemove = async (userId, productId) => {
-  //   try {
-  //     const response = await fetch(
-  //       `http://localhost:5000/cart/${userId}/${productId}`,
-  //       {
-  //         method: "DELETE",
-  //       }
-  //     );
-  //     if (response.ok) {
-  //       console.log(`Item with ID ${productId} has been removed from cart for user ${userId}.`);
-  //       const cartResponse = await fetch(`http://localhost:5000/cart/${userId}`);
-  //       const cartData = await cartResponse.json();
-  //       setTableData(cartData.items);
-  //     } else {
-  //       console.error("Failed to remove item");
-  //     }
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
-  // };
+
   const handleRemove = async (userId, productId) => {
     confirmAlert({
       title: "Confirm Deletion",

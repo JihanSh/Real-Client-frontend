@@ -7,27 +7,13 @@
     align-items: center;
     margin: 5%;
 }
-.category-searchbar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.category-searchbar input:focus{
-    outline: none;
-    border-bottom: #0B486A solid 2px;
-    padding-bottom: 5px;
-}
-.category-searchbar input{
-    font-size: 20px;
-    border: none;
-    color: #0B486A;
-}
-.category-searchbar button{
-    border: none;
-    background-color: transparent;
-    font-size: 20px;
-    padding: 5%;
-    margin-left: -25%;
-    color: #FF7D00;
-    cursor: pointer;
+
+@media only screen and (max-width: 699px) {
+    .category-wrapper{
+        overflow-x: hidden;
+    }
+    .category-wrapper-title{
+        font-size: 30px;
+        padding-bottom: 10%;
+    }
 }

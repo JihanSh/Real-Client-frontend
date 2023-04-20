@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./HeaderNavbar.css";
-// import logo from "./JONCO_logo.png";
 import logo2 from "../Header/images/LOGO_WATERMARK.png";
 import menu from "../Header/images/Menu.png";
 import cart from "../Header/images/icons8-cart-64.png";
@@ -22,15 +21,22 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
             <Link to="/about">About Us</Link>
           </button>
         </div>
-        <div className="navnavbar-contact">
-          <button className="navcontact-button">
-            <Link to="/cart">
-              <img className="cart" src={cart} alt="#" />
-            </Link>
-          </button>
-          <button className="navcontact-button">
-            <Link to="/register">
-              <img src={user} alt="#" />
+        <div className="navbar-user">
+          <div className="navnavbar-contact">
+            <button className="navcontact-button">
+              <Link to="/cart">
+                <img className="cart" src={cart} alt="#" />
+              </Link>
+            </button>
+            <button className="navcontact-button">
+              <Link to="/user">
+                <img src={user} alt="#" />
+              </Link>
+            </button>
+          </div>
+          <button className="navLogin-button">
+            <Link to="/login">
+              <a href="../login">Login</a>
             </Link>
           </button>
         </div>

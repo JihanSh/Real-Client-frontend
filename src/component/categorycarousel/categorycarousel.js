@@ -16,6 +16,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router";
+
 
 const TitleCarousel = () => {
   const [title, setTitle] = useState([]);
@@ -24,15 +28,16 @@ const TitleCarousel = () => {
   const [cartStatus, setCartStatus] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1); // add state for totalPages
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const categoryId = "6434408e01647f07fd0153cf";
+  const categoryId = useParams();
+
   // fetch subcategory titles
   useEffect(() => {
-    
     const fetchTitle = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/subcategories/list/${categoryId}`
+          `http://localhost:5000/subcategories/list/${categoryId.categoryId}`
         );
         const data = await response.json();
         setTitle(data.subcategories);
@@ -59,7 +64,7 @@ const TitleCarousel = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/list2/${categoryId}`
+          `http://localhost:5000/products/list2/${categoryId.categoryId}`
         );
         const data = await response.json();
         setProduct(data);
@@ -68,6 +73,7 @@ const TitleCarousel = () => {
         console.log(err.message);
       }
     };
+    console.log(categoryId);
     fetchProducts();
   }, []);
 
@@ -95,7 +101,7 @@ const TitleCarousel = () => {
       const fetchProducts = async () => {
         try {
           const response = await fetch(
-            `http://localhost:5000/products/list2/${categoryId}`
+            `http://localhost:5000/products/list2/${categoryId.categoryId}`
           );
           const data = await response.json();
           setProduct(data);
@@ -132,10 +138,20 @@ const TitleCarousel = () => {
     }
     console.log(cartStatus);
   };
-
   return (
     <>
-      <Slider {...settings}>
+      {/* Search bar */}
+      <div className="category-searchbar">
+        <input
+          type="text"
+          onChange={(event) => setSearchTerm(event.target.value)}
+          placeholder="Search products..."
+        />
+        <button>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
+      </div>
+      <Slider {...settings} className="Slider">
         {title.map((item) => (
           <div key={item._id}>
             <button
@@ -147,52 +163,81 @@ const TitleCarousel = () => {
           </div>
         ))}
       </Slider>
-      <div className="products-section">
-        {product.map((product, id) => (
-          <div className="product-card">
-            <Card key={id} sx={{ maxWidth: 250, border: "solid 1px #0B486A" }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="260"
-                  image={`http://localhost:5000/${product.images[0]}`}
-                  alt="product img"
-                />
-
-                <Box display="flex" flexDirection="column" alignItems="center">
-                  <CardContent>
-                    <Link
-                      className="product-link"
-                      to={`product/${product._id}`}
-                    >
-                      <Typography gutterBottom variant="h5" component="div">
-                        {product.name.slice(0, 15)}...
-                      </Typography>
-                    </Link>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      mb="-20px"
-                      fontSize="20px"
-                    >
-                      {product.price} $
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button
-                      size="small"
-                      onClick={(event) => handleCart(event, product._id)}
-                    >
-                      <Link to="/cart" className="addto-cart">
-                        ADD TO CART
-                      </Link>
-                    </Button>
-                  </CardActions>
-                </Box>
-              </CardActionArea>
-            </Card>
+      <div className="slider-responsive">
+        {title.map((item) => (
+          <div key={item._id}>
+            <button
+              className="slider-responsive-title-carousel"
+              onClick={() => handleSubcategoryClick(item._id)}
+            >
+              {item.title}
+            </button>
           </div>
         ))}
+      </div>
+      <div className="products-section">
+        {product
+          .filter((item) => {
+            if (searchTerm === "") {
+              return item;
+            } else if (
+              item.name.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              return item;
+            }
+          })
+          .map((product, id) => (
+            <div className="product-card">
+              <Card
+                key={id}
+                sx={{ maxWidth: 250, border: "solid 1px #0B486A" }}
+              >
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="260"
+                    image={`http://localhost:5000/${product.images[0]}`}
+                    alt="product img"
+                  />
+
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                  >
+                    <CardContent>
+                      <a
+                        className="product-link"
+                         href={`/product/${product._id}`}
+                      >
+                        <Typography gutterBottom variant="h5" component="div">
+                          {product.name.slice(0, 15)}...
+                        </Typography>
+                      </a>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        mb="-20px"
+                        fontSize="20px"
+                      >
+                        {product.price} $
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        size="small"
+                        onClick={(event) => handleCart(event, product._id)}
+                      >
+                        <Link to="/cart" className="addto-cart">
+                          ADD TO CART
+                        </Link>
+                      </Button>
+                    </CardActions>
+                  </Box>
+                </CardActionArea>
+              </Card>
+            </div>
+          ))}
         <Stack spacing={2}>
           <Pagination
             count={totalPages} // pass totalPages as prop

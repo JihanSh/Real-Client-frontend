@@ -9,6 +9,8 @@ import { HeaderNavbar, MenuBar } from "../src/component/Header/HeaderNavbar";
 import { useState } from "react";
 import NotFound from "./pages/notFound/NotFound";
 import Category from "./pages/category/Category";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 
 function App() {
   const [menubar, setMenuBar] = useState(false);
@@ -23,9 +25,11 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="cart" element={<Cart />} />
           <Route path="shop" element={<Shop />} />
-          <Route path="product" element={<Product />} />
-          <Route path="category" element={<Category />} />
+          <Route path="product/:productId" element={<Product />} />
+          <Route path="category/:categoryId" element={<Category />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>
