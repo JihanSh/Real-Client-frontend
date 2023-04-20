@@ -9,21 +9,20 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     setError(null);
-
+    console.log(username, password);
     try {
       const response = await fetch("http://localhost:5000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
+      const data = await response.json();
+      console.log(data);
       if (!response.ok) {
-        const data = await response.json();
         throw new Error(data.message);
       }
-      console.log(Error);
-      const { token, user } = await response.json();
-      sessionStorage.setItem("token", token);
-      sessionStorage.setItem("Id", user);
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("Id", data.user);
 
       console.log("Login successful");
     } catch (error) {
