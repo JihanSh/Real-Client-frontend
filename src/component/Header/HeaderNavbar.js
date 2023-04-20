@@ -58,6 +58,12 @@ const MenuBar = ({ menubar }) => {
       <button className="navmenu-menu">
         <Link to="/about">About Us</Link>
       </button>
+      <button className="navmenu-menu">
+        <Link to="/register">My Account</Link>
+      </button>
+      <button className="navmenu-menu">
+        <Link to="/cart">Cart</Link>
+      </button>
     </div>
   );
 };

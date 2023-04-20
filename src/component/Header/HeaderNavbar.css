@@ -81,6 +81,7 @@
     color: #0B486A;
     font-size: 24px;
     font-family: sans-serif;
+    
     cursor: pointer;
   }
   
@@ -88,7 +89,7 @@
     text-decoration: none 2px solid #FF7D00;
     color: #0B486A;
     line-height: 32px;
-    font-weight: 500;
+    font-weight: bold;
   }
   
   .navcontact-button {
