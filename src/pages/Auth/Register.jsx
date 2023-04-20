@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import "./Register.css";
 
-const Auth = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
@@ -34,45 +34,70 @@ const Auth = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label className="username">Username:</label>
-      <input
-        type="text"
-        id="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <label className="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <label className="address">Address:</label>
-      <input
-        type="text"
-        id="address"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-      />
-      <label className="phone-number">Phone Number:</label>
-      <input
-        type="text"
-        id="phone-number"
-        value={phonenumber}
-        onChange={(e) => setPhoneNumber(e.target.value)}
-      />
-
-      <Link to="/">
-        <button type="submit">Register</button>
-      </Link>
-
-      {error && error.message === "Username already exists" && (
-        <p>Please choose a different username</p>
-      )}
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} className="register-container">
+        <div className="username">
+          <label className="username">Username:</label> <br />
+          <input
+            autoComplete="off"
+            className="register-input"
+            type="text"
+            id="username"
+            placeholder="John Doe"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="password">
+          <label className="password">Password:</label>
+          <br />
+          <input
+            autoComplete="off"
+            className="register-input"
+            type="password"
+            id="password"
+            placeholder="******"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="address">
+          <label className="address">Address:</label>
+          <br />
+          <input
+            autoComplete="off"
+            className="register-input"
+            type="text"
+            id="address"
+            value={address}
+            placeholder="beirut dt aazariye block 3"
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+        <div className="phone-number">
+          <label className="phone-number">Phone Number:</label>
+          <br />
+          <input
+            autoComplete="off"
+            className="register-input"
+            type="text"
+            id="phone-number"
+            placeholder="+961 3 111 222"
+            value={phonenumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+        </div>
+        {error && <p className="error-message"> {error}</p>}
+        <button className="submit-button" type="submit">
+          Register
+        </button>
+        <p className="login-register">
+          Already Have an Account? <a href="./login">Login</a>
+        </p>
+      </form>
+    </div>
   );
+
 };
 
-export default Auth;
+export default Register;
