@@ -21,8 +21,10 @@ const Login = () => {
         throw new Error(data.message);
       }
       console.log(Error);
-      const { token } = await response.json();
+      const { token, user } = await response.json();
       sessionStorage.setItem("token", token);
+      sessionStorage.setItem("Id", user);
+
       console.log("Login successful");
     } catch (error) {
       setError(error.message);
@@ -49,13 +51,12 @@ const Login = () => {
         />
       </label>
       {error && <p className="error-message"> {error}</p>}
-      <button type="submit">
-        <Link to="/">Log In</Link>
-      </button>
+      <button type="submit">Log In</button>
       <p className="register">
         Not Registered? Click Here
         <a href="./register"> Register</a>
       </p>
+      <Link to="/"></Link>
     </form>
   );
 };
