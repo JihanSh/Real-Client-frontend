@@ -108,8 +108,8 @@ const Product = () => {
           </div>
           <div className="product-section2">
             <div className="description-product">
-              <h4>Description:</h4>
-              <p>
+              <h4 className="description-product-h4">Description:</h4>
+              <p className="description-product-p">
                 {products.description}
               </p>
             </div>

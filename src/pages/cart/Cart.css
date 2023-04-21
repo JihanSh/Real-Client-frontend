@@ -69,38 +69,40 @@
     width: 100px;
     height: 100px;
 }
-.cart-totals{
+.cart-totals {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 70%;
-    margin-left: 48%;
-    margin-bottom: 5%;
-}
-.cart-totals-title{
-    font-size: 50px;
-    color: #0B486A;
-    margin-bottom: 10px
-}
-.cart-totals-first{
+    width: 50%;
+    margin: 0 35% 5%;
+    border-radius: 5px;
+  }
+  
+  .cart-totals h1 {
+    font-size: 30px;
+    color: #0b486a;
+    margin-bottom: 10px;
+  }
+  
+  .cart-totals-first {
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    border: #0B486A solid 2px;
-    width: 50%;
     font-size: 25px;
     border-radius: 5px;
-}
-.cart-totals-second-button{
+    border: 2px solid #0b486a;
+  }
+  
+  .cart-totals-second-button {
     padding: 10px;
-    width: 52%;
-    background-color: #0B486A;
-    color: white;
-    border: #0B486A solid 1px;
+    width: 100%;
+    background-color: #0b486a;
+    color: #ffffff;
+    border: none;
     cursor: pointer;
     font-size: 25px;
     border-radius: 5px;
-}
+  }
 
   @media only screen and (max-width: 820px) {
     .cart-table{
@@ -114,19 +116,19 @@
         padding: 10px;
         display: flex;
         justify-content: space-between;
-        border: #0B486A solid 2px;
-        width: 91%;
         font-size: 25px;
-        margin-top: 10%;
+        border-radius: 5px;
+        border: 2px solid #0b486a;
     }
     .cart-totals-second-button{
         padding: 10px;
-        width: 96%;
-        background-color: #0B486A;
-        color: white;
-        border: #0B486A solid 1px;
+        width: 100%;
+        background-color: #0b486a;
+        color: #ffffff;
+        border: none;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 19px;
+        border-radius: 5px;
     }
     .react-confirm-alert > div:first-child {
         margin-left: auto;
