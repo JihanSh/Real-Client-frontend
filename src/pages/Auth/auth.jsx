@@ -1,10 +1,13 @@
 import React from "react";
 import "./auth.css";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+import { Footer } from "../../component/Header/footer/footer";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Auth() {
+  const [menubar, setMenuBar] = useState(false);
+
   const [zih, setZih] = useState(false);
 
   function activateZih() {
@@ -78,8 +81,9 @@ function Auth() {
   };
 
   return (
-    <>
-      <div>{(HeaderNavbar, MenuBar)}</div>
+    <div>
+      <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
+      <MenuBar menubar={menubar} />
       <div className="J-popup-wrapper">
         <div className="svg-head">
           <div
@@ -128,24 +132,33 @@ function Auth() {
                 }
               >
                 <form onSubmit={handleLogin}>
-                  <label className="label-auth"></label>
-                  Username:
-                  <input
-                    type="text"
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                  />
-                  <label className="label-auth"></label>
-                  Password:
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                  />
-                  {error && (
-                    <p className="error-message"> Invalid Credentials</p>
-                  )}
-                  <button type="submit">Log In</button>
+                  <div className="login-label">
+                    <label className="label-login">
+                      Username:
+                      <br />
+                      <input
+                        type="text"
+                        value={username}
+                        onChange={(event) => setUsername(event.target.value)}
+                      />
+                    </label>
+                  </div>
+                  <div className="login-label">
+                    <label className="label-login">
+                      Password:
+                      <br />
+                      <input
+                        type="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                      />
+                    </label></div>
+                    <div className="login-button">
+                    {error && (
+                      <p className="error-message"> Invalid Credentials</p>
+                    )}
+                    <button type="submit">Log In</button>
+                  </div>
                 </form>
 
                 <form onSubmit={handleSubmit} className="register-container">
@@ -210,9 +223,10 @@ function Auth() {
               </div>
             </div>
           </div>
+          <Footer />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
