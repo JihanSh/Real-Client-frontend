@@ -6,6 +6,7 @@ import Cart from "./pages/cart/Cart";
 import Shop from "./pages/shop/Shop";
 import Product from "./pages/product/Product";
 import { HeaderNavbar, MenuBar } from '../src/component/Header/HeaderNavbar';
+import {Footer} from './component/Header/footer/footer';
 import { useState } from "react";
 import Auth from "./pages/Auth/auth";
 
@@ -17,6 +18,7 @@ function App() {
         <div className="App"></div>
         <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
         <MenuBar menubar={menubar} />
+        <Footer/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
