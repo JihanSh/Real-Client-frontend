@@ -65,6 +65,17 @@ const Home = () => {
           }
         );
         setCartStatus("sucssful", response.data);
+        Swal.fire({
+          title: 'Product added to cart!',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          customClass: {
+            popup: 'custom-style',
+            title: 'custom-style',
+            confirmButton: 'custom-style',
+          },
+        });
       } catch (error) {
         console.error(error);
       }

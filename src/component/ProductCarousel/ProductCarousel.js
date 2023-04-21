@@ -13,7 +13,14 @@ const CarouselImg = styled.img`
   width: 500px;
   height: 500px;
   object-fit: cover;
+  /* Media query for screens with a maximum width of 414px */
+  @media (max-width: 414px) {
+    width: 340px;
+    height: 340px;
+    margin-left:-20px
+  }
 `;
+
 
 const ArrowWrapper = styled.div` /* added */
   display: flex;

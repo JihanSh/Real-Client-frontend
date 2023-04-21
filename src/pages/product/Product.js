@@ -6,7 +6,7 @@ import { useParams } from "react-router";
 import ProductCarousel from "../../component/ProductCarousel/ProductCarousel";
 import icon from "./images/icons8-right-arrow-32 (1).png";
 import { Link } from "react-router-dom";
-
+import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
 
 const Product = () => {
@@ -48,16 +48,43 @@ const Product = () => {
   const handleCart = async (event, productId) => {
     event.preventDefault();
     console.log(productId);
-    try {
-      const response = await axios.post(
-        `http://localhost:5000/cart/${userId}`,
-        {
-          productId: productId,
-        }
-      );
-      setCartStatus("sucssful", response.data);
-    } catch (error) {
-      console.error(error);
+    if (userId) {
+      try {
+        const response = await axios.post(
+          `http://localhost:5000/cart/${userId}`,
+          {
+            productId: productId,
+          }
+        );
+        setCartStatus("sucssful", response.data);
+        Swal.fire({
+          title: 'Product added to cart!',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          customClass: {
+            popup: 'custom-style',
+            title: 'custom-style',
+            confirmButton: 'custom-style',
+          },
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      const result = await Swal.fire({
+        title: 'You need to be logged in to add items to your cart',
+        showCancelButton: true,
+        confirmButtonText: 'Log in',
+        customClass: {
+          popup: 'custom-style',
+          title: 'custom-style',
+          confirmButton: 'custom-style',
+        },
+      });
+      if (result.isConfirmed) {
+        window.location.href = '/login'; 
+      }
     }
   };
 
@@ -120,9 +147,7 @@ const Product = () => {
                 size="small"
                 onClick={(event) => handleCart(event, product._id)}
               >
-                <Link to="/cart" className="link-add">
                   ADD TO CART
-                </Link>
               </button>
 
               <hr className="line-product1" />
@@ -137,7 +162,14 @@ const Product = () => {
           <div className="product-section2">
             <div className="description-product">
               <h4>Description:</h4>
-              <p>{product.description}</p>
+              <p>
+                {product.description}ljshdfpnvoi ;lskdfjnpaoiecnp woeimjcawoiemc
+                oweijcmckjecowemjc weijcopwinec iencpwine euvnpe
+                iupeituvneirbcperv psirncpeirtnvpi entpecirnp entvpertnp
+                ceitnpenvpetnpeupeivnutpecio mpoeinuvnutpoieetc nirnvierncpeintc
+                enrivnpeiorcwo oiermcpwoipeonrcpeior nclweivniuhgoiwvernuhce
+                cepiorcnpwoiecn
+              </p>
             </div>
             <div className="recent-product-section">
               <h4>

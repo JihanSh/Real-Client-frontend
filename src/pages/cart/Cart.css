@@ -1,6 +1,13 @@
 * {
     font-family: sans-serif;
 }
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Change this to whatever height you want */
+    margin: auto;
+  }
 .react-confirm-alert > div:first-child {
     background-color: white;
     border: #0B486A solid 1px;

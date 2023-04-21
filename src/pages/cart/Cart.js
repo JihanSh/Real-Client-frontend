@@ -13,6 +13,7 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import ReactLoading from "react-loading";
 
 const Cart = () => {
   const userId = sessionStorage.getItem("Id");
@@ -20,6 +21,7 @@ const Cart = () => {
   const [tableData, setTableData] = useState([]);
   const [totalData, settotalData] = useState([]);
   const [orderStatus, setOrderStatus] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +30,9 @@ const Cart = () => {
         const data = await response.json();
         setTableData(data.items);
         settotalData(data);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       } catch (err) {
         console.log(err.message);
       }
@@ -122,6 +127,16 @@ const Cart = () => {
   };
 
   return (
+    <>
+    {loading ? (
+        <ReactLoading
+          className="loading-container"
+          type="spinningBubbles"
+          color="#FF7D00"
+          height={200}
+          width={100}
+        />
+      ) : (
     <div className="cart-wrapper">
       <div className="cart-header">
         <h1 className="cart-title">Cart</h1>
@@ -194,6 +209,8 @@ const Cart = () => {
         </div>
       </div>
     </div>
+      )}
+    </>
   );
 };
 export default Cart;
