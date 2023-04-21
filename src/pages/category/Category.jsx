@@ -1,37 +1,34 @@
-import React from 'react';
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import TitleCarousel from "../../component/categorycarousel/categorycarousel";
+import "./Category.css";
 import { useParams } from "react-router";
 
-function Category() {
+const Category = () => {
+  const [category, setCategory] = useState([]);
   const categoryId = useParams();
-  const [subCategories , setSubCategories]= useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(`http://localhost:5000/categories/${categoryId.categoryId}`);
+        const data = await response.json();
+        setCategory(data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+    fetchData();
+  }, [categoryId]);
   
   
-useEffect(() => {    
-  console.log(categoryId)
-  axios
-    .get(`http://localhost:5000/subcategories/list/${categoryId.categoryId}`)
-    .then((response) => {
-      setSubCategories(response.data.subcategories);
-      console.log(response.data.subcategories);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}, [categoryId]);
-
-console.log(subCategories);
-
   return (
-    <>
-    <div className='category-section'>
-     {subCategories.map((sub, i)=>(
-       <h1 key={i}>{sub.title}</h1>
-       ))} 
+    <div className="category-wrapper">
+      <div className="category-header">
+        <h1 className="category-wrapper-title">{category.title}'s Wear</h1>
+      </div>
+      <TitleCarousel />
     </div>
-    </>
-  )
+  );
 };
 
-export default Category
+export default Category;

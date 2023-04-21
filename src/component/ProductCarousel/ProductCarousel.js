@@ -18,7 +18,7 @@ const CarouselImg = styled.img`
   @media (max-width: 414px) {
     width: 340px;
     height: 340px;
-    margin-left:-20px
+    margin-left:-10px
   }
 `;
 

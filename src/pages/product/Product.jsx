@@ -20,8 +20,7 @@ const Product = () => {
     axios
       .get(`http://localhost:5000/products/${productId.productId}`)
       .then((response) => {
-        console.log(response.data);
-        console.log(response.data.images[0]);
+        
         setProduct(response.data);
         setLoading(false);
       })
@@ -29,8 +28,7 @@ const Product = () => {
         console.log(error);
       });
   }, []);
-  console.log(product);
-  console.log(`http://localhost:5000/${product.images}`);
+ 
 
   // Fetch and sort the items on mount
   useEffect(() => {

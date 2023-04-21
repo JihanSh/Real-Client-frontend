@@ -1,4 +1,19 @@
-.category-section{
-    width: 1250px;
-    margin: auto;
+.category-wrapper-title{
+    font-size: 40px;
+}
+.category-header{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 5%;
+}
+
+@media only screen and (max-width: 699px) {
+    .category-wrapper{
+        overflow-x: hidden;
+    }
+    .category-wrapper-title{
+        font-size: 30px;
+        padding-bottom: 10%;
+    }
 }
