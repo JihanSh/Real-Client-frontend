@@ -11,16 +11,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const Cart = () => {
-const userId = sessionStorage.getItem('Id');
+  const userId = sessionStorage.getItem("Id");
 
   const [tableData, setTableData] = useState([]);
   const [totalData, settotalData] = useState([]);
   const [orderStatus, setOrderStatus] = useState(null);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -90,10 +90,10 @@ const userId = sessionStorage.getItem('Id');
           // set order status to success
           setOrderStatus("success");
           Swal.fire({
-            icon: 'success',
-            title: 'Order placed successfully!',
+            icon: "success",
+            title: "Order placed successfully!",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           }).then(() => {
             window.location.reload(); // Reload the page
           });
@@ -101,24 +101,24 @@ const userId = sessionStorage.getItem('Id');
           // set order status to failure
           setOrderStatus("failure");
           Swal.fire({
-            icon: 'error',
-            title: 'Failed to place order.',
+            icon: "error",
+            title: "Failed to place order.",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
         }
         console.log(orderStatus);
       })
       .catch((error) => {
-       // set order status to failure
-       setOrderStatus("failure");
-       Swal.fire({
-         icon: 'error',
-         title: 'Failed to place order.',
-         showConfirmButton: false,
-         timer: 1500
-       });
-     });
+        // set order status to failure
+        setOrderStatus("failure");
+        Swal.fire({
+          icon: "error",
+          title: "Failed to place order.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   };
 
   return (

@@ -15,6 +15,7 @@ import { Box, Button, CardActionArea, CardActions } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import icon1 from "./images/icons8-man-60.png";
+import Swal from "sweetalert2";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -23,7 +24,7 @@ const Home = () => {
   const [cartStatus, setCartStatus] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  const userId = sessionStorage.getItem('Id');
+  const userId = sessionStorage.getItem("Id");
   useEffect(() => {
     axios
       .get("http://localhost:5000/categories")
@@ -55,16 +56,32 @@ const Home = () => {
   const handleCart = async (event, productId) => {
     event.preventDefault();
     console.log(productId);
-    try {
-      const response = await axios.post(
-        `http://localhost:5000/cart/${userId}  `,
-        {
-          productId: productId,
-        }
-      );
-      setCartStatus("sucssful", response.data);
-    } catch (error) {
-      console.error(error);
+    if (userId) {
+      try {
+        const response = await axios.post(
+          `http://localhost:5000/cart/${userId}`,
+          {
+            productId: productId,
+          }
+        );
+        setCartStatus("sucssful", response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      const result = await Swal.fire({
+        title: 'You need to be logged in to add items to your cart',
+        showCancelButton: true,
+        confirmButtonText: 'Log in',
+        customClass: {
+          popup: 'custom-style',
+          title: 'custom-style',
+          confirmButton: 'custom-style',
+        },
+      });
+      if (result.isConfirmed) {
+        window.location.href = '/login'; 
+      }
     }
   };
   return (
@@ -82,11 +99,15 @@ const Home = () => {
         </div>
         <h1 className="line-category-section">Categories</h1>
         <div className="list-category-section">
-          {categories.map((category, id) =>(
-          <Link key={id} to={`/category/${category._id}`} className="link-category">
-            <img className="lic1" src={icon1} alt="#" />
-            {category.title}’s Wear
-          </Link>
+          {categories.map((category, id) => (
+            <Link
+              key={id}
+              to={`/category/${category._id}`}
+              className="link-category"
+            >
+              <img className="lic1" src={icon1} alt="#" />
+              {category.title}’s Wear
+            </Link>
           ))}
         </div>
         <div className="category-section">
@@ -95,8 +116,16 @@ const Home = () => {
           <img src={child} className="img3" alt="#" />
         </div>
         <div className="category1-section">
-          {categories.map((category, id)=>(
-          <button className="category-button"><Link key={id} className="link1-category" to={`/category/${category._id}`}>{category.title}</Link></button>
+          {categories.map((category, id) => (
+            <button className="category-button">
+              <Link
+                key={id}
+                className="link1-category"
+                to={`/category/${category._id}`}
+              >
+                {category.title}
+              </Link>
+            </button>
           ))}
         </div>
         <h1 className="line-latest-section">Latest Drops</h1>
@@ -121,7 +150,10 @@ const Home = () => {
                     alignItems="center"
                   >
                     <CardContent>
-                      <Link className="product-link" to={`product/${product._id}`}>
+                      <Link
+                        className="product-link"
+                        to={`product/${product._id}`}
+                      >
                         <Typography gutterBottom variant="h5" component="div">
                           {product.name.slice(0, 15)}...
                         </Typography>
@@ -139,10 +171,11 @@ const Home = () => {
                       <Button
                         size="small"
                         onClick={(event) => handleCart(event, product._id)}
+                        className="addto-cart"
                       >
-                        <Link to="/cart" className="addto-cart">
+                        {/* <Link to="/cart" className="addto-cart"> */}
                           ADD TO CART
-                        </Link>
+                        {/* </Link> */}
                       </Button>
                     </CardActions>
                   </Box>

@@ -15,11 +15,10 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router";
-
+import Swal from "sweetalert2";
 
 const TitleCarousel = () => {
   const [title, setTitle] = useState([]);
@@ -31,6 +30,7 @@ const TitleCarousel = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const categoryId = useParams();
+  const userId = sessionStorage.getItem("Id");
 
   // fetch subcategory titles
   useEffect(() => {
@@ -120,23 +120,38 @@ const TitleCarousel = () => {
   const handleCart = async (event, productId) => {
     event.preventDefault();
     console.log(productId);
-    try {
-      const url = `http://localhost:5000/cart/${productId}`;
-      const response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify({
-          productId,
-        }),
-        headers: {
-          "Content-Type": "application/json",
+    if (userId) {
+      try {
+        const url = `http://localhost:5000/cart/${userId}`;
+        const response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify({
+            productId,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setCartStatus(data);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      const result = await Swal.fire({
+        title: "You need to be logged in to add items to your cart",
+        showCancelButton: true,
+        confirmButtonText: "Log in",
+        customClass: {
+          popup: "custom-style",
+          title: "custom-style",
+          confirmButton: "custom-style",
         },
       });
-      const data = await response.json();
-      setCartStatus(data);
-    } catch (error) {
-      console.error(error);
+      if (result.isConfirmed) {
+        window.location.href = "/login";
+      }
     }
-    console.log(cartStatus);
   };
   return (
     <>
@@ -175,7 +190,7 @@ const TitleCarousel = () => {
           </div>
         ))}
       </div>
-      <div className="products-section">
+      <div className="products-section-category">
         {product
           .filter((item) => {
             if (searchTerm === "") {
@@ -208,7 +223,7 @@ const TitleCarousel = () => {
                     <CardContent>
                       <a
                         className="product-link"
-                         href={`/product/${product._id}`}
+                        href={`/product/${product._id}`}
                       >
                         <Typography gutterBottom variant="h5" component="div">
                           {product.name.slice(0, 15)}...
@@ -227,10 +242,9 @@ const TitleCarousel = () => {
                       <Button
                         size="small"
                         onClick={(event) => handleCart(event, product._id)}
+                        className="addto-cart"
                       >
-                        <Link to="/cart" className="addto-cart">
-                          ADD TO CART
-                        </Link>
+                        ADD TO CART
                       </Button>
                     </CardActions>
                   </Box>

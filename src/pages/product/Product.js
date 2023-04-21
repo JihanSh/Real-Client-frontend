@@ -6,31 +6,32 @@ import { useParams } from "react-router";
 import ProductCarousel from "../../component/ProductCarousel/ProductCarousel";
 import icon from "./images/icons8-right-arrow-32 (1).png";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+
+import ReactLoading from "react-loading";
 
 const Product = () => {
   const productId = useParams();
-  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [recent, setRecent] = useState([]);
-  const navigate = useNavigate();
- 
+  const [products, setProducts] = useState([]);
+  const [cartStatus, setCartStatus] = useState([]);
+  const userId = sessionStorage.getItem("Id");
+
   useEffect(() => {
-    // console.log(productId);
     axios
       .get(`http://localhost:5000/products/${productId.productId}`)
       .then((response) => {
-        // console.log(response.data);
-        // console.log(response.data.images[0]);
-        setProducts(response.data);
+        console.log(response.data);
+        console.log(response.data.images[0]);
+        setProduct(response.data);
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [productId]);
-  // console.log(products);
-  // console.log(`http://localhost:5000/${products.images}`);
+  }, []);
+  console.log(product);
+  console.log(`http://localhost:5000/${product.images}`);
 
   // Fetch and sort the items on mount
   useEffect(() => {
@@ -39,29 +40,45 @@ const Product = () => {
       const fetchedItems = response.data.sort(
         (a, b) => new Date(b.date_added) - new Date(a.date_added)
       );
-      setRecent(fetchedItems.slice(0, 3)); // get the first four items
+      setProducts(fetchedItems.slice(0, 3)); // get the first four items
     }
     fetchData();
   }, []);
 
-
-  function handleClick(productId) {
-   
-    navigate.push(`/product/${productId}`);
-  }
+  const handleCart = async (event, productId) => {
+    event.preventDefault();
+    console.log(productId);
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/cart/${userId}`,
+        {
+          productId: productId,
+        }
+      );
+      setCartStatus("sucssful", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
       {loading ? (
-        <h2>loading</h2>
+        <ReactLoading
+          className="loading-container"
+          type="spinningBubbles"
+          color="#FF7D00"
+          height={200}
+          width={100}
+        />
       ) : (
         <div className="product">
           <div className="product-section">
             <div className="carousel-product">
               <ProductCarousel
                 images={
-                  products.images &&
-                  products.images.map(
+                  product.images &&
+                  product.images.map(
                     (image) => `http://localhost:5000/${image}`
                   )
                 }
@@ -76,71 +93,82 @@ const Product = () => {
                 </span>
                 <img src={icon} alt="#" />
                 <span className="span-product">
-                  <Link to="/category" className="link-product">
+                  <a
+                    href={`/category/${product.category._id}`}
+                    className="link-product"
+                  >
                     Product
-                  </Link>
+                  </a>
                 </span>
                 <img src={icon} alt="#" />
-                <span className="name-h4">{products.name.slice(0, 20)}...</span>
+                <span className="name-h4">{product.name.slice(0, 20)}...</span>
               </div>
-              <h1>{products.name}...</h1>
-              {products.discountPercentage ? (
+              <h1>{product.name}...</h1>
+              {product.discountPercentage ? (
                 <>
-                  <p className="original-price">${products.price}</p>
+                  <p className="original-price">${product.price}</p>
                   <p className="discounted-price">
-                    ${products.discountedPrice} ({products.discountPercentage}%
+                    ${product.discountedPrice} ({product.discountPercentage}%
                     off)
                   </p>
                 </>
               ) : (
-                <p>${products.price}</p>
+                <p>${product.price}</p>
               )}
-              <Link className="link-add">ADD TO CART</Link>
+              <button
+                className="btn-add"
+                size="small"
+                onClick={(event) => handleCart(event, product._id)}
+              >
+                <Link to="/cart" className="link-add">
+                  ADD TO CART
+                </Link>
+              </button>
 
               <hr className="line-product1" />
               <p className="category-product">
-                Categorise: {products.category.title},{" "}
-                {products.subcategory.title}
+                Categorise: {product.category.title},{" "}
+                {product.subcategory.title}
               </p>
               <hr className="line-product2" />
-              <p className="des-product">{products.description}</p>
+              <p className="des-product">{product.description}</p>
             </div>
           </div>
           <div className="product-section2">
             <div className="description-product">
-              <h4 className="description-product-h4">Description:</h4>
-              <p className="description-product-p">
-                {products.description}
-              </p>
+              <h4>Description:</h4>
+              <p>{product.description}</p>
             </div>
             <div className="recent-product-section">
               <h4>
                 <span>Latest Drops</span>
               </h4>
-              {recent.map((item, i) => (
+              {products.map((each, i) => (
                 <React.Fragment key={i}>
-                  <div className="recent-product">
+                  <div className="recent-product" key={i}>
                     <img
                       className="img-product-section"
-                      src={`http://localhost:5000/${item.images[0]}`}
+                      src={`http://localhost:5000/${each.images[0]}`}
                       alt="#"
                     ></img>
                     <div className="recent-info">
-                      <Link  onClick={() => handleClick(item._id)} className="R"><h6 className="K">{item.name.slice(0, 15)}...</h6></Link>
-                      {item.discountPercentage ? (
-                <>
-                  <h6 className="original-price2">${item.price}</h6>
-                  <h6 className="discounted-price2">
-                    ${products.discountedPrice} ({item.discountPercentage}%
-                    off)
-                  </h6>
-                </>
-              ) : (
-                <h6>${item.price}</h6>
-              )}
+                      <a href={`/product/${each._id}`} className="R">
+                        <h6 className="K">{each.name.slice(0, 15)}...</h6>
+                      </a>
+                      {each.discountPercentage ? (
+                        <>
+                          <h6 className="original-price2">${each.price}</h6>
+                          <h6 className="discounted-price2">
+                            ${each.discountedPrice} ({each.discountPercentage}%
+                            off)
+                          </h6>
+                        </>
+                      ) : (
+                        <h6>${each.price}</h6>
+                      )}
                     </div>
                   </div>
-                  {i !== recent.length - 1 && <hr className="line-product3" />}{" "}
+                  {i !== each.length - 1 && <hr className="line-product3" />}{" "}
                   {/* Add <hr/> for all items except the last */}
                 </React.Fragment>
               ))}
