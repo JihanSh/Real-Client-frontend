@@ -1,6 +1,6 @@
 import React from "react";
 import "./auth.css";
-import { HeaderNavbar,MenuBar } from "../../component/Header/HeaderNavbar";
+import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -79,7 +79,7 @@ function Auth() {
 
   return (
     <>
-      <div>{(HeaderNavbar, MenuBar) }</div>
+      <div>{(HeaderNavbar, MenuBar)}</div>
       <div className="J-popup-wrapper">
         <div className="svg-head">
           <div
