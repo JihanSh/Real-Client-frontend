@@ -16,7 +16,6 @@ const Product = () => {
   const [products, setProducts] = useState([]);
   const [cartStatus, setCartStatus] = useState([]);
 
- 
   useEffect(() => {
     axios
       .get(`http://localhost:5000/products/${productId.productId}`)
@@ -45,7 +44,6 @@ const Product = () => {
     fetchData();
   }, []);
 
-
   const handleCart = async (event, productId) => {
     event.preventDefault();
     console.log(productId);
@@ -65,13 +63,13 @@ const Product = () => {
   return (
     <>
       {loading ? (
-          <ReactLoading className="loading-container"
-        type="spinningBubbles"
-        color="#FF7D00"
-        height={200}
-        width={100}
-       
-      />
+        <ReactLoading
+          className="loading-container"
+          type="spinningBubbles"
+          color="#FF7D00"
+          height={200}
+          width={100}
+        />
       ) : (
         <div className="product">
           <div className="product-section">
@@ -94,7 +92,10 @@ const Product = () => {
                 </span>
                 <img src={icon} alt="#" />
                 <span className="span-product">
-                  <a href={`/category/${product.category._id}`}  className="link-product">
+                  <a
+                    href={`/category/${product.category._id}`}
+                    className="link-product"
+                  >
                     Product
                   </a>
                 </span>
@@ -113,14 +114,15 @@ const Product = () => {
               ) : (
                 <p>${product.price}</p>
               )}
-                <button className="btn-add"
-                        size="small"
-                        onClick={(event) => handleCart(event, product._id)}
-                      >
-                        <Link to="/cart" className="link-add">
-                          ADD TO CART
-                        </Link>
-                      </button>
+              <button
+                className="btn-add"
+                size="small"
+                onClick={(event) => handleCart(event, product._id)}
+              >
+                <Link to="/cart" className="link-add">
+                  ADD TO CART
+                </Link>
+              </button>
 
               <hr className="line-product1" />
               <p className="category-product">
@@ -135,8 +137,8 @@ const Product = () => {
             <div className="description-product">
               <h4>Description:</h4>
               <p>
-                {product.description}ljshdfpnvoi ;lskdfjnpaoiecnp
-                woeimjcawoiemc oweijcmckjecowemjc weijcopwinec iencpwine euvnpe
+                {product.description}ljshdfpnvoi ;lskdfjnpaoiecnp woeimjcawoiemc
+                oweijcmckjecowemjc weijcopwinec iencpwine euvnpe
                 iupeituvneirbcperv psirncpeirtnvpi entpecirnp entvpertnp
                 ceitnpenvpetnpeupeivnutpecio mpoeinuvnutpoieetc nirnvierncpeintc
                 enrivnpeiorcwo oiermcpwoipeonrcpeior nclweivniuhgoiwvernuhce
@@ -156,18 +158,20 @@ const Product = () => {
                       alt="#"
                     ></img>
                     <div className="recent-info">
-                      <a href={`/product/${each._id}`} className="R"><h6 className="K">{each.name.slice(0, 15)}...</h6></a>
+                      <a href={`/product/${each._id}`} className="R">
+                        <h6 className="K">{each.name.slice(0, 15)}...</h6>
+                      </a>
                       {each.discountPercentage ? (
-                <>
-                  <h6 className="original-price2">${each.price}</h6>
-                  <h6 className="discounted-price2">
-                    ${each.discountedPrice} ({each.discountPercentage}%
-                    off)
-                  </h6>
-                </>
-              ) : (
-                <h6>${each.price}</h6>
-              )}
+                        <>
+                          <h6 className="original-price2">${each.price}</h6>
+                          <h6 className="discounted-price2">
+                            ${each.discountedPrice} ({each.discountPercentage}%
+                            off)
+                          </h6>
+                        </>
+                      ) : (
+                        <h6>${each.price}</h6>
+                      )}
                     </div>
                   </div>
                   {i !== each.length - 1 && <hr className="line-product3" />}{" "}
@@ -183,4 +187,3 @@ const Product = () => {
 };
 
 export default Product;
-
