@@ -35,8 +35,8 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
             </button>
           </div>
           <button className="navLogin-button">
-            <Link to="/login">
-              <a href="../login">Login</a>
+            <Link to="/auth">
+              <a href="../auth">Login</a>
             </Link>
           </button>
         </div>

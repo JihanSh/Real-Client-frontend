@@ -7,8 +7,7 @@ import Shop from "./pages/shop/Shop";
 import Product from "./pages/product/Product";
 import { HeaderNavbar, MenuBar } from '../src/component/Header/HeaderNavbar';
 import { useState } from "react";
-import Register from "./pages/Auth/Register";
-import Login from "./pages/Auth/login";
+import Auth from "./pages/Auth/auth";
 
 function App() {
   const [menubar, setMenuBar] = useState(false);
@@ -24,8 +23,7 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="shop" element={<Shop />} />
           <Route path="product" element={<Product />} />
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
+          <Route path="auth" element={<Auth />} />
         </Routes>
       </BrowserRouter>
     </>
