@@ -4,9 +4,8 @@ import Home from "./pages/home/Home";
 import About from "./pages/about/About";
 import Cart from "./pages/cart/Cart";
 import Product from "./pages/product/Product";
-import Category from "./pages/category/Category";
+// import Category from "./pages/category/Category";
 
-import { useState } from "react";
 import Auth from "./pages/Auth/auth";
 
 function App() {
@@ -21,7 +20,7 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="auth" element={<Auth />} />
           <Route path="product/:productId" element={<Product />} />
-          <Route path="category/:categoryId" element={<Category />} />
+          {/* <Route path="category/:categoryId" element={<Category />} /> */}
         </Routes>
       </BrowserRouter>
     </>
