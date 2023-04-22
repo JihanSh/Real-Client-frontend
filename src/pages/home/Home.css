@@ -146,6 +146,20 @@
     color:#FF7D00;
     font-size: 15px;
 }
+.original-price3 {
+    text-decoration: line-through;
+    opacity: 0.5;
+    margin-right: 8px;
+   
+  }
+  
+  .original-price3::after {
+    content: " ";
+  }
+.raneem{
+  display: flex;
+   justify-content:space-evenly;
+}
 @media (max-width: 768px){
     .home-section{
         width: 768px;

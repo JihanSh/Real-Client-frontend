@@ -14,7 +14,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Box, Button, CardActionArea, CardActions } from "@mui/material";
+import { Box, CardActionArea, CardActions } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import icon1 from "./images/icons8-man-60.png";
@@ -109,19 +109,19 @@ const Home = () => {
         </div>
         <div className="category1-section">
           {categories.map((category, id)=>(
-          <button className="category-button"><Link key={id} className="link1-category" to={`/category/${category._id}`}>{category.title}</Link></button>
+          <button className="category-button" key={id}><Link key={id} className="link1-category" to={`/category/${category._id}`}>{category.title}</Link></button>
           ))}
         </div>
         <h1 className="line-latest-section">Latest Drops</h1>
         <div className="products-section">
           {products.map((product, id) => (
-            <div className="product-card">
+            <div className="product-card" key={id} >
               <Card
-                key={id}
+              
                 sx={{ maxWidth: 250, border: "solid 1px #0B486A" }}
               >
-                <CardActionArea>
-                  <CardMedia
+                <CardActionArea >
+                  <CardMedia 
                     component="img"
                     height="260"
                     image={`http://localhost:5000/${product.images[0]}`}
@@ -139,24 +139,49 @@ const Home = () => {
                           {product.name.slice(0, 15)}...
                         </Typography>
                       </Link>
+                      {product.discountPercentage ?(
+                      <>
+                      <div className="raneem">
                       <Typography
+                        className="original-price3"
                         variant="body2"
                         color="text.secondary"
                         mb="-20px"
                         fontSize="20px"
                       >
-                        {product.price} $
+                        ${product.price} 
                       </Typography>
+                      <Typography
+                        className="discounted-price3"
+                        variant="body2"
+                        color="text.secondary"
+                        mb="-20px"
+                        fontSize="20px"
+                      >
+                        ${product.discountedPrice}
+                      </Typography>
+                      </div>
+                      </>
+                      ) : (
+                        <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        mb="-20px"
+                        fontSize="20px"
+                      >
+                        ${product.price}
+                      </Typography>
+                      )}
                     </CardContent>
                     <CardActions>
-                      <Button
+                      <div key={id}
                         size="small"
                         onClick={(event) => handleCart(event, product._id)}
                       >
                         <Link to="/cart" className="addto-cart">
                           ADD TO CART
                         </Link>
-                      </Button>
+                      </div>
                     </CardActions>
                   </Box>
                 </CardActionArea>
