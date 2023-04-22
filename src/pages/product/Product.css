@@ -109,7 +109,13 @@
     justify-content:flex-start;
     margin-bottom: 10px;
 }
-.description-product h4, p{
+.description-product-h4{
+    color:#0B486A;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+.description-product-p{
     color:#0B486A;
     margin-top: 20px;
     margin-bottom: 20px;

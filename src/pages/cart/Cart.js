@@ -14,10 +14,11 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import ReactLoading from "react-loading";
+import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 
 const Cart = () => {
   const userId = sessionStorage.getItem("Id");
-
+  const [menubar, setMenuBar] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [totalData, settotalData] = useState([]);
   const [orderStatus, setOrderStatus] = useState(null);
@@ -32,7 +33,7 @@ const Cart = () => {
         settotalData(data);
         setTimeout(() => {
           setLoading(false);
-        }, 1000);
+        }, 2000);
       } catch (err) {
         console.log(err.message);
       }
@@ -128,7 +129,9 @@ const Cart = () => {
 
   return (
     <>
-    {loading ? (
+      <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
+      <MenuBar menubar={menubar} />
+      {loading ? (
         <ReactLoading
           className="loading-container"
           type="spinningBubbles"
@@ -137,78 +140,82 @@ const Cart = () => {
           width={100}
         />
       ) : (
-    <div className="cart-wrapper">
-      <div className="cart-header">
-        <h1 className="cart-title">Cart</h1>
-      </div>
-      <div className="cart-table">
-        <Paper
-          sx={{
-            width: "70%",
-            overflow: "hidden",
-            marginLeft: "auto",
-            marginRight: "auto",
-            border: "#0B486A solid 1px",
-          }}
-        >
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {tableData?.map((item) => (
-                  <TableRow key={item._id}>
-                    <TableCell>
-                      <button
-                        onClick={() => handleRemove(userId, item.productId._id)}
-                        className="cart-button-icon"
-                      >
-                        <FontAwesomeIcon
-                          icon={faCircleXmark}
-                          className="cart-Xicon"
-                        />
-                      </button>
-                    </TableCell>
-                    <TableCell className="cart-item-image">
-                      <img
-                        src={`http://localhost:5000/${item.productId.images[0]}`}
-                        alt={item.product}
-                      />
-                    </TableCell>
-                    <TableCell>{item.productId.name}</TableCell>
-                    <TableCell>{item.productId.size}</TableCell>
-                    <TableCell>{item.productId.discountedPrice}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </div>
-      <div className="cart-totals">
-        {/* <h1 className="cart-totals-title">Cart Total</h1> */}
-        <div className="cart-totals-first">
-          <p>Total</p>
-          <p>{totalData.bill}</p>
+        <div className="cart-wrapper">
+          <div className="cart-header">
+            <h1 className="cart-title">Cart</h1>
+          </div>
+          <div className="cart-table">
+            <Paper
+              sx={{
+                width: "70%",
+                overflow: "hidden",
+                marginLeft: "auto",
+                marginRight: "auto",
+                border: "#0B486A solid 1px",
+              }}
+            >
+              <TableContainer sx={{ maxHeight: 440 }}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          style={{ minWidth: column.minWidth }}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {tableData?.map((item) => (
+                      <TableRow key={item._id}>
+                        <TableCell>
+                          <button
+                            onClick={() =>
+                              handleRemove(userId, item.productId._id)
+                            }
+                            className="cart-button-icon"
+                          >
+                            <FontAwesomeIcon
+                              icon={faCircleXmark}
+                              className="cart-Xicon"
+                            />
+                          </button>
+                        </TableCell>
+                        <TableCell className="cart-item-image">
+                          <img
+                            src={`http://localhost:5000/${item.productId.images[0]}`}
+                            alt={item.product}
+                          />
+                        </TableCell>
+                        <TableCell>{item.productId.name}</TableCell>
+                        <TableCell>{item.productId.size}</TableCell>
+                        <TableCell>{item.productId.discountedPrice}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </div>
+          <div className="cart-totals">
+            <div className="cart-totals-first">
+              <p>Total</p>
+              <p>$ {totalData.bill.toFixed(2)}</p>
+            </div>
+            <div className="cart-totals-second">
+              <button
+                className="cart-totals-second-button"
+                onClick={handleOrder}
+              >
+                Proceed to checkout
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="cart-totals-second">
-          <button className="cart-totals-second-button" onClick={handleOrder}>
-            Proceed to checkout
-          </button>
-        </div>
-      </div>
-    </div>
       )}
     </>
   );

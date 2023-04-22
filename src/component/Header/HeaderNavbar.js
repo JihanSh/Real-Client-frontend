@@ -33,12 +33,12 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
                 <img src={user} alt="#" />
               </Link>
             </button>
-          </div>
           <button className="navLogin-button">
-            <Link to="/login">
-              <a href="../login">Login</a>
+            <Link to="/auth">
+              Login
             </Link>
           </button>
+          </div>
         </div>
         <div className="navnavbar-menu">
           <button className="navmenu-button" id="navmenuButton">
@@ -57,13 +57,24 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
 
 const MenuBar = ({ menubar }) => {
   return (
-    <div className={!menubar ? "navhidden_hidden" : "navhidden_show"} menubar>
+    <div className={!menubar ? "navhidden_hidden" : "navhidden_show"}>
       <button className="navmenu-menu">
         <Link to="/">Home</Link>
       </button>
       <button className="navmenu-menu">
         <Link to="/about">About Us</Link>
       </button>
+      <button className="navmenu-menu">
+        <Link to="/register">My Account</Link>
+      </button>
+      <button className="navmenu-menu">
+        <Link to="/cart">Cart</Link>
+      </button>
+      <button className="navmenu-menu">
+            <Link to="/auth">
+              Login
+            </Link>
+          </button>
     </div>
   );
 };

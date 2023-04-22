@@ -16,8 +16,11 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import icon1 from "./images/icons8-man-60.png";
 import Swal from "sweetalert2";
+import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+
 
 const Home = () => {
+  const [menubar, setMenuBar] = useState(false);
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1); // add state for totalPages
@@ -43,7 +46,7 @@ const Home = () => {
       .then((response) => {
         setProducts(response.data.data);
         setTotalPages(response.data.totalPages); // update totalPages state
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -66,14 +69,14 @@ const Home = () => {
         );
         setCartStatus("sucssful", response.data);
         Swal.fire({
-          title: 'Product added to cart!',
-          icon: 'success',
+          title: "Product added to cart!",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonText: 'OK',
+          confirmButtonText: "OK",
           customClass: {
-            popup: 'custom-style',
-            title: 'custom-style',
-            confirmButton: 'custom-style',
+            popup: "custom-style",
+            title: "custom-style",
+            confirmButton: "custom-style",
           },
         });
       } catch (error) {
@@ -81,22 +84,24 @@ const Home = () => {
       }
     } else {
       const result = await Swal.fire({
-        title: 'You need to be logged in to add items to your cart',
+        title: "You need to be logged in to add items to your cart",
         showCancelButton: true,
-        confirmButtonText: 'Log in',
+        confirmButtonText: "Log in",
         customClass: {
-          popup: 'custom-style',
-          title: 'custom-style',
-          confirmButton: 'custom-style',
+          popup: "custom-style",
+          title: "custom-style",
+          confirmButton: "custom-style",
         },
       });
       if (result.isConfirmed) {
-        window.location.href = '/login'; 
+        window.location.href = "/login";
       }
     }
   };
   return (
     <>
+    <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
+        <MenuBar menubar={menubar} />
       <div className="home-section">
         <div className="sale-section">
           <div className="img-sale-section">
@@ -128,7 +133,7 @@ const Home = () => {
         </div>
         <div className="category1-section">
           {categories.map((category, id) => (
-            <button className="category-button">
+            <button className="category-button" key={id}>
               <Link
                 key={id}
                 className="link1-category"
@@ -142,7 +147,7 @@ const Home = () => {
         <h1 className="line-latest-section">Latest Drops</h1>
         <div className="products-section">
           {products.map((product, id) => (
-            <div className="product-card">
+            <div className="product-card" key={id}>
               <Card
                 key={id}
                 sx={{ maxWidth: 250, border: "solid 1px #0B486A" }}
@@ -169,25 +174,48 @@ const Home = () => {
                           {product.name.slice(0, 15)}...
                         </Typography>
                       </Link>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        mb="-20px"
-                        fontSize="20px"
-                      >
-                        {product.price} $
-                      </Typography>
+                      {product.discountPercentage ? (
+                        <>
+                          <div className="raneem">
+                            <Typography
+                              className="original-price3"
+                              variant="body2"
+                              color="text.secondary"
+                              mb="-20px"
+                              fontSize="20px"
+                            >
+                              ${product.price}
+                            </Typography>
+                            <Typography
+                              className="discounted-price3"
+                              variant="body2"
+                              color="text.secondary"
+                              mb="-20px"
+                              fontSize="20px"
+                            >
+                              ${product.discountedPrice}
+                            </Typography>
+                          </div>
+                        </>
+                      ) : (
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          mb="-20px"
+                          fontSize="20px"
+                        >
+                          ${product.price}
+                        </Typography>
+                      )}
                     </CardContent>
                     <CardActions>
-                      <Button
+                      <div
                         size="small"
                         onClick={(event) => handleCart(event, product._id)}
                         className="addto-cart"
                       >
-                        {/* <Link to="/cart" className="addto-cart"> */}
-                          ADD TO CART
-                        {/* </Link> */}
-                      </Button>
+                        ADD TO CART
+                      </div>
                     </CardActions>
                   </Box>
                 </CardActionArea>

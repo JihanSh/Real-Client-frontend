@@ -5,21 +5,16 @@ import About from "./pages/about/About";
 import Cart from "./pages/cart/Cart";
 import Shop from "./pages/shop/Shop";
 import Product from "./pages/product/Product";
-import { HeaderNavbar, MenuBar } from "../src/component/Header/HeaderNavbar";
-import { useState } from "react";
 import NotFound from "./pages/notFound/NotFound";
 import Category from "./pages/category/Category";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 
 function App() {
-  const [menubar, setMenuBar] = useState(false);
   return (
     <>
       <BrowserRouter>
         <div className="App"></div>
-        <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
-        <MenuBar menubar={menubar} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />

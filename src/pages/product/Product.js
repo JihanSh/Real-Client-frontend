@@ -8,21 +8,23 @@ import icon from "./images/icons8-right-arrow-32 (1).png";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
+import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+
 
 const Product = () => {
+  const [menubar, setMenuBar] = useState(false);
   const productId = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [cartStatus, setCartStatus] = useState([]);
   const userId = sessionStorage.getItem("Id");
+  
 
   useEffect(() => {
     axios
       .get(`http://localhost:5000/products/${productId.productId}`)
       .then((response) => {
-        console.log(response.data);
-        console.log(response.data.images[0]);
         setProduct(response.data);
         setLoading(false);
       })
@@ -30,8 +32,6 @@ const Product = () => {
         console.log(error);
       });
   }, []);
-  console.log(product);
-  console.log(`http://localhost:5000/${product.images}`);
 
   // Fetch and sort the items on mount
   useEffect(() => {
@@ -90,6 +90,8 @@ const Product = () => {
 
   return (
     <>
+    <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
+        <MenuBar menubar={menubar} />
       {loading ? (
         <ReactLoading
           className="loading-container"
@@ -161,14 +163,9 @@ const Product = () => {
           </div>
           <div className="product-section2">
             <div className="description-product">
-              <h4>Description:</h4>
-              <p>
-                {product.description}ljshdfpnvoi ;lskdfjnpaoiecnp woeimjcawoiemc
-                oweijcmckjecowemjc weijcopwinec iencpwine euvnpe
-                iupeituvneirbcperv psirncpeirtnvpi entpecirnp entvpertnp
-                ceitnpenvpetnpeupeivnutpecio mpoeinuvnutpoieetc nirnvierncpeintc
-                enrivnpeiorcwo oiermcpwoipeonrcpeior nclweivniuhgoiwvernuhce
-                cepiorcnpwoiecn
+              <h4 className="description-product-h4">Description:</h4>
+              <p className="description-product-p"> 
+                {product.description}
               </p>
             </div>
             <div className="recent-product-section">

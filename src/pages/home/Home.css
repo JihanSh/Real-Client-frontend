@@ -155,7 +155,6 @@
 }
 .MuiTypography-h5:hover{
     color:#FF7D00
-
 }
 
 .pagination{
@@ -166,6 +165,20 @@
     text-decoration: none !important;
     color:#FF7D00 !important;
     font-size: 15px !important;
+}
+.original-price3 {
+    text-decoration: line-through;
+    opacity: 0.5;
+    margin-right: 8px;
+   
+  }
+  
+  .original-price3::after {
+    content: " ";
+  }
+.raneem{
+  display: flex;
+   justify-content:space-evenly;
 }
 @media (max-width: 768px){
     .home-section{
@@ -269,7 +282,7 @@
 
      @media (max-width: 414px) {
         .home-section{
-            width: 413px;
+            width: 390px;
             margin: auto;
         }
         .sale-section{
@@ -322,7 +335,7 @@
             border-bottom: 2px solid #FF7D00; /* This creates the border. Replace black with whatever color you want. */
         }
         .products-section{
-            width: 410px;
+            width: 300px;
             display: grid;
             grid-template-columns: 1fr ;
             gap: 5px;
@@ -338,7 +351,7 @@
       .list-category-section{
         display: flex;
         flex-direction: column;
-       margin: 10px;
+        margin: 10px 10px 10px 20px;
         }
         .list-category-section .link-category{
             text-decoration: none;

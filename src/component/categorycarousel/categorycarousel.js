@@ -25,9 +25,9 @@ const TitleCarousel = () => {
   const [product, setProduct] = useState([]);
   const [subcategoryId, setSubcategoryId] = useState(null);
   const [cartStatus, setCartStatus] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1); // add state for totalPages
-  const [searchTerm, setSearchTerm] = useState("");
 
   const categoryId = useParams();
   const userId = sessionStorage.getItem("Id");
@@ -64,18 +64,19 @@ const TitleCarousel = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/list2/${categoryId.categoryId}`
+          `http://localhost:5000/products/list2/${categoryId.categoryId}?page=${currentPage}`
         );
         const data = await response.json();
-        setProduct(data);
+        setProduct(data.data);
         setTotalPages(data.totalPages); // update totalPages state
+        console.log(data);
       } catch (err) {
         console.log(err.message);
       }
     };
-    console.log(categoryId);
+
     fetchProducts();
-  }, []);
+  }, [currentPage]);
 
   const handleSubcategoryClick = (subcategoryId) => {
     setSubcategoryId(subcategoryId);
@@ -86,10 +87,12 @@ const TitleCarousel = () => {
     const fetchProductsBySubcategory = async (subcategoryId) => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/list1/${subcategoryId}`
+          `http://localhost:5000/products/list1/${subcategoryId}?page=${currentPage}`
         );
         const data = await response.json();
-        setProduct(data);
+        setProduct(data.data);
+        setTotalPages(data.totalPages); // update totalPages state
+        console.log(data);
       } catch (err) {
         console.log(err.message);
       }
@@ -101,11 +104,12 @@ const TitleCarousel = () => {
       const fetchProducts = async () => {
         try {
           const response = await fetch(
-            `http://localhost:5000/products/list2/${categoryId.categoryId}`
+            `http://localhost:5000/products/list2/${categoryId.categoryId}?page=${currentPage}`
           );
           const data = await response.json();
-          setProduct(data);
-          setTotalPages(data.totalPages);
+          setProduct(data.data);
+          setTotalPages(data.totalPages); // update totalPages state
+          console.log(data);
         } catch (err) {
           console.log(err.message);
         }
@@ -135,14 +139,14 @@ const TitleCarousel = () => {
         const data = await response.json();
         setCartStatus(data);
         Swal.fire({
-          title: 'Product added to cart!',
-          icon: 'success',
+          title: "Product added to cart!",
+          icon: "success",
           showCancelButton: false,
-          confirmButtonText: 'OK',
+          confirmButtonText: "OK",
           customClass: {
-            popup: 'custom-style',
-            title: 'custom-style',
-            confirmButton: 'custom-style',
+            popup: "custom-style",
+            title: "custom-style",
+            confirmButton: "custom-style",
           },
         });
       } catch (error) {
@@ -183,6 +187,7 @@ const TitleCarousel = () => {
             <button
               className="title-carousel"
               onClick={() => handleSubcategoryClick(item._id)}
+              key={item._id}
             >
               {item.title}
             </button>
@@ -195,6 +200,7 @@ const TitleCarousel = () => {
             <button
               className="slider-responsive-title-carousel"
               onClick={() => handleSubcategoryClick(item._id)}
+              key={item._id}
             >
               {item.title}
             </button>
@@ -213,7 +219,7 @@ const TitleCarousel = () => {
             }
           })
           .map((product, id) => (
-            <div className="product-card">
+            <div className="product-card" key={id}>
               <Card
                 key={id}
                 sx={{ maxWidth: 250, border: "solid 1px #0B486A" }}
@@ -240,23 +246,48 @@ const TitleCarousel = () => {
                           {product.name.slice(0, 15)}...
                         </Typography>
                       </a>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        mb="-20px"
-                        fontSize="20px"
-                      >
-                        {product.price} $
-                      </Typography>
+                      {product.discountPercentage ? (
+                        <>
+                          <div className="raneem">
+                            <Typography
+                              className="original-price3"
+                              variant="body2"
+                              color="text.secondary"
+                              mb="-20px"
+                              fontSize="20px"
+                            >
+                              ${product.price}
+                            </Typography>
+                            <Typography
+                              className="discounted-price3"
+                              variant="body2"
+                              color="text.secondary"
+                              mb="-20px"
+                              fontSize="20px"
+                            >
+                              ${product.discountedPrice}
+                            </Typography>
+                          </div>
+                        </>
+                      ) : (
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          mb="-20px"
+                          fontSize="20px"
+                        >
+                          ${product.price}
+                        </Typography>
+                      )}
                     </CardContent>
                     <CardActions>
-                      <Button
+                      <div
                         size="small"
                         onClick={(event) => handleCart(event, product._id)}
                         className="addto-cart"
                       >
                         ADD TO CART
-                      </Button>
+                      </div>
                     </CardActions>
                   </Box>
                 </CardActionArea>
