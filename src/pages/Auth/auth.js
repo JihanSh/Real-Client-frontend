@@ -1,7 +1,7 @@
 import React from "react";
 import "./auth.css";
-import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
+import { HeaderNavbar} from "../../component/Header/HeaderNavbar";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -83,7 +83,7 @@ function Auth() {
   return (
     <div>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
-      <MenuBar menubar={menubar} />
+
       <div className="J-popup-wrapper">
         <div className="svg-head">
           <div
@@ -152,8 +152,9 @@ function Auth() {
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                       />
-                    </label></div>
-                    <div className="login-button">
+                    </label>
+                  </div>
+                  <div className="login-button">
                     {error && (
                       <p className="error-message"> Invalid Credentials</p>
                     )}
