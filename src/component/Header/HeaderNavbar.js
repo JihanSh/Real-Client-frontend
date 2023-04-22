@@ -35,7 +35,7 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
             </button>
           <button className="navLogin-button">
             <Link to="/auth">
-              <a href="../auth">Login</a>
+              Login
             </Link>
           </button>
           </div>
@@ -57,7 +57,7 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
 
 const MenuBar = ({ menubar }) => {
   return (
-    <div className={!menubar ? "navhidden_hidden" : "navhidden_show"} menubar>
+    <div className={!menubar ? "navhidden_hidden" : "navhidden_show"}>
       <button className="navmenu-menu">
         <Link to="/">Home</Link>
       </button>
@@ -72,7 +72,7 @@ const MenuBar = ({ menubar }) => {
       </button>
       <button className="navmenu-menu">
             <Link to="/auth">
-              <a href="../auth">Login</a>
+              Login
             </Link>
           </button>
     </div>

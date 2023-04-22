@@ -7,7 +7,7 @@ import ProductCarousel from "../../component/ProductCarousel/ProductCarousel";
 import icon from "./images/icons8-right-arrow-32 (1).png";
 import { Link } from "react-router-dom";
 import { HeaderNavbar, MenuBar } from '../../component/Header/HeaderNavbar';
-
+import {Footer} from '../../component/Header/footer/footer';
 import ReactLoading from "react-loading";
 
 const Product = () => {
@@ -29,7 +29,7 @@ const Product = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [productId.productId]);
  
 
   // Fetch and sort the items on mount
@@ -184,6 +184,7 @@ const Product = () => {
           </div>
         </div>
       )}
+       <Footer/>
     </>
   );
 };
