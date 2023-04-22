@@ -1,0 +1,43 @@
+.register-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    border:1px solid #0b486a;
+    box-shadow:  10px 15px #0b486a ;
+    border-radius: 30px;
+    margin: 100px auto;
+    width: 500px;
+    height: 500px;
+    color:#0b486a;
+    font-size: larger;
+    justify-content: center;
+  }
+  
+  .register-input {
+  width: 320px;
+  height: 40px;
+  font-size: 16px;
+  padding: 0 5px;border: transparent;
+  border-bottom: 1px solid #8f8e8e ;
+  outline: none;
+  background: transparent;
+  color: black;
+  cursor:text;
+  
+  }
+  .submit-button{
+      height: 50px;
+      background-color:#ff7d00;
+      color:#0b486a;
+      border: transparent;
+  }
+  .error-message{
+      color: red;
+      font-size: smaller;
+      font-weight: normal;
+  }
+  
+  .login-register a{
+    color:#ff7d00;
+    text-decoration: none;
+  }
