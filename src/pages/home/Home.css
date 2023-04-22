@@ -262,7 +262,7 @@
 
      @media (max-width: 414px) {
         .home-section{
-            width: 413px;
+            width: 400px;
             margin: auto;
         }
         .sale-section{
@@ -270,7 +270,7 @@
             background-color: #e8e5e5 ;
             align-items: center;
             justify-content: space-evenly;
-            width: 350px;
+            width: 300px;
             height: 200px;
         }
         .img-sale-section img{
@@ -315,7 +315,7 @@
             border-bottom: 2px solid #FF7D00; /* This creates the border. Replace black with whatever color you want. */
         }
         .products-section{
-            width: 410px;
+            width: 300px;
             display: grid;
             grid-template-columns: 1fr ;
             gap: 5px;
