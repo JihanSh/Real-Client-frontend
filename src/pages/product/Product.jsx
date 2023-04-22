@@ -6,11 +6,13 @@ import { useParams } from "react-router";
 import ProductCarousel from "../../component/ProductCarousel/ProductCarousel";
 import icon from "./images/icons8-right-arrow-32 (1).png";
 import { Link } from "react-router-dom";
+import { HeaderNavbar, MenuBar } from '../../component/Header/HeaderNavbar';
 
 import ReactLoading from "react-loading";
 
 const Product = () => {
   const productId = useParams();
+  const [menubar, setMenuBar] = useState(false);
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -60,6 +62,8 @@ const Product = () => {
 
   return (
     <>
+     <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
+      <MenuBar menubar={menubar} /> 
       {loading ? (
         <ReactLoading
           className="loading-container"

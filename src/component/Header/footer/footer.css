@@ -1,0 +1,31 @@
+.footer-container {
+    width: 1250px;
+    margin: auto;
+    display: grid;
+    background-color: #0b486a;
+    color: white;
+    font-family: sans-serif;
+    grid-template-columns: 200px 200px 200px 350px;
+    padding: 20px;
+    
+    justify-content: space-between;
+    align-items: normal;
+  }
+  
+  .footer-logo {
+    width: 128px;
+    padding: 8px;
+  }
+  .contact-socials {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+  }
+  .facebook-social,
+  .instagram-social {
+    color: white;
+  }
+  .Contact-footer {
+    text-align: center;
+  }

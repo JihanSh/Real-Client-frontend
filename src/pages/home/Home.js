@@ -8,6 +8,8 @@ import child from "./images/istockphoto-674315022-612x612 .jpeg";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { HeaderNavbar, MenuBar } from '../../component/Header/HeaderNavbar';
+import {Footer} from '../../component/Header/footer/footer';
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -20,6 +22,7 @@ import icon2 from "./images/icons8-businesswoman-50.png";
 import icon3 from "./images/icons8-children-16.png";
 
 const Home = () => {
+  const [menubar, setMenuBar] = useState(false);
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1); // add state for totalPages
@@ -71,6 +74,8 @@ const Home = () => {
   };
   return (
     <>
+    <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
+      <MenuBar menubar={menubar} /> 
       <div className="home-section">
         <div className="sale-section">
           <div className="img-sale-section">
@@ -169,6 +174,7 @@ const Home = () => {
           />
         </Stack>
       </div>
+      <Footer/>
     </>
   );
 };
