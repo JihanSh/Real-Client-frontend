@@ -187,3 +187,75 @@
     color: white;
   }
   
+  /* responsive to mobile */
+  /* For devices with a screen size of 600px or less */
+@media (max-width: 600px) {
+
+  /* Shared styles */
+  .form-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  .input-field {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  /* Register page specific styles */
+  .register-wrapper {
+    height: 100vh;
+  }
+
+  .register-form {
+    width: 100%;
+    height: auto;
+    position: static;
+    top: 0;
+    transform: none;
+  }
+
+  .register-form h2 {
+    font-size: 18px;
+  }
+
+  .register-form label {
+    font-size: 16px;
+  }
+
+  .register-form input[type="text"],
+  .register-form input[type="password"] {
+    font-size: 16px;
+  }
+
+  /* Login page specific styles */
+  .login-wrapper {
+    height: 100vh;
+  }
+
+  .login-form {
+    width: 100%;
+    height: auto;
+    position: static;
+    top: 0;
+    transform: none;
+  }
+
+  .login-form h2 {
+    font-size: 18px;
+  }
+
+  .login-form label {
+    font-size: 16px;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    font-size: 16px;
+  }
+}
