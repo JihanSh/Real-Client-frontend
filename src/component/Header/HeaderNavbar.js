@@ -21,24 +21,17 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
             <Link to="/about">About Us</Link>
           </button>
         </div>
-        <div className="navbar-user">
-          <div className="navnavbar-contact">
-            <button className="navcontact-button">
-              <Link to="/cart">
-                <img className="cart" src={cart} alt="#" />
-              </Link>
-            </button>
-            <button className="navcontact-button">
-              <Link to="/user">
-                <img src={user} alt="#" />
-              </Link>
-            </button>
-          <button className="navLogin-button">
-            <Link to="/auth">
-              Login
+        <div className="navnavbar-contact">
+          <button className="navcontact-button">
+            <Link to="/cart">
+              <img className="cart" src={cart} alt="#" />
             </Link>
           </button>
-          </div>
+          <button className="navcontact-button">
+            <Link to="/register">
+              <img src={user} alt="#" />
+            </Link>
+          </button>
         </div>
         <div className="navnavbar-menu">
           <button className="navmenu-button" id="navmenuButton">
@@ -65,16 +58,14 @@ const MenuBar = ({ menubar }) => {
         <Link to="/about">About Us</Link>
       </button>
       <button className="navmenu-menu">
-        <Link to="/register">My Account</Link>
+        <Link to="/User">My Account</Link>
       </button>
       <button className="navmenu-menu">
         <Link to="/cart">Cart</Link>
       </button>
       <button className="navmenu-menu">
-            <Link to="/auth">
-              Login
-            </Link>
-          </button>
+        <Link to="/auth">Login</Link>
+      </button>
     </div>
   );
 };

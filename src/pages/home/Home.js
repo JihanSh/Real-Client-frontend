@@ -18,7 +18,6 @@ import icon1 from "./images/icons8-man-60.png";
 import Swal from "sweetalert2";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 
-
 const Home = () => {
   const [menubar, setMenuBar] = useState(false);
   const [products, setProducts] = useState([]);
@@ -100,8 +99,8 @@ const Home = () => {
   };
   return (
     <>
-    <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
-        <MenuBar menubar={menubar} />
+      <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
+      <MenuBar menubar={menubar} />
       <div className="home-section">
         <div className="sale-section">
           <div className="img-sale-section">
