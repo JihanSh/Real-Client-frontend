@@ -29,7 +29,7 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
               </Link>
             </button>
             <button className="navcontact-button">
-              <Link to="/user">
+              <Link to="/User">
                 <img src={user} alt="#" />
               </Link>
             </button>
@@ -63,7 +63,7 @@ const MenuBar = ({ menubar }) => {
         <Link to="/about">About Us</Link>
       </button>
       <button className="navmenu-menu">
-        <Link to="/register">My Account</Link>
+        <Link to="/User">My Account</Link>
       </button>
       <button className="navmenu-menu">
         <Link to="/cart">Cart</Link>
