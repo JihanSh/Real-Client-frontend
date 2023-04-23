@@ -17,6 +17,7 @@ import Stack from "@mui/material/Stack";
 import icon1 from "./images/icons8-man-60.png";
 import Swal from "sweetalert2";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+import { Footer } from "../../component/Header/footer/footer";
 
 const Home = () => {
   const [menubar, setMenuBar] = useState(false);
@@ -232,6 +233,7 @@ const Home = () => {
           />
         </Stack>
       </div>
+      <Footer/>
     </>
   );
 };

@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+import { Footer } from "../../component/Header/footer/footer";
 
 
 const Product = () => {
@@ -205,6 +206,7 @@ const Product = () => {
           </div>
         </div>
       )}
+      <Footer/>
     </>
   );
 };

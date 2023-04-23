@@ -1,9 +1,9 @@
 import React from "react";
 import "./auth.css";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
-import { Footer } from "../../component/Header/footer/footer";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Footer } from "../../component/Header/footer/footer";
 
 function Auth() {
   const [menubar, setMenuBar] = useState(false);

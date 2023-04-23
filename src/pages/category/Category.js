@@ -3,6 +3,7 @@ import TitleCarousel from "../../component/categorycarousel/categorycarousel";
 import "./Category.css";
 import { useParams } from "react-router";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+import { Footer } from "../../component/Header/footer/footer";
 
 const Category = () => {
   const [menubar, setMenuBar] = useState(false);
@@ -34,6 +35,7 @@ const Category = () => {
         </div>
         <TitleCarousel />
       </div>
+      <Footer/>
     </>
   );
 };

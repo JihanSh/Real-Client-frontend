@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import ReactLoading from "react-loading";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+import { Footer } from "../../component/Header/footer/footer";
 
 const Cart = () => {
   const userId = sessionStorage.getItem("Id");
@@ -217,6 +218,7 @@ const Cart = () => {
           </div>
         </div>
       )}
+      <Footer/>
     </>
   );
 };

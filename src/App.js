@@ -17,7 +17,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="shop" element={<Shop />} />
           <Route path="product/:productId" element={<Product />} />
           <Route path="category/:categoryId" element={<Category />} />
           <Route path="*" element={<NotFound />} />

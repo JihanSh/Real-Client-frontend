@@ -21,17 +21,22 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
             <Link to="/about">About Us</Link>
           </button>
         </div>
-        <div className="navnavbar-contact">
-          <button className="navcontact-button">
-            <Link to="/cart">
-              <img className="cart" src={cart} alt="#" />
-            </Link>
-          </button>
-          <button className="navcontact-button">
-            <Link to="/register">
-              <img src={user} alt="#" />
-            </Link>
-          </button>
+        <div className="navbar-user">
+          <div className="navnavbar-contact">
+            <button className="navcontact-button">
+              <Link to="/cart">
+                <img className="cart" src={cart} alt="#" />
+              </Link>
+            </button>
+            <button className="navcontact-button">
+              <Link to="/User">
+                <img src={user} alt="#" />
+              </Link>
+            </button>
+            <button className="navLogin-button">
+              <Link to="/auth">Login</Link>
+            </button>
+          </div>
         </div>
         <div className="navnavbar-menu">
           <button className="navmenu-button" id="navmenuButton">
