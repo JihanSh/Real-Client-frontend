@@ -7,11 +7,12 @@ const User = () => {
   const [menubar, setMenuBar] = useState(false);
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [error, setError] = useState(null);
   const [user, setUser] = useState({});
   const id = sessionStorage.getItem("Id");
   console.log(id);
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchUser = async () => {
       try {
         const response = await fetch(`http://localhost:5000/api/user/${id}`);
@@ -23,7 +24,21 @@ const User = () => {
     };
     fetchUser();
   }, [id]);
-
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/http://localhost:5000/api/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      if (response.ok) {
+        console.log("Logout Successfully");
+      } else {
+        throw new Error("Logout failed");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
   const updateUser = async (event) => {
     event.preventDefault();
 
@@ -46,11 +61,12 @@ const User = () => {
         throw new Error(data.message);
       }
       if (response.ok) {
-      Swal.fire({
-        icon: "success",
-        title: "Updated successfully",
-      });
-      return data.user;}
+        Swal.fire({
+          icon: "success",
+          title: "Updated successfully",
+        });
+        return data.user;
+      }
     } catch (error) {
       console.error(error);
     }
@@ -86,6 +102,7 @@ const User = () => {
         <button className="submit-button" type="submit">
           Update
         </button>
+        <button onClick={handleLogout}>Logout</button>
       </form>
       <Footer />
     </>

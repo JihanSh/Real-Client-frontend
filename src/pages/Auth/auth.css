@@ -187,6 +187,9 @@
 .login-label {
   color: white;
 }
+.error-message{
+  color: red;
+}
 
 /* responsive to mobile */
 /* For devices with a screen size of 600px or less */

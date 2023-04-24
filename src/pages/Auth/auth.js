@@ -220,8 +220,6 @@ function Auth() {
                     Register
                   </button>
                 </form>
-
-                {/* login */}
               </div>
             </div>
           </div>
