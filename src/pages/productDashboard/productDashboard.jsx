@@ -30,7 +30,7 @@ function ProductDashboard() {
     price: "",
     discountPercentage: "",
     size: "",
-    main_image: "",
+    
     images: [],
   });
 
@@ -59,7 +59,7 @@ function ProductDashboard() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [products]);
 
   const handleDelete = async (id) => {
     const confirm = window.confirm(
@@ -142,7 +142,7 @@ function ProductDashboard() {
       formData.append("price", product.price);
       formData.append("discountPercentage", product.discountPercentage);
       formData.append("size", product.size);
-      formData.append("main_image", product.main_image);
+     
 
       await axios.put(`http://localhost:5000/products/${id}`, formData, {
         headers: {
@@ -151,7 +151,7 @@ function ProductDashboard() {
       });
       alert("You have updated the product info!");
       setEditMode(false);
-      window.location.reload(true);
+      
       console.log(formData);
     } catch (error) {
       console.error(error);
@@ -176,7 +176,7 @@ function ProductDashboard() {
       formData.append("price", product.price);
       formData.append("discountPercentage", product.discountPercentage);
       formData.append("size", product.size);
-      formData.append("main_image", product.main_image);
+     
 
       await axios.post(`http://localhost:5000/products`, formData, {
         headers: {
@@ -185,7 +185,7 @@ function ProductDashboard() {
       });
       alert("You have Added a new product");
       setAddMode(false);
-      window.location.reload(true);
+      // window.location.reload(true);
       console.log(formData);
     } catch (error) {
       console.error(error);
@@ -395,20 +395,7 @@ function ProductDashboard() {
                   onChange={handleInputChange}
                 />
               </div>
-              <div className="username">
-                <label className="label-auth">Main Image:</label> <br />
-                <input
-                  className="product-edit-input"
-                  type="number"
-                  id="username"
-                  placeholder="Size"
-                  name="main_image"
-                  min="0"
-                  max="5"
-                  value={product.main_image}
-                  onChange={handleInputChange}
-                />
-              </div>
+             
               <div className="username">
                 <label className="label-auth">Uplaod images:</label> <br />
                 <input
@@ -533,20 +520,7 @@ function ProductDashboard() {
                   onChange={handleInputChange}
                 />
               </div>
-              <div className="username">
-                <label className="label-auth">Main Image:</label> <br />
-                <input
-                  className="product-edit-input"
-                  type="number"
-                  id="username"
-                  placeholder="Size"
-                  name="main_image"
-                  min="0"
-                  max="5"
-                  value={product.main_image}
-                  onChange={handleInputChange}
-                />
-              </div>
+             
               <div className="username">
                 <label className="label-auth">Uplaod images:</label> <br />
                 <input
@@ -559,7 +533,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
+                <label className="label-auth">The main image:</label> <br />
                 <input
                   className="product-edit-input"
                   id="username"
@@ -569,39 +543,7 @@ function ProductDashboard() {
                   multiple
                 />
               </div>
-              <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
-              <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
-              <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
+             
               <button className="product-edit-button" type="submit">
                 Update Product
               </button>

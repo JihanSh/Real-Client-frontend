@@ -29,7 +29,7 @@
 }
 .product-edit-form {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     border:1px solid #0b486a;
     box-shadow:  10px 15px #0b486a ;
