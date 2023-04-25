@@ -11,7 +11,6 @@ const Footer = () => {
       </div>
       <div className="about-footer">
         <h2>About us</h2>
-        <br />
         <p>
           Step into our authentic clothing shop and experience the finest
           quality fabrics and styles that will stand the test of time.
@@ -19,7 +18,6 @@ const Footer = () => {
       </div>
       <div className="Contact-footer">
         <h2>Contact us</h2>
-        <br />
         <p>+961 71 958 446</p>
         <br />
         <div className="contact-socials">
@@ -39,10 +37,11 @@ const Footer = () => {
       </div>
       <div className="question-footer">
         <h2>Do you have any Questions?</h2>
-        <br />
         <p>
-          Our customer service is available from Monday to Friday from 09.00 to
-          21.00 and on Saturdays from 10.00 to 17.00 .
+          Our customer service is available from 
+          -Monday to Friday from 09.00 to
+          21.00 </p>
+        <p>  -Saturdays from 10.00 to 17.00 .
         </p>
       </div>
     </div>

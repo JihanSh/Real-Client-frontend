@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
 import Swal from "sweetalert2";
-
+import "./profile.css";
 const User = () => {
   const [menubar, setMenuBar] = useState(false);
   const [address, setAddress] = useState("");
@@ -11,12 +11,14 @@ const User = () => {
   const id = sessionStorage.getItem("Id");
   console.log(id);
 
-  useEffect(() => { 
+  useEffect(() => {
     const fetchUser = async () => {
       try {
         const response = await fetch(`http://localhost:5000/api/user/${id}`);
         const data = await response.json();
         setUser(data);
+        setPhoneNumber(data.phonenumber);
+        setAddress(data.address);
       } catch (error) {
         console.error(error);
       }
@@ -26,7 +28,7 @@ const User = () => {
 
   const updateUser = async (event) => {
     event.preventDefault();
-
+    console.log("phoneNumber: ", phoneNumber);
     try {
       const response = await fetch("http://localhost:5000/api/update", {
         method: "PUT",
@@ -36,7 +38,7 @@ const User = () => {
         body: JSON.stringify({
           id: id,
           address: address,
-          phoneNumber: phoneNumber,
+          phonenumber: phoneNumber,
         }),
       });
       const data = await response.json();
@@ -62,31 +64,46 @@ const User = () => {
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
       <form onSubmit={updateUser}>
-        <div className="User-inputs">
-          <h1>{user.username}</h1>
-
-          <label className="update-Address">
-            Address:
-            <br />
-            <input
-              type="text"
-              value={address}
-              onChange={(event) => setAddress(event.target.value)}
-            />
-          </label>
+        <div className="user-form">
+          <div className="user-username">
+            <p>
+              Username: <br />
+              <br />
+              {user.username}
+            </p>
+          </div>
+          <div className="update-label">
+            <div className="address-label">
+              <label className="update-Address">
+                Address:
+                <br />
+                <input
+                  className="user-inputs"
+                  type="text"
+                  value={address}
+                  placeholder="New Address"
+                  onChange={(event) => setAddress(event.target.value)}
+                />
+              </label>
+            </div>
+            <div className="phonenumber-label">
+              <label className="update-phonenumber">
+                Phonenumber:
+                <br />
+                <input
+                  className="user-inputs"
+                  type="text"
+                  value={phoneNumber}
+                  placeholder="phonenumber"
+                  onChange={(event) => setPhoneNumber(event.target.value)}
+                />
+              </label>
+            </div>
+          </div>
+          <button className="submit-button" type="submit">
+            Update
+          </button>
         </div>
-        <label className="update-phonenumber">
-          Phonenumber:
-          <br />
-          <input
-            type="text"
-            value={phoneNumber}
-            onChange={(event) => setPhoneNumber(event.target.value)}
-          />
-        </label>
-        <button className="submit-button" type="submit">
-          Update
-        </button>
       </form>
       <Footer />
     </>
