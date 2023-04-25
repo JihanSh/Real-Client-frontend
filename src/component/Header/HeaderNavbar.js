@@ -7,6 +7,14 @@ import cart from "../Header/images/icons8-cart-64.png";
 import user from "../Header/images/icons8-user-32 .png";
 
 const HeaderNavbar = ({ setMenuBar, menubar }) => {
+  const authenticated = sessionStorage.getItem("token");
+
+  const handleLogout = () => {
+    console.log("Logout");
+    sessionStorage.clear("token");
+    window.location.reload();
+  };
+
   return (
     <div className="navbiggerthing">
       <div className="navnavbar">
@@ -33,8 +41,11 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
                 <img src={user} alt="#" />
               </Link>
             </button>
-            <button className="navLogin-button">
-              <Link to="/auth">Login</Link>
+            <button
+              className="navLogin-button"
+              onClick={authenticated && handleLogout}
+            >
+              {authenticated ? "Logout" : <Link to="/auth">Login</Link>}
             </button>
           </div>
         </div>
