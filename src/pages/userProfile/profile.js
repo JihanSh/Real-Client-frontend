@@ -11,7 +11,7 @@ const User = () => {
   const id = sessionStorage.getItem("Id");
   console.log(id);
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchUser = async () => {
       try {
         const response = await fetch(`http://localhost:5000/api/user/${id}`);
@@ -46,11 +46,12 @@ const User = () => {
         throw new Error(data.message);
       }
       if (response.ok) {
-      Swal.fire({
-        icon: "success",
-        title: "Updated successfully",
-      });
-      return data.user;}
+        Swal.fire({
+          icon: "success",
+          title: "Updated successfully",
+        });
+        return data.user;
+      }
     } catch (error) {
       console.error(error);
     }
