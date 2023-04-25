@@ -49,7 +49,7 @@
 
 .jiji button {
   background-color: #ff7d00;
-  background-image: linear-gradient(#ff7d00, #f8a456);
+  background-image: linear-gradient(#e64a1d, #ff7d00);
   height: 45px;
   color: white;
   width: 120px;
@@ -130,7 +130,7 @@
 
 .left-right-wrapper form button {
   background-color: #ff7d00;
-  background-image: linear-gradient(#ff7d00, #f8a456);
+  background-image: linear-gradient(#e64a1d, #ff7d00);
   height: 45px;
   color: white;
   width: 120px;
