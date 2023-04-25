@@ -1,0 +1,74 @@
+.prodash-section{
+    width: 1700px;
+   
+    text-align: center;
+    margin: 30px auto 30px auto;
+ }
+ .cart-header-prodash{
+     display: flex;
+     flex-direction: row;
+     justify-content: space-evenly;
+ 
+ }
+ .cart-table-prodash{
+     margin-top: 20px;
+   
+ }
+ .prodash-icon{
+     width: 2.5rem;
+     height: 2.5rem;
+ }
+ .prodash-button{
+     background-color: white;
+     border: none;
+ }
+ 
+ .forms-section{
+     display: flex;
+     flex-direction: row;
+ }
+ .product-edit-form {
+     display: grid;
+     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+     align-items: center;
+     border:1px solid #0b486a;
+     box-shadow:  10px 15px #0b486a ;
+     border-radius: 30px;
+     margin: 50px auto;
+     width: 500px;
+     height: 900px;
+     color:#0b486a;
+     font-size: larger;
+     justify-content: center;
+    
+   }
+   
+   .product-edit-input {
+   width: 320px;
+   height: 40px;
+   font-size: 16px;
+   padding: 0 5px;
+   border: transparent;
+   border-bottom: 1px solid #8f8e8e ;
+   outline: none;
+   background: transparent;
+   color: black;
+   cursor:text;
+   
+   }
+   .product-edit-button{
+       height: 50px;
+       background-color:#ff7d00;
+       color:#0b486a;
+       border: transparent;
+   }
+   .product-form-container{
+     margin: 50px auto;
+     width: 500px;
+     height: 900px;
+   }
+   .product-form-container h1{
+     color:#0b486a;
+   }
+  
+  

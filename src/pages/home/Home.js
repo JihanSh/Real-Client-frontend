@@ -94,7 +94,7 @@ const Home = () => {
         },
       });
       if (result.isConfirmed) {
-        window.location.href = "/login";
+        window.location.href = "/auth";
       }
     }
   };

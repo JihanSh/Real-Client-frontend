@@ -102,7 +102,7 @@ const Cart = () => {
             showConfirmButton: false,
             timer: 1500,
           }).then(() => {
-            window.location.reload(); // Reload the page
+            window.location.href = '/';
           });
         } else {
           // set order status to failure
@@ -132,7 +132,13 @@ const Cart = () => {
     <>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
-      {loading ? (
+      {!userId ? (
+      <div className="cart-wrapper">
+        <div className="cart-header">
+          <h1 className="cart-title">Please log in to access your cart</h1>
+        </div>
+      </div>
+    ) :loading ? (
         <ReactLoading
           className="loading-container"
           type="spinningBubbles"

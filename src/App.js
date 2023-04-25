@@ -8,6 +8,7 @@ import Cart from "./pages/cart/Cart";
 import Product from "./pages/product/Product";
 import NotFound from "./pages/notFound/NotFound";
 import Category from "./pages/category/Category";
+import ProductDashboard from "./pages/productDashboard/productDashboard";
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="product/:productId" element={<Product />} />
           <Route path="category/:categoryId" element={<Category />} />
+          <Route path="proDash" element={<ProductDashboard />} />
           <Route path="*" element={<NotFound />} />
           <Route path="auth" element={<Auth />} />
           <Route path="User" element={<User />} />
