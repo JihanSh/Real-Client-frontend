@@ -9,6 +9,7 @@ import NotFound from "./pages/notFound/NotFound";
 import Category from "./pages/category/Category";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import ProductDashboard from "./pages/productDashboard/productDashboard";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
+          <Route path="proDash" element={<ProductDashboard />} />
         </Routes>
       </BrowserRouter>
     </>
