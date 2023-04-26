@@ -39,6 +39,8 @@
   border: transparent;
   font-size: larger;
   margin-top: 20px;
+    border-radius: 10px;
+
 }
 .update-label {
   display: flex;
