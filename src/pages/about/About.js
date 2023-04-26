@@ -24,7 +24,7 @@ const About = () => {
         <Box
           textAlign={"center"}
           p={{ xs: 2, sm: 3, md: 5 }}
-          mt={{ xs: 3, sm: 4, md: 5 }}
+          mt={{ xs: 3, sm: 4, md: 1 }}
           width={{ xs: "100%", sm: "80%", md: "65%" }}
           ml={{ xs: -1, sm: 4, md: 35 }}
         >
@@ -34,14 +34,14 @@ const About = () => {
         </Box>
         <Box textAlign={"center"}>
           {" "}
-          <Typography variant="h5" mt={{ xs: 3, sm: 4 }} gutterBottom>
+          <Typography variant="h5" mt={{ xs: 3, sm: 1 }} gutterBottom>
             FEEL FREE TO CONTACT US
           </Typography>
           <Typography
             textAlign={"center"}
             variant="body1"
             align="justify"
-            mt={3}
+            mt={2}
             gutterBottom
           >
             The time for the delivery: 2 to 7 days
@@ -50,7 +50,7 @@ const About = () => {
             textAlign={"center"}
             variant="body1"
             align="justify"
-            mt={3}
+            mt={2}
             gutterBottom
           >
             How much does the delivery cost? 2.5$

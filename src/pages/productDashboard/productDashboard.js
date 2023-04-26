@@ -14,7 +14,11 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import edit from "./images/icons8-create-64.png";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+<<<<<<< HEAD
+import CategoryDash from "./categoryDash";
+=======
 import CategoryDash from "./CategoryDash";
+>>>>>>> 20807e67d3d037cb620d01b71b75d6a54fd7431c
 
 function ProductDashboard() {
   const [loading, setLoading] = useState(true);
@@ -91,7 +95,6 @@ function ProductDashboard() {
     }
   };
 
-
   // Fetch the category and subcategory data on component mount
   useEffect(() => {
     const fetchCategories = async () => {
@@ -150,15 +153,19 @@ function ProductDashboard() {
       });
       alert("You have updated the product info!");
       setEditMode(false);
-      window.location.reload(true);
+      // Fetch the updated list of products
+      const response = await axios.get(`http://localhost:5000/products`);
+
+      // Update the state of the products with the new list
+      setProducts(response.data);
       console.log(formData);
     } catch (error) {
       console.error(error);
     }
   };
-  const handleAdd = (() =>{
+  const handleAdd = () => {
     setAddMode(true);
-  });
+  };
 
   const handleAddSubmit = async (event) => {
     event.preventDefault();
@@ -183,7 +190,12 @@ function ProductDashboard() {
       });
       alert("You have Added a new product");
       setAddMode(false);
-      window.location.reload(true);
+
+      // Fetch the updated list of products
+      const response = await axios.get(`http://localhost:5000/products`);
+
+      // Update the state of the products with the new list
+      setProducts(response.data);
       console.log(formData);
     } catch (error) {
       console.error(error);
@@ -206,9 +218,12 @@ function ProductDashboard() {
         <div className="prodash-section">
           <div className="cart-wrapper-prodash">
             <div className="cart-header-prodash">
-              <h1 className="cart-title">Product Dashboard</h1>
+              <h1 className="cart-title-prodash">Product Dashboard</h1>
               <div className="cart-totals-second">
-                <button className="cart-totals-second-button" onClick={handleAdd}>
+                <button
+                  className="cart-totals-second-button"
+                  onClick={handleAdd}
+                >
                   Add Product
                 </button>
               </div>
@@ -287,12 +302,12 @@ function ProductDashboard() {
         </div>
       )}
       <div className="forms-section">
-      {addMode && (
+        {addMode && (
           <div className="product-form-container">
             <h1>Add Product</h1>
             <form
               className="product-edit-form"
-              onSubmit={handleAddSubmit}  
+              onSubmit={handleAddSubmit}
               ref={form}
             >
               <div className="username">
@@ -393,7 +408,6 @@ function ProductDashboard() {
                   onChange={handleInputChange}
                 />
               </div>
-          
               <div className="username">
                 <label className="label-auth">Uplaod images:</label> <br />
                 <input
@@ -406,40 +420,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
-              <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
-              <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
-              <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
+                <label className="label-auth">Uplaod main image:</label> <br />
                 <input
                   className="product-edit-input"
                   id="username"
@@ -453,12 +434,11 @@ function ProductDashboard() {
                 Add Product
               </button>
             </form>
-            </div>
-         
-      )}
+          </div>
+        )}
         {editMode && (
-         <div className="product-form-container">
-          <h1>Update Product</h1>
+          <div className="product-form-container">
+            <h1>Update Product</h1>
             <form
               className="product-edit-form"
               onSubmit={handleEditSubmit}
@@ -562,7 +542,6 @@ function ProductDashboard() {
                   onChange={handleInputChange}
                 />
               </div>
-          
               <div className="username">
                 <label className="label-auth">Uplaod images:</label> <br />
                 <input
@@ -574,41 +553,9 @@ function ProductDashboard() {
                   multiple
                 />
               </div>
+
               <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
-              <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
-              <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
-              <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
+                <label className="label-auth">Uplaod main image:</label> <br />
                 <input
                   className="product-edit-input"
                   id="username"
@@ -622,12 +569,23 @@ function ProductDashboard() {
                 Update Product
               </button>
             </form>
-         </div>
+          </div>
         )}
       </div>
+<<<<<<< HEAD
+    <CategoryDash/>
+=======
       <CategoryDash />
+>>>>>>> 20807e67d3d037cb620d01b71b75d6a54fd7431c
     </>
   );
 }
 
 export default ProductDashboard;
+<<<<<<< HEAD
+
+// setTimeout(() => {
+//     setLoading(false);
+//   }, 2000);
+=======
+>>>>>>> 20807e67d3d037cb620d01b71b75d6a54fd7431c
