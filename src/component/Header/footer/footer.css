@@ -39,7 +39,7 @@
 /* styles for mobile */
 @media (max-width: 600px) {
   .footer-container {
-    width: 100%;
+    width: 92%;
     grid-template-columns: 1fr;
     text-align: center;
   }

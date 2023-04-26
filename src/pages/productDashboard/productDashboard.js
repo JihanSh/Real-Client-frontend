@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import "./productDashboard.css";
 import ReactLoading from "react-loading";
@@ -14,6 +14,7 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import edit from "./images/icons8-create-64.png";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+import CategoryDash from "./CategoryDash";
 
 function ProductDashboard() {
   const [loading, setLoading] = useState(true);
@@ -624,122 +625,9 @@ function ProductDashboard() {
          </div>
         )}
       </div>
+      <CategoryDash />
     </>
   );
 }
 
 export default ProductDashboard;
-
-// setTimeout(() => {
-//     setLoading(false);
-//   }, 2000);
-
-//   {addMode && (
-//         <form  className="product-edit-form" ref={form}>
-//         <div className="username">
-//           <label className="label-auth">Product name:</label> <br />
-//           <input
-
-//             className="product-edit-input"
-//             type="text"
-//             id="username"
-//             placeholder="Product name"
-//             name="name"
-//             value={product.name}
-//             onChange={handleChange}
-//            />
-//         </div>
-//         <div className="username">
-//           <label className="label-auth">Description:</label> <br />
-//           <input
-
-//             className="product-edit-input"
-//             type="text"
-//             id="username"
-//             placeholder="discription"
-//             name="description"
-//             value={formData.description}
-//             onChange={handleChange}
-//            />
-//         </div>
-//         <div className="username">
-//           <label className="label-auth">Category:</label> <br />
-//           <input
-
-//             className="product-edit-input"
-//             type="text"
-//             id="username"
-//             placeholder="Category name"
-//             name="category"
-//             value={formData.category.title}
-//             onChange={handleChange}
-//            />
-//         </div>
-//         <div className="username">
-//           <label className="label-auth">Subcategory:</label> <br />
-//           <input
-
-//             className="product-edit-input"
-//             type="text"
-//             id="username"
-//             placeholder="Subcategory name"
-//             name="subcategory"
-//             value={formData.subcategory.title}
-//             onChange={handleChange}
-//            />
-//         </div>
-//         <div className="username">
-//           <label className="label-auth">Price:</label> <br />
-//           <input
-
-//             className="product-edit-input"
-//             type="text"
-//             id="username"
-//             placeholder="Price"
-//             name="price"
-//             value={formData.price}
-//             onChange={handleChange}
-//            />
-//         </div>
-//         <div className="username">
-//           <label className="label-auth">Discount Percentage:</label> <br />
-//           <input
-
-//             className="product-edit-input"
-//             type="text"
-//             id="username"
-//             placeholder="Discount Percentage"
-//             name="discountPercentage"
-//             value={formData.discountPercentage}
-//             onChange={handleChange}
-//            />
-//         </div>
-//         <div className="username">
-//           <label className="label-auth">Size:</label> <br />
-//           <input
-
-//             className="product-edit-input"
-//             type="text"
-//             id="username"
-//             placeholder="Size"
-//             name="size"
-//             value={formData.size}
-//             onChange={handleChange}
-//            />
-//         </div>
-//         <div className="username">
-//           <label className="label-auth">Uplaod images:</label> <br />
-//           <input
-//           className="product-edit-input"
-//           id="username"
-//           type="file"
-//           name="images"
-//           onChange={handleFileInputChange}
-//           multiple
-//           />
-//         </div>
-//         <button className="product-edit-button" type="submit">
-//           Submit
-//         </button>
-//       </form>
-//                  )}

@@ -16,6 +16,7 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import ReactLoading from "react-loading";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const userId = sessionStorage.getItem("Id");
@@ -102,7 +103,7 @@ const Cart = () => {
             showConfirmButton: false,
             timer: 1500,
           }).then(() => {
-            window.location.href = '/';
+            window.location.href = "/";
           });
         } else {
           // set order status to failure
@@ -133,12 +134,17 @@ const Cart = () => {
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
       {!userId ? (
-      <div className="cart-wrapper">
-        <div className="cart-header">
-          <h1 className="cart-title">Please log in to access your cart</h1>
+        <div className="cart-wrapper-div1">
+          <div className="cart-header">
+            <h1 className="cart-title-b">Please log in to access your cart.</h1>
+          </div>
+          <div className="cart-login">
+            <Link to="/auth" className="cart-login-link">
+              Login
+            </Link>
+          </div>
         </div>
-      </div>
-    ) :loading ? (
+      ) : loading ? (
         <ReactLoading
           className="loading-container"
           type="spinningBubbles"
@@ -224,7 +230,7 @@ const Cart = () => {
           </div>
         </div>
       )}
-      <Footer/>
+      <Footer />
     </>
   );
 };
