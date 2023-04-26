@@ -73,13 +73,15 @@
    }
   .catdash-section{
     width: 500px;
-   
     text-align: center;
-    margin: 200px auto 30px auto;
+    margin: 50px auto 30px auto;
+    padding-left: 60px;
   }
   .catdash-list{
     display: flex;
-    justify-content:space-evenly ;
+    justify-content:center ;
+   
+    padding-top: 20px;
     
    }
    .catdash-section ul li{
@@ -101,7 +103,7 @@
 .sub-cat-dash{
     display: flex;
     margin: 50px auto 50px auto;
-    width:1700px;
+    width:1600px;
     
 }
 .subdash-section{
@@ -151,3 +153,28 @@
     color:#0b486a;
     border: transparent;
   }
+
+  .catdash-icon{
+    width: 2rem;
+    height: 2rem;
+}
+.catdash-button{
+    background-color: white;
+    border: none;
+    margin-top: -10px;
+}
+.cat-edit-form{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  border:1px solid #0b486a;
+  box-shadow:  10px 15px #0b486a ;
+  border-radius: 30px;
+  margin: 50px auto;
+  width: 500px;
+  height:150px;
+  color:#0b486a;
+  font-size: larger;
+  justify-content: center;
+ 
+}

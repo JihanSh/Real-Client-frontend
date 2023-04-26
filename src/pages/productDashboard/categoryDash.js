@@ -16,12 +16,21 @@ import edit from "./images/icons8-create-64.png";
 const CategoryDash = () => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
-  const [editMode, setEditMode] = useState(true);
-  const [addMode, setAddMode] = useState(true);
+  const [editMode, setEditMode] = useState(false);
+  const [editMode1, setEditMode1] = useState(false);
+  const [addMode, setAddMode] = useState(false);
+  const [idCategory, setIdCategory] = useState(null);
+  const [category, setCategory] =useState({
+    title: "",
+  });
   const columns = [
     { id: "remove", label: " ", minWidth: 100 },
-    { id: "images", label: "Images", minWidth: 100 },
-    { id: "product", label: "Product", minWidth: 100 },
+    { id: "images", label: "Subcategory", minWidth: 100 },
+    { id: "product", label: "Category", minWidth: 100 },
+    { id: "edit", label: "edit", minWidth: 100 },
+  ];
+  const column = [
+    { id: "title", label: "Category", minWidth: 100 },
     { id: "edit", label: "edit", minWidth: 100 },
   ];
 
@@ -47,20 +56,131 @@ const CategoryDash = () => {
     fetchCategories();
     fetchSubcategories();
   }, []);
+   
+  const getCategoryById = async (id) => {
+    console.log(id);
+    try {
+      const response = await axios.get(`http://localhost:5000/categories/${id}`);
+      setCategory(response.data);
+      setIdCategory(id);
+      setEditMode1(true);
+      console.log("get by id", category);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const form = useRef();
+   
+  const handleCategoryChange = (event) => {
+    const { name, value } = event.target;
+    setCategory({ ...category, [name]: value });
+  };
+  
+  const handleEditSubmitCategory = async (event)=>{
+    console.log(idCategory);
+    event.preventDefault();
+    fetch(`http://localhost:5000/categories/${idCategory}`, {
+      method: "PUT",
+      headers: {
+        // "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/json"
+        
+      },
+      body: JSON.stringify({
+        title: category.title,
+      }),
+    })
+      .then(response => response.json())
+      .then(setEditMode1(false))
+      .then(alert("You have updated the category name"))
+
+      // Fetch the updated list of products
+      const response = await axios.get(`http://localhost:5000/categories`);
+
+      // Update the state of the products with the new list
+      
+      setCategories(response.data)
+      .catch(error => console.error(error));
+  }
 
   return (
     <>
       <div className="sub-cat-dash">
         <div className="catdash-section">
           <h1 className="cart-title-catdash">Category Dashboard</h1>
-          {categories.map((category, i) => (
-            <ul className="catdash-list" key={i}>
-              <li>{category.title}</li>
-              <button className="prodash-button">
-                <img className="prodash-icon" src={edit} alt="#" />
+          <div className="cart-table-prodash">
+            <Paper
+              sx={{
+                width: "75%",
+
+                overflow: "hidden",
+                marginLeft: "auto",
+                marginRight: "auto",
+                border: "#0B486A solid 1px",
+              }}
+            >
+              <TableContainer sx={{ maxHeight: "600px" }}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {column.map((colum) => (
+                        <TableCell
+                          key={colum.id}
+                          align={colum.align}
+                          style={{ minWidth: colum.minWidth }}
+                        >
+                          {colum.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {categories.map((category, i) => (
+                      <TableRow key={i}>
+                        <TableCell>{category.title}</TableCell>
+                        <TableCell>
+                          <button className="prodash-button" onClick={() => getCategoryById(category._id)}>
+                            <img className="prodash-icon" src={edit} alt="#" />
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </div>
+          {editMode1 && (
+          <div className="subcat-form-container">
+            <h1>Update Category Name</h1>
+            <form
+              className="cat-edit-form"
+              onSubmit={handleEditSubmitCategory}
+              ref={form}
+            >
+              <div className="username">
+                <label className="label-auth">Category name:</label> <br />
+                <input
+                  className="subcat-edit-input"
+                  type="text"
+                  id="username"
+                  placeholder="Category name"
+                  name="title"
+                  value={category.title}
+                  onChange={handleCategoryChange}
+                  
+                />
+              </div>
+            
+             
+             
+              <button className="subcat-edit-button" type="submit">
+                Update Subcategory
               </button>
-            </ul>
-          ))}
+            </form>
+          </div>
+        )}
         </div>
         <div className="subdash-section">
           <h1 className="cart-title-catdash">subcategory Dashboard</h1>
