@@ -125,12 +125,12 @@ const CategoryDash = () => {
               className="subcat-edit-form"
             >
               <div className="username">
-                <label className="label-auth">Product name:</label> <br />
+                <label className="label-auth">Subcategory name:</label> <br />
                 <input
                   className="subcat-edit-input"
                   type="text"
                   id="username"
-                  placeholder="Product name"
+                  placeholder="Subcategory name"
                   name="name"
                 
                 />
@@ -166,12 +166,12 @@ const CategoryDash = () => {
             
             >
               <div className="username">
-                <label className="label-auth">Product name:</label> <br />
+                <label className="label-auth">Subcategory name:</label> <br />
                 <input
                   className="subcat-edit-input"
                   type="text"
                   id="username"
-                  placeholder="Product name"
+                  placeholder="Subcategory name"
                   name="name"
                   
                 />
