@@ -48,14 +48,14 @@
 }
 
 .jiji button {
-  font-size: 17px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 120px;
-  padding: 7px 15px;
-  border: 1px solid #ff7d00;
   background-color: #ff7d00;
+  background-image: linear-gradient(#e64a1d, #ff7d00);
+  height: 45px;
+  color: white;
+  width: 120px;
+  border: transparent;
+  font-size: 15px;
+  margin-top: 20px;
 }
 
 /* .ask-login{
@@ -129,12 +129,14 @@
 }
 
 .left-right-wrapper form button {
-  padding: 7px 15px;
-  color: rgb(255, 255, 255);
-  width: 120px;
-  font-size: 17px;
-  box-shadow: 0 0 10px #ff7d00;
   background-color: #ff7d00;
+  background-image: linear-gradient(#e64a1d, #ff7d00);
+  height: 45px;
+  color: white;
+  width: 120px;
+  border: transparent;
+  font-size: 15px;
+  margin-top: 20px;
 }
 
 .svg-wrapper-1 {

@@ -14,7 +14,17 @@
 .footer-container p {
   color: white;
 }
+.Contact-footer h2{
+  border-bottom: 0.2px solid white;
+}
+.Contact-footer p{
+margin-top: 5px;
+}
+.about-footer h2{
+    border-bottom: 0.2px solid white;
+    margin-bottom: 5px;
 
+}
 .footer-logo {
   width: 128px;
   padding: 8px;
@@ -35,20 +45,29 @@
 .Contact-footer {
   text-align: center;
 }
+.question-footer h2{
+  border-bottom: 0.2px solid white;
+  font-size: 22px;
+}
+.question-footer p{
+  margin-top: 5px;
+}
 
 /* styles for mobile */
 @media (max-width: 600px) {
   .footer-container {
-    width: 92%;
+    width: 95%;
     grid-template-columns: 1fr;
     text-align: center;
   }
+  .about-footer{
+    margin-bottom: 10px;
+  }
+  
   
   .contact-socials {
-    margin-top: 20px;
-    flex-direction: column;
-    gap: 10px;
-  }
+    flex-direction: row;
+margin-bottom: 10px;  }
   
   .footer-logo {
     margin-bottom: 20px;
