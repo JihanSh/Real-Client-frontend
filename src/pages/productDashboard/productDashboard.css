@@ -1,6 +1,5 @@
 .prodash-section{
     width: 1700px;
-   
     text-align: center;
     margin: 30px auto 30px auto;
  }
@@ -26,10 +25,12 @@
  .forms-section{
      display: flex;
      flex-direction: row;
+     width:1600px;
+     margin: 10px auto 10px auto;
  }
  .product-edit-form {
      display: grid;
-     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
      align-items: center;
      border:1px solid #0b486a;
      box-shadow:  10px 15px #0b486a ;
@@ -70,5 +71,83 @@
    .product-form-container h1{
      color:#0b486a;
    }
-  
-  
+  .catdash-section{
+    width: 500px;
+   
+    text-align: center;
+    margin: 200px auto 30px auto;
+  }
+  .catdash-list{
+    display: flex;
+    justify-content:space-evenly ;
+    
+   }
+   .catdash-section ul li{
+    color:#0b486a;
+   }
+   .cart-title-prodash{
+    font-size: 30px;
+    color: #0B486A;
+
+   }
+   .cart-title-catdash{
+    font-size: 30px;
+    color: #0B486A;
+    margin-bottom: 20px;
+   }
+   .catdash-section ul {
+    list-style-type: none;
+}
+.sub-cat-dash{
+    display: flex;
+    margin: 50px auto 50px auto;
+    width:1700px;
+    
+}
+.subdash-section{
+    width: 900px;
+    text-align: center;
+    margin: 30px auto 30px auto;
+  }
+
+  .subcat-form-container{
+    margin: 50px auto;
+    width: 500px;
+    height: 900px;
+  }
+  .subcat-form-container h1{
+    color:#0b486a;
+  }
+  .subcat-edit-form{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: center;
+    border:1px solid #0b486a;
+    box-shadow:  10px 15px #0b486a ;
+    border-radius: 30px;
+    margin: 50px auto;
+    width: 500px;
+    height: 300px;
+    color:#0b486a;
+    font-size: larger;
+    justify-content: center;
+  }
+
+  .subcat-edit-input{
+    width: 320px;
+    height: 40px;
+    font-size: 16px;
+    padding: 0 5px;
+    border: transparent;
+    border-bottom: 1px solid #8f8e8e ;
+    outline: none;
+    background: transparent;
+    color: black;
+    cursor:text;
+  }
+  .subcat-edit-button{
+    height: 50px;
+    background-color:#ff7d00;
+    color:#0b486a;
+    border: transparent;
+  }
