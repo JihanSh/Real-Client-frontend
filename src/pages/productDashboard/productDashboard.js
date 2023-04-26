@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import "./productDashboard.css";
 import ReactLoading from "react-loading";
@@ -14,7 +14,11 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import edit from "./images/icons8-create-64.png";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+<<<<<<< HEAD
 import CategoryDash from "./categoryDash";
+=======
+import CategoryDash from "./CategoryDash";
+>>>>>>> 20807e67d3d037cb620d01b71b75d6a54fd7431c
 
 function ProductDashboard() {
   const [loading, setLoading] = useState(true);
@@ -568,13 +572,20 @@ function ProductDashboard() {
           </div>
         )}
       </div>
+<<<<<<< HEAD
     <CategoryDash/>
+=======
+      <CategoryDash />
+>>>>>>> 20807e67d3d037cb620d01b71b75d6a54fd7431c
     </>
   );
 }
 
 export default ProductDashboard;
+<<<<<<< HEAD
 
 // setTimeout(() => {
 //     setLoading(false);
 //   }, 2000);
+=======
+>>>>>>> 20807e67d3d037cb620d01b71b75d6a54fd7431c

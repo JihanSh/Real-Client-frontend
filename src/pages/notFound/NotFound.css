@@ -50,14 +50,4 @@
     color: #FF7D00;
   }
   
-  .not-found-contact-link {
-    color: white;
-    font-size: 1.2rem;
-    text-decoration: underline;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .not-found-contact-link:hover {
-    color: #FF7D00;
-  }
   

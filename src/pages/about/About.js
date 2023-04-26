@@ -28,7 +28,7 @@ const About = () => {
           width={{ xs: "100%", sm: "80%", md: "65%" }}
           ml={{ xs: -1, sm: 4, md: 35 }}
         >
-          <Typography variant="h4" ml={{ xs: 2, sm: 3, md: 5 }} gutterBottom>
+          <Typography variant="h2" ml={{ xs: 2, sm: 3, md: 5 }} gutterBottom>
             About Us
           </Typography>
         </Box>
