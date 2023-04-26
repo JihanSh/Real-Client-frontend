@@ -104,12 +104,11 @@
     margin: 20px;
 }
 .category1-section{
-    width: 1000px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 150px;
-    gap: 20%;
+    gap: 13%;
 }
 .link1-category{
     text-decoration: none;
