@@ -28,7 +28,6 @@ const User = () => {
 
   const updateUser = async (event) => {
     event.preventDefault();
-    console.log("phoneNumber: ", phoneNumber);
     try {
       const response = await fetch("http://localhost:5000/api/update", {
         method: "PUT",
