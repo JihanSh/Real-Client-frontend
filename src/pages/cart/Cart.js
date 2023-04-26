@@ -35,7 +35,7 @@ const Cart = () => {
         settotalData(data);
         setTimeout(() => {
           setLoading(false);
-        }, 2000);
+        }, 1000);
       } catch (err) {
         console.log(err.message);
       }

@@ -20,6 +20,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
 
+
 const TitleCarousel = () => {
   const [title, setTitle] = useState([]);
   const [product, setProduct] = useState([]);
@@ -294,16 +295,18 @@ const TitleCarousel = () => {
               </Card>
             </div>
           ))}
-        <Stack spacing={2}>
-          <Pagination
-            count={totalPages} // pass totalPages as prop
-            shape="rounded"
-            page={currentPage} // set the current active page
-            onChange={(event, value) => setCurrentPage(value)} // update the currentPage when user clicks on a different page
-            className="pagination"
-          />
-        </Stack>
-      </div>
+          </div>
+          <div className="stack-pagination">
+          <Stack spacing={2}>
+            <Pagination
+              count={totalPages} // pass totalPages as prop
+              shape="rounded"
+              page={currentPage} // set the current active page
+              onChange={(event, value) => setCurrentPage(value)} // update the currentPage when user clicks on a different page
+              className="pagination"
+            />
+          </Stack>
+        </div>
     </>
   );
 };

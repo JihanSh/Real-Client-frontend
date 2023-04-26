@@ -1,48 +1,26 @@
-import React from "react";
-import "./Home.css";
-import sale from "./images/e20be251-9e01-4175-8cdf-231450c3d9d1.jpeg";
-import men from "./images/male-looks-casual-wear-style.jpeg";
-import women from "./images/lp-header-m.jpeg";
-import child from "./images/istockphoto-674315022-612x612 .jpeg";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { Box, Button, CardActionArea, CardActions } from "@mui/material";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import icon1 from "./images/icons8-man-60.png";
-import Swal from "sweetalert2";
-import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+import React, { useEffect, useState } from 'react'
+import { HeaderNavbar, MenuBar } from '../../component/Header/HeaderNavbar'
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import { Box, Card, CardActionArea, CardActions, CardContent, CardMedia, Pagination, Stack, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import './Sale.css'
 import { Footer } from "../../component/Header/footer/footer";
 
-const Home = () => {
+const Sale = () => {
   const [menubar, setMenuBar] = useState(false);
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1); // add state for totalPages
   const [cartStatus, setCartStatus] = useState([]);
-  const [categories, setCategories] = useState([]);
 
   const userId = sessionStorage.getItem("Id");
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/categories")
-      .then((response) => {
-        setCategories(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  
 
   useEffect(() => {
     // console.log("jjjjj", currentPage);
     axios
-      .get(`http://localhost:5000/products/pag?page=${currentPage}`)
+      .get(`http://localhost:5000/products/sale/?page=${currentPage}`)
       .then((response) => {
         setProducts(response.data.data);
         setTotalPages(response.data.totalPages); // update totalPages state
@@ -52,9 +30,6 @@ const Home = () => {
         console.log(error);
       });
   }, [currentPage]);
-
-  // Sort products by date_added in descending order
-  products.sort((a, b) => new Date(b.date_added) - new Date(a.date_added));
 
   const handleCart = async (event, productId) => {
     event.preventDefault();
@@ -98,54 +73,13 @@ const Home = () => {
       }
     }
   };
+
   return (
     <>
-      <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
+    <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
-      <div className="home-section">
-        <div className="sale-section">
-          <div className="img-sale-section">
-            <img src={sale} alt="#" />
-          </div>
-          <div className="line-sale-section">
-            <h2 className="line">Special Sale !!</h2>
-            <h2>GET UP TO 20% OFF</h2>
-            <Link className="sale-link" to={'/sale'}>SHOP NOW</Link>
-          </div>
-        </div>
-        <h1 className="line-category-section">Categories</h1>
-        <div className="list-category-section">
-          {categories.map((category, id) => (
-            <Link
-              key={id}
-              to={`/category/${category._id}`}
-              className="link-category"
-            >
-              <img className="lic1" src={icon1} alt="#" />
-              {category.title}’s Wear
-            </Link>
-          ))}
-        </div>
-        <div className="category-section">
-          <img src={men} className="img1" alt="#" />
-          <img src={women} className="img2" alt="#" />
-          <img src={child} className="img3" alt="#" />
-        </div>
-        <div className="category1-section">
-          {categories.map((category, id) => (
-            <button className="category-button" key={id}>
-              <Link
-                key={id}
-                className="link1-category"
-                to={`/category/${category._id}`}
-              >
-                {category.title}
-              </Link>
-            </button>
-          ))}
-        </div>
-        <h1 className="line-latest-section">Latest Drops</h1>
-        <div className="products-section">
+      <div className='sale-product-section'>
+      <div className="products-section">
           {products.map((product, id) => (
             <div className="product-card" key={id}>
               <Card
@@ -224,20 +158,20 @@ const Home = () => {
           ))}
         </div>
         <div className="stack-pagination">
-          <Stack spacing={2}>
-            <Pagination
-              count={totalPages} // pass totalPages as prop
-              shape="rounded"
-              page={currentPage} // set the current active page
-              onChange={(event, value) => setCurrentPage(value)} // update the currentPage when user clicks on a different page
-              className="pagination"
-            />
-          </Stack>
+        <Stack spacing={2}>
+          <Pagination
+            count={totalPages} // pass totalPages as prop
+            shape="rounded"
+            page={currentPage} // set the current active page
+            onChange={(event, value) => setCurrentPage(value)} // update the currentPage when user clicks on a different page
+            className="pagination"
+          />
+        </Stack>
         </div>
-      </div>
-      <Footer />
+        </div>
+        <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Sale

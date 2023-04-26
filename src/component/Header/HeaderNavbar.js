@@ -19,11 +19,16 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
     <div className="navbiggerthing">
       <div className="navnavbar">
         <div>
-          <img src={logo2} alt="JoncoMET" className="navnavbar-logo" />
+          <Link to="/">
+            <img src={logo2} alt="JoncoMET" className="navnavbar-logo" />
+          </Link>
         </div>
         <div className="navnavbar-list">
           <button className="navnavbar-button">
             <Link to="/">Home</Link>
+          </button>
+          <button className="navnavbar-button">
+            <Link to="/sale">Sale</Link>
           </button>
           <button className="navnavbar-button">
             <Link to="/about">About Us</Link>
@@ -72,6 +77,9 @@ const MenuBar = ({ menubar }) => {
       </button>
       <button className="navmenu-menu">
         <Link to="/about">About Us</Link>
+      </button>
+      <button className="navmenu-menu">
+        <Link to="/sale">Sale</Link>
       </button>
       <button className="navmenu-menu">
         <Link to="/User">My Account</Link>
