@@ -310,7 +310,7 @@ const CategoryDash = () => {
 
           <div className="cart-table-prodash">
             <button
-              // className="cart-totals-second-button"
+              className="button-addsubcategory"
               onClick={handleAddSubcategory}
             >
               Add Subcategory
@@ -392,8 +392,6 @@ const CategoryDash = () => {
                   value={subcategory.title}
                   onChange={handleSubCategoryChange}
                 />
-
-        {/* {console.log(subcategory.title)} */}
               </div>
 
               <div className="username">

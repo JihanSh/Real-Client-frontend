@@ -1,3 +1,16 @@
+.button-addsubcategory{
+  padding: 10px;
+  width: 30%;
+  background-color: #0b486a;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+
 .prodash-section{
     width: 1700px;
     text-align: center;
