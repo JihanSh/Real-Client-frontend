@@ -22,7 +22,6 @@ const CategoryDash = () => {
   const [addMode, setAddMode] = useState(false);
   const [idCategory, setIdCategory] = useState(null);
   const [category, setCategory] = useState({
-  const [category, setCategory] = useState({
     title: "",
   });
   const [subcategory, setSubcategory] = useState({
