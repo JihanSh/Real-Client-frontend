@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import edit from "./images/icons8-create-64.png";
+import Swal from "sweetalert2";
 
 const CategoryDash = () => {
   const [categories, setCategories] = useState([]);
@@ -20,9 +21,14 @@ const CategoryDash = () => {
   const [editMode1, setEditMode1] = useState(false);
   const [addMode, setAddMode] = useState(false);
   const [idCategory, setIdCategory] = useState(null);
-  const [category, setCategory] =useState({
+  const [category, setCategory] = useState({
     title: "",
   });
+  const [subcategory, setSubcategory] = useState({
+    title: "",
+    category: "",
+  });
+  const [idSubCategory, setIdSubCategory] = useState(null);
   const columns = [
     { id: "remove", label: " ", minWidth: 100 },
     { id: "images", label: "Subcategory", minWidth: 100 },
@@ -39,6 +45,7 @@ const CategoryDash = () => {
       try {
         const response = await axios.get("http://localhost:5000/categories");
         setCategories(response.data);
+        console.log(categories);
       } catch (error) {
         console.error(error);
       }
@@ -56,11 +63,13 @@ const CategoryDash = () => {
     fetchCategories();
     fetchSubcategories();
   }, []);
-   
+
   const getCategoryById = async (id) => {
     console.log(id);
     try {
-      const response = await axios.get(`http://localhost:5000/categories/${id}`);
+      const response = await axios.get(
+        `http://localhost:5000/categories/${id}`
+      );
       setCategory(response.data);
       setIdCategory(id);
       setEditMode1(true);
@@ -69,40 +78,159 @@ const CategoryDash = () => {
       console.error(error);
     }
   };
+  const getSubCategoryById = async (id) => {
+    console.log(id);
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/subcategories/${id}`
+      );
+      setSubcategory(response.data);
+      setIdSubCategory(id);
+      setEditMode(true);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const form = useRef();
-   
+
   const handleCategoryChange = (event) => {
     const { name, value } = event.target;
     setCategory({ ...category, [name]: value });
   };
-  
-  const handleEditSubmitCategory = async (event)=>{
+
+  const handleEditSubmitCategory = async (event) => {
     console.log(idCategory);
     event.preventDefault();
     fetch(`http://localhost:5000/categories/${idCategory}`, {
       method: "PUT",
       headers: {
         // "Content-Type": "application/x-www-form-urlencoded"
-        "Content-Type": "application/json"
-        
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         title: category.title,
       }),
     })
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(setEditMode1(false))
-      .then(alert("You have updated the category name"))
+      .then(alert("You have updated the category name"));
 
-      // Fetch the updated list of products
-      const response = await axios.get(`http://localhost:5000/categories`);
+    // Fetch the updated list of products
+    const response = await axios.get(`http://localhost:5000/categories`);
 
-      // Update the state of the products with the new list
-      
-      setCategories(response.data)
-      .catch(error => console.error(error));
-  }
+    // Update the state of the products with the new list
+
+    setCategories(response.data).catch((error) => console.error(error));
+  };
+
+  const handleSubCategoryChange = (event) => {
+    console.log(event.target.value);
+    const { name, value } = event.target;
+    setSubcategory({ ...subcategory, [name]: value });
+    console.log("rrrr", subcategory);
+  };
+
+  const handleEditSubmitSubCategory = async (event) => {
+    event.preventDefault();
+    fetch(`http://localhost:5000/subcategories/${idSubCategory}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: subcategory.title,
+        category: subcategory.category,
+      }),
+    })
+      .then((response) => response.json())
+      .then(setEditMode(false))
+      .then(alert("You have updated the category name"));
+    {
+    }
+    // Fetch the updated list of products
+    const response = await axios.get(`http://localhost:5000/subcategories`);
+
+    // Update the state of the products with the new list
+
+    setSubcategories(response.data).catch((error) => console.error(error));
+  };
+
+  // console.log("kjhsdfsgflsjdk", subcategory.category.title);
+
+  const handleRemove = async (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this subcategory?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FF7D00",
+      cancelButtonColor: "#0B486A",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(
+            `http://localhost:5000/subcategories/${id}`,
+            {
+              method: "DELETE",
+            }
+          );
+          if (response.ok) {
+            const data = response.json();
+            setSubcategory(data);
+          } else {
+            console.error("Failed to remove subcategory");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        Swal.fire({
+          title: "Deleted!",
+          text: "The subcategory has been deleted.",
+          icon: "success",
+          confirmButtonColor: "#FF7D00",
+        });
+      }
+    });
+  };
+
+  const handleAddSubcategory = () => {
+    setAddMode(true);
+  };
+
+  const handleAddSubcategoryChange = (event) => {
+    const { name, value } = event.target;
+    setCategory({ ...category, [name]: value });
+  };
+
+  const handleAddSubmit = (event) => {
+    fetch("http://localhost:5000/subcategories", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: subcategory.title,
+        category: subcategory.category,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSubcategory(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   return (
     <>
@@ -140,7 +268,10 @@ const CategoryDash = () => {
                       <TableRow key={i}>
                         <TableCell>{category.title}</TableCell>
                         <TableCell>
-                          <button className="prodash-button" onClick={() => getCategoryById(category._id)}>
+                          <button
+                            className="prodash-button"
+                            onClick={() => getCategoryById(category._id)}
+                          >
                             <img className="prodash-icon" src={edit} alt="#" />
                           </button>
                         </TableCell>
@@ -152,43 +283,44 @@ const CategoryDash = () => {
             </Paper>
           </div>
           {editMode1 && (
-          <div className="subcat-form-container">
-            <h1>Update Category Name</h1>
-            <form
-              className="cat-edit-form"
-              onSubmit={handleEditSubmitCategory}
-              ref={form}
-            >
-              <div className="username">
-                <label className="label-auth">Category name:</label> <br />
-                <input
-                  className="subcat-edit-input"
-                  type="text"
-                  id="username"
-                  placeholder="Category name"
-                  name="title"
-                  value={category.title}
-                  onChange={handleCategoryChange}
-                  
-                />
-              </div>
-            
-             
-             
-              <button className="subcat-edit-button" type="submit">
-                Update Subcategory
-              </button>
-            </form>
-          </div>
-        )}
+            <div className="subcat-form-container">
+              <h1>Update Category Name</h1>
+              <form
+                className="cat-edit-form"
+                onSubmit={handleEditSubmitCategory}
+                ref={form}
+              >
+                <div className="username">
+                  <label className="label-auth">Category name:</label> <br />
+                  <input
+                    className="subcat-edit-input"
+                    type="text"
+                    id="username"
+                    placeholder="Category name"
+                    name="title"
+                    value={category.title}
+                    onChange={handleCategoryChange}
+                  />
+                </div>
+                <button className="subcat-edit-button" type="submit">
+                  Update Subcategory
+                </button>
+              </form>
+            </div>
+          )}
         </div>
         <div className="subdash-section">
           <h1 className="cart-title-catdash">subcategory Dashboard</h1>
           <div className="cart-table-prodash">
+            <button
+              // className="cart-totals-second-button"
+              onClick={handleAddSubcategory}
+            >
+              Add Subcategory
+            </button>
             <Paper
               sx={{
                 width: "75%",
-
                 overflow: "hidden",
                 marginLeft: "auto",
                 marginRight: "auto",
@@ -214,7 +346,10 @@ const CategoryDash = () => {
                     {subcategories.map((product, i) => (
                       <TableRow key={i}>
                         <TableCell>
-                          <button className="cart-button-icon">
+                          <button
+                            className="cart-button-icon"
+                            onClick={() => handleRemove(product._id)}
+                          >
                             <FontAwesomeIcon
                               icon={faCircleXmark}
                               className="cart-Xicon"
@@ -224,7 +359,10 @@ const CategoryDash = () => {
                         <TableCell>{product.title}</TableCell>
                         <TableCell>{product.category.title}</TableCell>
                         <TableCell>
-                          <button className="prodash-button">
+                          <button
+                            className="prodash-button"
+                            onClick={() => getSubCategoryById(product._id)}
+                          >
                             <img className="prodash-icon" src={edit} alt="#" />
                           </button>
                         </TableCell>
@@ -243,6 +381,8 @@ const CategoryDash = () => {
             <h1>Add Subcategory</h1>
             <form
               className="subcat-edit-form"
+              onSubmit={handleAddSubmit}
+              ref={form}
             >
               <div className="username">
                 <label className="label-auth">Subcategory name:</label> <br />
@@ -250,28 +390,31 @@ const CategoryDash = () => {
                   className="subcat-edit-input"
                   type="text"
                   id="username"
-                  placeholder="Subcategory name"
-                  name="name"
-                
+                  placeholder="Product name"
+                  name="title"
+                  value={subcategory.title}
+                  onChange={handleAddSubcategoryChange}
                 />
+        {console.log(subcategory.title)}
               </div>
-             
+
               <div className="username">
                 <label className="label-auth">Category:</label> <br />
                 <select
                   id="category"
-                  name="categoryTitle"
-                  
+                  name="category"
+                  value={category}
+                  onChange={handleAddSubcategoryChange}
                 >
                   <option value="">Select a category...</option>
                   {categories.map((category) => (
-                    <option key={category._id} value={category.title}>
+                    <option key={category._id} value={category}>
                       {category.title}
                     </option>
                   ))}
                 </select>
               </div>
-             
+
               <button className="subcat-edit-button" type="submit">
                 Add Subcategory
               </button>
@@ -283,7 +426,8 @@ const CategoryDash = () => {
             <h1>Update Subcategory</h1>
             <form
               className="subcat-edit-form"
-            
+              onSubmit={handleEditSubmitSubCategory}
+              ref={form}
             >
               <div className="username">
                 <label className="label-auth">Subcategory name:</label> <br />
@@ -292,27 +436,30 @@ const CategoryDash = () => {
                   type="text"
                   id="username"
                   placeholder="Subcategory name"
-                  name="name"
-                  
+                  name="title"
+                  value={subcategory.title}
+                  onChange={handleSubCategoryChange}
                 />
               </div>
-            
+
               <div className="username">
                 <label className="label-auth">Category:</label> <br />
                 <select
                   id="category"
-                  name="categoryTitle"
-               
+                  name="category name"
+                  value={subcategory.category}
+                  onChange={handleSubCategoryChange}
                 >
                   <option value="">Select a category...</option>
-                  {categories.map((category) => (
-                    <option key={category._id} value={category.title}>
-                      {category.title}
+                  {categories.map((each, i) => (
+                    <option key={i} value={each._id}>
+                      {each.title}
+                      {/* {console.log("value", each.title)}{" "} */}
                     </option>
                   ))}
                 </select>
               </div>
-             
+
               <button className="subcat-edit-button" type="submit">
                 Update Subcategory
               </button>
