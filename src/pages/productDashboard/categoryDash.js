@@ -202,10 +202,6 @@ const CategoryDash = () => {
     setAddMode(true);
   };
 
-  const handleAddSubcategoryChange = (event) => {
-    const { name, value } = event.target;
-    setCategory({ ...category, [name]: value });
-  };
 
   const handleAddSubmit = (event) => {
     fetch("http://localhost:5000/subcategories", {
@@ -394,9 +390,10 @@ const CategoryDash = () => {
                   placeholder="Product name"
                   name="title"
                   value={subcategory.title}
-                  onChange={handleAddSubcategoryChange}
+                  onChange={handleSubCategoryChange}
                 />
-        {console.log(subcategory.title)}
+
+        {/* {console.log(subcategory.title)} */}
               </div>
 
               <div className="username">
@@ -405,11 +402,11 @@ const CategoryDash = () => {
                   id="category"
                   name="category"
                   value={category}
-                  onChange={handleAddSubcategoryChange}
+                  onChange={handleSubCategoryChange}
                 >
                   <option value="">Select a category...</option>
                   {categories.map((category) => (
-                    <option key={category._id} value={category}>
+                    <option key={category._id} value={category._id}>
                       {category.title}
                     </option>
                   ))}
@@ -447,7 +444,7 @@ const CategoryDash = () => {
                 <label className="label-auth">Category:</label> <br />
                 <select
                   id="category"
-                  name="category name"
+                  name="category"
                   value={subcategory.category}
                   onChange={handleSubCategoryChange}
                 >
