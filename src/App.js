@@ -9,6 +9,7 @@ import Product from "./pages/product/Product";
 import NotFound from "./pages/notFound/NotFound";
 import Category from "./pages/category/Category";
 import ProductDashboard from "./pages/productDashboard/productDashboard";
+import UserOrders from "./pages/productDashboard/orderDashboard";
 import Sale from "./pages/sale/Sale";
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="auth" element={<Auth />} />
           <Route path="User" element={<User />} />
+          <Route path="dashorder" element={<UserOrders />} />
         </Routes>
       </BrowserRouter>
     </>
