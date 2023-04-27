@@ -148,7 +148,7 @@ const CategoryDash = () => {
       .then(setEditMode(false))
       .then(alert("You have updated the category name"));
     {
-    }
+    
     // Fetch the updated list of products
     const response = await axios.get(`http://localhost:5000/subcategories`);
 
@@ -156,7 +156,7 @@ const CategoryDash = () => {
 
     setSubcategories(response.data).catch((error) => console.error(error));
   };
-
+  }
   // console.log("kjhsdfsgflsjdk", subcategory.category.title);
 
   const handleRemove = async (id) => {
@@ -202,10 +202,10 @@ const CategoryDash = () => {
     setAddMode(true);
   };
 
-  const handleAddSubcategoryChange = (event) => {
-    const { name, value } = event.target;
-    setCategory({ ...category, [name]: value });
-  };
+  // const handleAddSubcategoryChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setCategory({ ...category, [name]: value });
+  // };
 
   const handleAddSubmit = (event) => {
     fetch("http://localhost:5000/subcategories", {
@@ -394,7 +394,7 @@ const CategoryDash = () => {
                   placeholder="Product name"
                   name="title"
                   value={subcategory.title}
-                  onChange={handleAddSubcategoryChange}
+                  onChange={handleSubCategoryChange}
                 />
         {console.log(subcategory.title)}
               </div>
@@ -405,11 +405,11 @@ const CategoryDash = () => {
                   id="category"
                   name="category"
                   value={category}
-                  onChange={handleAddSubcategoryChange}
+                  onChange={handleSubCategoryChange}
                 >
                   <option value="">Select a category...</option>
                   {categories.map((category) => (
-                    <option key={category._id} value={category}>
+                    <option key={category._id} value={category._id}>
                       {category.title}
                     </option>
                   ))}
@@ -447,7 +447,7 @@ const CategoryDash = () => {
                 <label className="label-auth">Category:</label> <br />
                 <select
                   id="category"
-                  name="category name"
+                  name="category"
                   value={subcategory.category}
                   onChange={handleSubCategoryChange}
                 >
@@ -455,7 +455,6 @@ const CategoryDash = () => {
                   {categories.map((each, i) => (
                     <option key={i} value={each._id}>
                       {each.title}
-                      {/* {console.log("value", each.title)}{" "} */}
                     </option>
                   ))}
                 </select>
