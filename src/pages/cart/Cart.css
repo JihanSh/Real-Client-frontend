@@ -1,7 +1,6 @@
 * {
     font-family: sans-serif;
 }
-
 .cart-login {
     display: flex;
     flex-direction: column;
@@ -18,12 +17,12 @@
     margin-bottom: 1rem;
     border-radius: 10px;
     text-decoration: none;
-    transition: all 0.2s ease-in-out;
   }
   
   .cart-login-link:hover {
     background-color: white;
     color: #FF7D00;
+    border: #FF7D00 solid 2px;
   }
 
   .MuiTableContainer-root{
@@ -95,7 +94,7 @@
     margin-right: auto;
 }
 .cart-wrapper-div1{
-    height: 58vh;
+    height: 504px;
 }
 .cart-button-icon{
     background-color: transparent;

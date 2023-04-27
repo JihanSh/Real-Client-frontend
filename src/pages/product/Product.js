@@ -134,6 +134,7 @@ const Product = () => {
                 <span className="name-h4">{product.name.slice(0, 20)}...</span>
               </div>
               <h1>{product.name}...</h1>
+             
               {product.discountPercentage ? (
                 <>
                   <p className="original-price">${product.price}</p>
@@ -159,7 +160,7 @@ const Product = () => {
                 {product.subcategory.title}
               </p>
               <hr className="line-product2" />
-              <p className="des-product">{product.description}</p>
+              <p className="des-product">size: {product.size}</p>
             </div>
           </div>
           <div className="product-section2">
