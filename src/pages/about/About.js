@@ -22,6 +22,7 @@ const About = () => {
       <MenuBar menubar={menubar} />
       <>
         <Box
+        style={{ height: "59px" }}
           textAlign={"center"}
           p={{ xs: 2, sm: 3, md: 5 }}
           mt={{ xs: 3, sm: 4, md: 1 }}
@@ -32,7 +33,7 @@ const About = () => {
             About Us
           </Typography>
         </Box>
-        <Box textAlign={"center"}>
+        <Box textAlign={"center"} style={{ height: "55px" }} >
           {" "}
           <Typography variant="h5" mt={{ xs: 3, sm: 1 }} gutterBottom>
             FEEL FREE TO CONTACT US

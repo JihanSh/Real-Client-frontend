@@ -20,7 +20,7 @@ const CategoryDash = () => {
   const [editMode1, setEditMode1] = useState(false);
   const [addMode, setAddMode] = useState(false);
   const [idCategory, setIdCategory] = useState(null);
-  const [category, setCategory] =useState({
+  const [category, setCategory] = useState({
     title: "",
   });
   const columns = [
@@ -56,11 +56,13 @@ const CategoryDash = () => {
     fetchCategories();
     fetchSubcategories();
   }, []);
-   
+
   const getCategoryById = async (id) => {
     console.log(id);
     try {
-      const response = await axios.get(`http://localhost:5000/categories/${id}`);
+      const response = await axios.get(
+        `http://localhost:5000/categories/${id}`
+      );
       setCategory(response.data);
       setIdCategory(id);
       setEditMode1(true);
@@ -71,38 +73,36 @@ const CategoryDash = () => {
   };
 
   const form = useRef();
-   
+
   const handleCategoryChange = (event) => {
     const { name, value } = event.target;
     setCategory({ ...category, [name]: value });
   };
-  
-  const handleEditSubmitCategory = async (event)=>{
+
+  const handleEditSubmitCategory = async (event) => {
     console.log(idCategory);
     event.preventDefault();
     fetch(`http://localhost:5000/categories/${idCategory}`, {
       method: "PUT",
       headers: {
         // "Content-Type": "application/x-www-form-urlencoded"
-        "Content-Type": "application/json"
-        
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         title: category.title,
       }),
     })
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(setEditMode1(false))
-      .then(alert("You have updated the category name"))
+      .then(alert("You have updated the category name"));
 
-      // Fetch the updated list of products
-      const response = await axios.get(`http://localhost:5000/categories`);
+    // Fetch the updated list of products
+    const response = await axios.get(`http://localhost:5000/categories`);
 
-      // Update the state of the products with the new list
-      
-      setCategories(response.data)
-      .catch(error => console.error(error));
-  }
+    // Update the state of the products with the new list
+
+    setCategories(response.data).catch((error) => console.error(error));
+  };
 
   return (
     <>
@@ -140,7 +140,10 @@ const CategoryDash = () => {
                       <TableRow key={i}>
                         <TableCell>{category.title}</TableCell>
                         <TableCell>
-                          <button className="prodash-button" onClick={() => getCategoryById(category._id)}>
+                          <button
+                            className="prodash-button"
+                            onClick={() => getCategoryById(category._id)}
+                          >
                             <img className="prodash-icon" src={edit} alt="#" />
                           </button>
                         </TableCell>
@@ -152,38 +155,35 @@ const CategoryDash = () => {
             </Paper>
           </div>
           {editMode1 && (
-          <div className="subcat-form-container">
-            <h1>Update Category Name</h1>
-            <form
-              className="cat-edit-form"
-              onSubmit={handleEditSubmitCategory}
-              ref={form}
-            >
-              <div className="username">
-                <label className="label-auth">Category name:</label> <br />
-                <input
-                  className="subcat-edit-input"
-                  type="text"
-                  id="username"
-                  placeholder="Category name"
-                  name="title"
-                  value={category.title}
-                  onChange={handleCategoryChange}
-                  
-                />
-              </div>
-            
-             
-             
-              <button className="subcat-edit-button" type="submit">
-                Update Subcategory
-              </button>
-            </form>
-          </div>
-        )}
+            <div className="subcat-form-container">
+              <h1>Update Category Name</h1>
+              <form
+                className="cat-edit-form"
+                onSubmit={handleEditSubmitCategory}
+                ref={form}
+              >
+                <div className="username">
+                  <label className="label-auth">Category name:</label> <br />
+                  <input
+                    className="subcat-edit-input"
+                    type="text"
+                    id="username"
+                    placeholder="Category name"
+                    name="title"
+                    value={category.title}
+                    onChange={handleCategoryChange}
+                  />
+                </div>
+                <button className="subcat-edit-button" type="submit">
+                  Update Subcategory
+                </button>
+              </form>
+            </div>
+          )}
         </div>
         <div className="subdash-section">
           <h1 className="cart-title-catdash">subcategory Dashboard</h1>
+
           <div className="cart-table-prodash">
             <Paper
               sx={{
@@ -241,9 +241,7 @@ const CategoryDash = () => {
         {addMode && (
           <div className="subcat-form-container">
             <h1>Add Subcategory</h1>
-            <form
-              className="subcat-edit-form"
-            >
+            <form className="subcat-edit-form">
               <div className="username">
                 <label className="label-auth">Subcategory name:</label> <br />
                 <input
@@ -252,17 +250,12 @@ const CategoryDash = () => {
                   id="username"
                   placeholder="Subcategory name"
                   name="name"
-                
                 />
               </div>
-             
+
               <div className="username">
                 <label className="label-auth">Category:</label> <br />
-                <select
-                  id="category"
-                  name="categoryTitle"
-                  
-                >
+                <select id="category" name="categoryTitle">
                   <option value="">Select a category...</option>
                   {categories.map((category) => (
                     <option key={category._id} value={category.title}>
@@ -271,7 +264,7 @@ const CategoryDash = () => {
                   ))}
                 </select>
               </div>
-             
+
               <button className="subcat-edit-button" type="submit">
                 Add Subcategory
               </button>
@@ -281,10 +274,7 @@ const CategoryDash = () => {
         {editMode && (
           <div className="subcat-form-container">
             <h1>Update Subcategory</h1>
-            <form
-              className="subcat-edit-form"
-            
-            >
+            <form className="subcat-edit-form">
               <div className="username">
                 <label className="label-auth">Subcategory name:</label> <br />
                 <input
@@ -293,17 +283,12 @@ const CategoryDash = () => {
                   id="username"
                   placeholder="Subcategory name"
                   name="name"
-                  
                 />
               </div>
-            
+
               <div className="username">
                 <label className="label-auth">Category:</label> <br />
-                <select
-                  id="category"
-                  name="categoryTitle"
-               
-                >
+                <select id="category" name="categoryTitle">
                   <option value="">Select a category...</option>
                   {categories.map((category) => (
                     <option key={category._id} value={category.title}>
@@ -312,7 +297,7 @@ const CategoryDash = () => {
                   ))}
                 </select>
               </div>
-             
+
               <button className="subcat-edit-button" type="submit">
                 Update Subcategory
               </button>
@@ -320,6 +305,7 @@ const CategoryDash = () => {
           </div>
         )}
       </div>
+     
     </>
   );
 };
