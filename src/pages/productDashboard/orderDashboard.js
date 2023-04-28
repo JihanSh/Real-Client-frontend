@@ -75,9 +75,10 @@ const UserOrders = () => {
                     {/* {console.log(item)} */}
                     {item.product && (
                       <div>
-                        <img
+                        {/* <img
                           src={`http://localhost:5000/${item.product.images[0]}`}
-                        />
+                        /> */}
+                         {console.log("ITEM ",item.product)}
                         <p>{item.product.name}</p>
                       </div>
                     )}

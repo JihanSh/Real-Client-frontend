@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import ReactLoading from "react-loading";
+
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
 import { Link } from "react-router-dom";
@@ -22,7 +22,8 @@ const Cart = () => {
   const [tableData, setTableData] = useState([]);
   const [totalData, settotalData] = useState([]);
   const [orderStatus, setOrderStatus] = useState(null);
-  const [loading, setLoading] = useState(true);
+ 
+  const [hasItems, setHasItems] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,9 +32,10 @@ const Cart = () => {
         const data = await response.json();
         setTableData(data.items);
         settotalData(data);
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
+    
+        if (data.items.length > 0) {
+          setHasItems(true);
+        }
       } catch (err) {
         console.log(err.message);
       }
@@ -144,15 +146,15 @@ const Cart = () => {
             </Link>
           </div>
         </div>
-      ) : loading ? (
-        <ReactLoading
-          className="loading-container"
-          type="spinningBubbles"
-          color="#FF7D00"
-          height={200}
-          width={100}
-        />
-      ) : (
+      ) : hasItems ? (
+      //   <ReactLoading
+      //     className="loading-container"
+      //     type="spinningBubbles"
+      //     color="#FF7D00"
+      //     height={200}
+      //     width={100}
+      //   />
+      // ) : (
         <div className="cart-wrapper">
           <div className="cart-header">
             <h1 className="cart-title">Cart</h1>
@@ -230,7 +232,10 @@ const Cart = () => {
             </div>
           </div>
         </div>
-
+      ):(
+        <div className="cart-wrapper-empty">
+          <h1 className="text-empty">Your cart is empty.</h1>
+        </div>
       )}
       <Footer />
     </>

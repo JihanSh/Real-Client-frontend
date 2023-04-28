@@ -171,7 +171,7 @@ const CategoryDash = () => {
         })
       );
     {
-    }
+    
     // Fetch the updated list of products
     const response = await axios.get(`http://localhost:5000/subcategories`);
 
@@ -507,5 +507,6 @@ const CategoryDash = () => {
     </>
   );
 };
+}
 
 export default CategoryDash;

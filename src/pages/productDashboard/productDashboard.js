@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./productDashboard.css";
-import ReactLoading from "react-loading";
+
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -17,7 +18,7 @@ import CategoryDash from "./categoryDash";
 import Swal from "sweetalert2";
 
 function ProductDashboard() {
-  const [loading, setLoading] = useState(true);
+ 
   const [products, setProducts] = useState([]);
   const [menubar, setMenuBar] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -54,7 +55,7 @@ function ProductDashboard() {
       .get(`http://localhost:5000/products`)
       .then((response) => {
         setProducts(response.data);
-        setLoading(false);
+       
       })
       .catch((error) => {
         console.log(error);
@@ -232,22 +233,21 @@ function ProductDashboard() {
     <>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
-      {loading ? (
-        <ReactLoading
-          className="loading-container"
-          type="spinningBubbles"
-          color="#FF7D00"
-          height={200}
-          width={100}
-        />
-      ) : (
+      <div className="go-order-button">
+                <button
+                  className="add-subcategory-button"
+                  onClick={handleAdd}
+                ><Link to="/dashorder" className="go-order-link">
+                  Go to Orders Dashboard
+                  </Link></button>
+              </div>
         <div className="prodash-section">
           <div className="cart-wrapper-prodash">
             <div className="cart-header-prodash">
               <h1 className="cart-title-prodash">Product Dashboard</h1>
               <div className="cart-totals-second">
                 <button
-                  className="cart-totals-second-button"
+                  className="add-subcategory-button"
                   onClick={handleAdd}
                 >
                   Add Product
@@ -326,7 +326,7 @@ function ProductDashboard() {
             </div>
           </div>
         </div>
-      )}
+      
       <div className="forms-section">
         {addMode && (
           <div className="product-form-container">
@@ -608,3 +608,13 @@ export default ProductDashboard;
 // setTimeout(() => {
 //     setLoading(false);
 //   }, 2000);
+
+// {loading ? (
+//   <ReactLoading
+//     className="loading-container"
+//     type="spinningBubbles"
+//     color="#FF7D00"
+//     height={200}
+//     width={100}
+//   />
+// ) : (

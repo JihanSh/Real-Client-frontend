@@ -9,6 +9,17 @@
   border-radius: 5px;
   margin: 10px;
 }
+.go-order-button{
+  width: 300px;
+  margin: 20px auto;
+}
+.go-order-button .go-order-link {
+  color: white;
+  text-decoration: none;
+}
+.go-order-button .go-order-link:hover {
+ color: #ff7d00;
+}
 .prodash-section{
     width: 1700px;
     text-align: center;
@@ -34,6 +45,12 @@
  }
  
  .forms-section{
+     display: flex;
+     flex-direction: row;
+     width:1600px;
+     margin: 10px auto 10px auto;
+ }
+  .forms-section2{
      display: flex;
      flex-direction: row;
      width:1600px;
@@ -85,7 +102,7 @@
   .catdash-section{
     width: 500px;
     text-align: center;
-    margin: 50px auto 30px auto;
+    margin: 150px auto 30px auto;
     padding-left: 60px;
   }
   .catdash-list{
@@ -124,9 +141,9 @@
   }
 
   .subcat-form-container{
-    margin: 50px auto;
+    margin: 10px auto;
     width: 500px;
-    height: 900px;
+    height: 300px;
   }
   .subcat-form-container h1{
     color:#0b486a;
@@ -188,4 +205,133 @@
   font-size: larger;
   justify-content: center;
  
+}
+.add-subcategory-button{
+  padding: 10px;
+    margin-bottom: 10px;
+    background-color: #0b486a;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    border-radius: 5px;
+}
+.add-subcategory-button:hover{
+  color:#ff7d00
+}
+
+@media (max-width: 768px){
+
+  .prodash-section{
+    width: 730px;
+    text-align: center;
+    margin: 30px auto 10px auto;
+ }
+ .forms-section{
+  display: flex;
+  flex-direction: column;
+  width:700px;
+  margin: 10px auto 10px auto;
+}
+.sub-cat-dash{
+  display: flex;
+  flex-direction: column;
+  margin: 0px auto 50px auto;
+  width:700px;
+  
+}
+.catdash-section{
+  width: 600px;
+  text-align: center;
+  margin: 70px auto 30px auto;
+  padding-left: 20px;
+}
+
+.subdash-section{
+  width: 700px;
+  text-align: center;
+  margin: 30px auto 30px auto;
+}
+.forms-section2{
+  display: flex;
+  flex-direction: column;
+  width:600px;
+  margin: 10px auto 10px auto;
+}
+.subcat-form-container{
+  margin: 10px auto;
+  width: 500px;
+  height: 400px;
+}
+.subcat-edit-form{
+  width:500px;
+}
+}
+
+@media (max-width: 414px) {
+
+
+  .prodash-section{
+    width: 380px;
+    text-align: center;
+    margin: 30px auto 10px auto;
+ }
+
+   .cart-header-prodash{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 10px auto;
+   }
+
+   .forms-section{
+    display: flex;
+    flex-direction: column;
+    width:350px;
+    margin: 10px auto 10px auto;
+  }
+  .forms-section2{
+    display: flex;
+    flex-direction: column;
+    width:350px;
+    margin: 10px auto 10px auto;
+  }
+  .sub-cat-dash{
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto 50px auto;
+    width:350px;
+    
+  }
+  .catdash-section{
+    width: 350px;
+    text-align: center;
+    margin: 70px auto 30px auto;
+    padding-left: 0px;
+  }
+  
+  .subdash-section{
+    width: 350px;
+    text-align: center;
+    margin: 30px auto 30px auto;
+  }
+  .product-form-container{
+    margin: 50px auto;
+    width: 350px;
+    height: 900px;
+  }
+  .product-edit-form {
+    width: 350px;
+  }
+  .subcat-form-container{
+    margin: 10px auto;
+    width: 350px;
+    height: 400px;
+  }
+  .cat-edit-form{
+    width: 350px;
+  }
+  .subcat-edit-form{
+    width: 350px;
+  }
 }
