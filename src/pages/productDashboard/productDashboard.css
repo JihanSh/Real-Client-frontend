@@ -1,13 +1,17 @@
 .button-addsubcategory{
+
   padding: 10px;
   width: 30%;
-  background-color: #0b486a;
+  background-color: #0B486A;
   color: #ffffff;
   border: none;
   cursor: pointer;
   font-size: 25px;
   border-radius: 5px;
   margin: 10px;
+}
+.button-addsubcategory:hover{
+  color: #ff7d00;
 }
 .go-order-button{
   width: 300px;
