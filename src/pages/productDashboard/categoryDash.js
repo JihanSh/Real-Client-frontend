@@ -171,156 +171,162 @@ const CategoryDash = () => {
         })
       );
     {
-    
-    // Fetch the updated list of products
-    const response = await axios.get(`http://localhost:5000/subcategories`);
+      // Fetch the updated list of products
+      const response = await axios.get(`http://localhost:5000/subcategories`);
 
-    // Update the state of the products with the new list
+      // Update the state of the products with the new list
 
-    setSubcategories(response.data).catch((error) => console.error(error));
-  };
+      setSubcategories(response.data).catch((error) => console.error(error));
+    }
+  }
 
-  const handleRemove = async (id) => {
-    console.log(id);
-    Swal.fire({
-      title: "Are you sure you want to delete?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "Cancel",
-      customClass: {
-        popup: "custom-style",
-        title: "custom-style",
-        confirmButton: "custom-style",
-        cancelButton: "custom-style",
-      },
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await fetch(
-            `http://localhost:5000/subcategories/${id}`,
-            {
-              method: "DELETE",
+    const handleRemove = async (id) => {
+      console.log(id);
+      Swal.fire({
+        title: "Are you sure you want to delete?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "Cancel",
+        customClass: {
+          popup: "custom-style",
+          title: "custom-style",
+          confirmButton: "custom-style",
+          cancelButton: "custom-style",
+        },
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const response = await fetch(
+              `http://localhost:5000/subcategories/${id}`,
+              {
+                method: "DELETE",
+              }
+            );
+            if (response.ok) {
+              const data = response.json();
+              setSubcategory(data);
+            } else {
+              console.error("Failed to remove subcategory");
             }
-          );
-          if (response.ok) {
-            const data = response.json();
-            setSubcategory(data);
-          } else {
-            console.error("Failed to remove subcategory");
+          } catch (error) {
+            console.error(error);
           }
-        } catch (error) {
-          console.error(error);
+          // Fetch the updated list of products
+          const response = await axios.get(
+            `http://localhost:5000/subcategories`
+          );
+
+          // Update the state of the products with the new list
+
+          setSubcategories(response.data);
         }
-        // Fetch the updated list of products
-        const response = await axios.get(`http://localhost:5000/subcategories`);
-
-        // Update the state of the products with the new list
-
-        setSubcategories(response.data);
-      }
-    });
-  };
-
-  const handleAddSubcategory = () => {
-    setAddMode(true);
-  };
-
-  const handleAddSubmit = async (event) => {
-    event.preventDefault();
-    await fetch("http://localhost:5000/subcategories", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: subcategory.title,
-        category: subcategory.category,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setSubcategory(data);
-        setAddMode(false);
-        Swal.fire({
-          title: "Subcategory added successfully!",
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonText: "OK",
-          customClass: {
-            popup: "custom-style",
-            title: "custom-style",
-            confirmButton: "custom-style",
-          },
-        });
-      })
-      .catch((error) => {
-        console.error("Error:", error);
       });
-    // Fetch the updated list of products
-    const response = await axios.get("http://localhost:5000/subcategories");
+    };
 
-    // Update the state of the products with the new list
+    const handleAddSubcategory = () => {
+      setAddMode(true);
+    };
 
-    setSubcategories(response.data);
-  };
+    const handleAddSubmit = async (event) => {
+      event.preventDefault();
+      await fetch("http://localhost:5000/subcategories", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: subcategory.title,
+          category: subcategory.category,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setSubcategory(data);
+          setAddMode(false);
+          Swal.fire({
+            title: "Subcategory added successfully!",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonText: "OK",
+            customClass: {
+              popup: "custom-style",
+              title: "custom-style",
+              confirmButton: "custom-style",
+            },
+          });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      // Fetch the updated list of products
+      const response = await axios.get("http://localhost:5000/subcategories");
 
-  return (
-    <>
-      <div className="sub-cat-dash">
-        <div className="catdash-section">
-          <h1 className="cart-title-catdash">Category Dashboard</h1>
-          <div className="cart-table-prodash">
-            <Paper
-              sx={{
-                width: "75%",
+      // Update the state of the products with the new list
 
-                overflow: "hidden",
-                marginLeft: "auto",
-                marginRight: "auto",
-                border: "#0B486A solid 1px",
-              }}
-            >
-              <TableContainer sx={{ maxHeight: "600px" }}>
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
-                      {column.map((colum) => (
-                        <TableCell
-                          key={colum.id}
-                          align={colum.align}
-                          style={{ minWidth: colum.minWidth }}
-                        >
-                          {colum.label}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {categories.map((category, i) => (
-                      <TableRow key={i}>
-                        <TableCell>{category.title}</TableCell>
-                        <TableCell>
-                          <button
-                            className="prodash-button"
-                            onClick={() => getCategoryById(category._id)}
+      setSubcategories(response.data);
+    };
+
+    return (
+      <>
+        <div className="sub-cat-dash">
+          <div className="catdash-section">
+            <h1 className="cart-title-catdash">Category Dashboard</h1>
+            <div className="cart-table-prodash">
+              <Paper
+                sx={{
+                  width: "75%",
+
+                  overflow: "hidden",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  border: "#0B486A solid 1px",
+                }}
+              >
+                <TableContainer sx={{ maxHeight: "600px" }}>
+                  <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                      <TableRow>
+                        {column.map((colum) => (
+                          <TableCell
+                            key={colum.id}
+                            align={colum.align}
+                            style={{ minWidth: colum.minWidth }}
                           >
-                            <img className="prodash-icon" src={edit} alt="#" />
-                          </button>
-                        </TableCell>
+                            {colum.label}
+                          </TableCell>
+                        ))}
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Paper>
-          </div>
-          {editMode1 && (
+                    </TableHead>
+                    <TableBody>
+                      {categories.map((category, i) => (
+                        <TableRow key={i}>
+                          <TableCell>{category.title}</TableCell>
+                          <TableCell>
+                            <button
+                              className="prodash-button"
+                              onClick={() => getCategoryById(category._id)}
+                            >
+                              <img
+                                className="prodash-icon"
+                                src={edit}
+                                alt="#"
+                              />
+                            </button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+            </div>
+            {editMode1 && (
             <div className="subcat-form-container">
               <h1>Update Category Name</h1>
               <form
@@ -346,10 +352,9 @@ const CategoryDash = () => {
               </form>
             </div>
           )}
-        </div>
-        <div className="subdash-section">
+          </div>
+          <div className="subdash-section">
           <h1 className="cart-title-catdash">Subcategory Dashboard</h1>
-
           <div className="cart-table-prodash">
             <button
               className="button-addsubcategory"
@@ -413,8 +418,8 @@ const CategoryDash = () => {
             </Paper>
           </div>
         </div>
-      </div>
-      <div className="forms-section">
+        </div>
+        <div className="forms-section">
         {addMode && (
           <div className="subcat-form-container">
             <h1>Add Subcategory</h1>
@@ -504,9 +509,8 @@ const CategoryDash = () => {
           </div>
         )}
       </div>
-    </>
-  );
-};
-}
+      </>
+    );
+  };
 
 export default CategoryDash;

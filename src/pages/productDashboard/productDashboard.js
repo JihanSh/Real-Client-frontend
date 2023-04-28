@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import edit from "./images/icons8-create-64.png";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
-import CategoryDash from "./categoryDash";
+import CategoryDash from './categoryDash.js';
 import Swal from "sweetalert2";
 
 function ProductDashboard() {
@@ -240,8 +240,8 @@ function ProductDashboard() {
                 ><Link to="/dashorder" className="go-order-link">
                   Go to Orders Dashboard
                   </Link></button>
-              </div>
-        <div className="prodash-section">
+      </div>
+      <div className="prodash-section">
           <div className="cart-wrapper-prodash">
             <div className="cart-header-prodash">
               <h1 className="cart-title-prodash">Product Dashboard</h1>
@@ -325,8 +325,7 @@ function ProductDashboard() {
               </Paper>
             </div>
           </div>
-        </div>
-      
+      </div>
       <div className="forms-section">
         {addMode && (
           <div className="product-form-container">
@@ -602,19 +601,5 @@ function ProductDashboard() {
     </>
   );
 }
-
 export default ProductDashboard;
 
-// setTimeout(() => {
-//     setLoading(false);
-//   }, 2000);
-
-// {loading ? (
-//   <ReactLoading
-//     className="loading-container"
-//     type="spinningBubbles"
-//     color="#FF7D00"
-//     height={200}
-//     width={100}
-//   />
-// ) : (
