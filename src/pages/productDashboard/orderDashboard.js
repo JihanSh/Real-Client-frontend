@@ -10,7 +10,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import edit from "./images/icons8-create-64.png";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 

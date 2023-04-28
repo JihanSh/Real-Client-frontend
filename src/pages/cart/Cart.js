@@ -9,8 +9,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import ReactLoading from "react-loading";
@@ -53,32 +51,34 @@ const Cart = () => {
   ];
 
   const handleRemove = async (userId, productId) => {
-    confirmAlert({
-      title: "Confirm Deletion",
-      message: "Are you sure you want to delete this item from your cart?",
-      buttons: [
-        {
-          label: "Yes",
-          onClick: async () => {
-            const response = await fetch(
-              `http://localhost:5000/cart/${userId}/${productId}`,
-              {
-                method: "DELETE",
-              }
-            );
-            if (response.ok) {
-              const data = response.json();
-              setTableData(data);
-              window.location.reload(); // Reload the page
-            } else {
-              console.error("Failed to remove item");
-            }
-          },
-        },
-        {
-          label: "No",
-        },
-      ],
+    await Swal.fire({
+      title: "Are you sure you want to delete this item from your cart?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      customClass: {
+        popup: "custom-style",
+        title: "custom-style",
+        confirmButton: "custom-style",
+        cancelButton: "custom-style",
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await fetch(
+          `http://localhost:5000/cart/${userId}/${productId}`,
+          {
+            method: "DELETE",
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setTableData(data);
+          window.location.reload(); // Reload the page
+        } else {
+          console.error("Failed to remove item");
+        }
+      }
     });
   };
 
@@ -115,7 +115,7 @@ const Cart = () => {
             timer: 1500,
           });
         }
-        console.log(orderStatus);
+        console.log("rana", orderStatus);
       })
       .catch((error) => {
         // set order status to failure
@@ -157,6 +157,7 @@ const Cart = () => {
           <div className="cart-header">
             <h1 className="cart-title">Cart</h1>
           </div>
+          
           <div className="cart-table">
             <Paper
               sx={{
@@ -229,6 +230,7 @@ const Cart = () => {
             </div>
           </div>
         </div>
+
       )}
       <Footer />
     </>

@@ -10,7 +10,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import edit from "./images/icons8-create-64.png";
 import Swal from "sweetalert2";
 
@@ -115,7 +114,19 @@ const CategoryDash = () => {
     })
       .then((response) => response.json())
       .then(setEditMode1(false))
-      .then(alert("You have updated the category name"));
+      .then(
+        Swal.fire({
+          title: "Category updated successfully!",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonText: "OK",
+          customClass: {
+            popup: "custom-style",
+            title: "custom-style",
+            confirmButton: "custom-style",
+          },
+        })
+      );
 
     // Fetch the updated list of products
     const response = await axios.get(`http://localhost:5000/categories`);
@@ -146,7 +157,19 @@ const CategoryDash = () => {
     })
       .then((response) => response.json())
       .then(setEditMode(false))
-      .then(alert("You have updated the category name"));
+      .then(
+        Swal.fire({
+          title: "Subcategory updated successfully!",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonText: "OK",
+          customClass: {
+            popup: "custom-style",
+            title: "custom-style",
+            confirmButton: "custom-style",
+          },
+        })
+      );
     {
     }
     // Fetch the updated list of products
@@ -157,19 +180,20 @@ const CategoryDash = () => {
     setSubcategories(response.data).catch((error) => console.error(error));
   };
 
-  // console.log("kjhsdfsgflsjdk", subcategory.category.title);
-
   const handleRemove = async (id) => {
     console.log(id);
     Swal.fire({
-      title: "Confirm Deletion",
-      text: "Are you sure you want to delete this subcategory?",
+      title: "Are you sure you want to delete?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#FF7D00",
-      cancelButtonColor: "#0B486A",
       confirmButtonText: "Yes",
-      cancelButtonText: "No",
+      cancelButtonText: "Cancel",
+      customClass: {
+        popup: "custom-style",
+        title: "custom-style",
+        confirmButton: "custom-style",
+        cancelButton: "custom-style",
+      },
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -188,12 +212,12 @@ const CategoryDash = () => {
         } catch (error) {
           console.error(error);
         }
-        Swal.fire({
-          title: "Deleted!",
-          text: "The subcategory has been deleted.",
-          icon: "success",
-          confirmButtonColor: "#FF7D00",
-        });
+        // Fetch the updated list of products
+        const response = await axios.get(`http://localhost:5000/subcategories`);
+
+        // Update the state of the products with the new list
+
+        setSubcategories(response.data);
       }
     });
   };
@@ -202,9 +226,9 @@ const CategoryDash = () => {
     setAddMode(true);
   };
 
-
-  const handleAddSubmit = (event) => {
-    fetch("http://localhost:5000/subcategories", {
+  const handleAddSubmit = async (event) => {
+    event.preventDefault();
+    await fetch("http://localhost:5000/subcategories", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -222,10 +246,28 @@ const CategoryDash = () => {
       })
       .then((data) => {
         setSubcategory(data);
+        setAddMode(false);
+        Swal.fire({
+          title: "Subcategory added successfully!",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonText: "OK",
+          customClass: {
+            popup: "custom-style",
+            title: "custom-style",
+            confirmButton: "custom-style",
+          },
+        });
       })
       .catch((error) => {
         console.error("Error:", error);
       });
+    // Fetch the updated list of products
+    const response = await axios.get("http://localhost:5000/subcategories");
+
+    // Update the state of the products with the new list
+
+    setSubcategories(response.data);
   };
 
   return (
@@ -306,7 +348,7 @@ const CategoryDash = () => {
           )}
         </div>
         <div className="subdash-section">
-          <h1 className="cart-title-catdash">subcategory Dashboard</h1>
+          <h1 className="cart-title-catdash">Subcategory Dashboard</h1>
 
           <div className="cart-table-prodash">
             <button
@@ -387,7 +429,7 @@ const CategoryDash = () => {
                   className="subcat-edit-input"
                   type="text"
                   id="username"
-                  placeholder="Product name"
+                  placeholder="subcategory name"
                   name="title"
                   value={subcategory.title}
                   onChange={handleSubCategoryChange}
@@ -450,7 +492,6 @@ const CategoryDash = () => {
                   {categories.map((each, i) => (
                     <option key={i} value={each._id}>
                       {each.title}
-                      {/* {console.log("value", each.title)}{" "} */}
                     </option>
                   ))}
                 </select>
@@ -463,7 +504,6 @@ const CategoryDash = () => {
           </div>
         )}
       </div>
-     
     </>
   );
 };

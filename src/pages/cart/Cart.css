@@ -35,45 +35,6 @@
     height: 100vh; /* Change this to whatever height you want */
     margin: auto;
   }
-.react-confirm-alert > div:first-child {
-    background-color: white;
-    border: #0B486A solid 1px;
-    width: 90%;
-    padding: 50px 30px 50px 70px;
-}
-.react-confirm-alert-body {
-    font-size: 20px;
-    font-weight: 400;
-    color: #0B486A;
-  }
-.react-confirm-alert-body h1{
-    color: #0B486A;
-    margin-bottom: 20px;
-}
-.react-confirm-alert-button-group{
-    display: flex;
-    gap: 60%;
-}
-.react-confirm-alert-button-group button:nth-child(1){
-    width: 15%;
-    background-color: #0B486A;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-}
-.react-confirm-alert-button-group button:nth-child(2){
-    width: 15%;
-    background-color: #0B486A;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-}
-.react-confirm-alert-button-group button:nth-child(1):hover {
-    background-color: #FF7D00;
-}
-.react-confirm-alert-button-group button:nth-child(2):hover {
-    background-color: #FF7D00;
-}
 .cart-header {
     width: 70%;
     display: flex;
@@ -173,32 +134,6 @@
         cursor: pointer;
         font-size: 19px;
         border-radius: 5px;
-    }
-    .react-confirm-alert > div:first-child {
-        margin-left: auto;
-        margin-right: auto;
-        background-color: white;
-        border: #0B486A solid 1px;
-        width: 50%;
-        padding-left: 45px;
-    }
-    .react-confirm-alert-button-group{
-        display: flex;
-        gap: 20%;
-    }
-    .react-confirm-alert-button-group button:nth-child(1){
-        width: 40%;
-        background-color: #0B486A;
-        color: white;
-        font-weight: bold;
-        font-size: 20px;
-    }
-    .react-confirm-alert-button-group button:nth-child(2){
-        width: 40%;
-        background-color: #0B486A;
-        color: white;
-        font-weight: bold;
-        font-size: 20px;
     }
   }
 
