@@ -202,10 +202,6 @@ const CategoryDash = () => {
     setAddMode(true);
   };
 
-  // const handleAddSubcategoryChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setCategory({ ...category, [name]: value });
-  // };
 
   const handleAddSubmit = (event) => {
     fetch("http://localhost:5000/subcategories", {
@@ -396,7 +392,8 @@ const CategoryDash = () => {
                   value={subcategory.title}
                   onChange={handleSubCategoryChange}
                 />
-        {console.log(subcategory.title)}
+
+        {/* {console.log(subcategory.title)} */}
               </div>
 
               <div className="username">
