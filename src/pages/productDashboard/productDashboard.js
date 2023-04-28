@@ -202,15 +202,7 @@ function ProductDashboard() {
     <>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
-      {loading ? (
-        <ReactLoading
-          className="loading-container"
-          type="spinningBubbles"
-          color="#FF7D00"
-          height={200}
-          width={100}
-        />
-      ) : (
+     
         <div className="prodash-section">
           <div className="cart-wrapper-prodash">
             <div className="cart-header-prodash">
@@ -296,7 +288,7 @@ function ProductDashboard() {
             </div>
           </div>
         </div>
-      )}
+      
       <div className="forms-section">
         {addMode && (
           <div className="product-form-container">
@@ -578,3 +570,13 @@ export default ProductDashboard;
 // setTimeout(() => {
 //     setLoading(false);
 //   }, 2000);
+
+// {loading ? (
+//   <ReactLoading
+//     className="loading-container"
+//     type="spinningBubbles"
+//     color="#FF7D00"
+//     height={200}
+//     width={100}
+//   />
+// ) : (
