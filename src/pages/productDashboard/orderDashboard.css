@@ -1,0 +1,32 @@
+table {
+}
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #0b486a;
+}
+th {
+  background-color: #f2f2f2;
+}
+tr:hover {
+  background-color: #0b496a53;
+}
+.dashboard-product-image {
+  height: 50px;
+  width: 50px;
+}
+.Order-dash-table .order-body {
+  width: 60%;
+  text-align: center;
+  margin: 30px auto 30px auto;
+  max-height: 600px !important;
+  border-collapse: collapse;
+  
+}
+.table-wrapper-order {
+  height: 600px;
+  overflow: auto;
+  width: 100%;
+
+}
