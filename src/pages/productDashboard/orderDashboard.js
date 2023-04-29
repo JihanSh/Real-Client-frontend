@@ -3,12 +3,15 @@ import axios from "axios";
 import "./orderDashboard.css";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
+import { Link } from "react-router-dom";
 
 const UserOrders = () => {
   const [menubar, setMenuBar] = useState(false);
 
   const [users, setUsers] = useState([]);
   const [product, setProduct] = useState([]);
+    const [addMode, setAddMode] = useState(false);
+
   console.log(product);
   useEffect(() => {
     const fetchUsers = async () => {
@@ -23,11 +26,20 @@ const UserOrders = () => {
 
     fetchUsers();
   }, []);
-
+  const handleAdd = () => {
+    setAddMode(true);
+  };
   return (
     <>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
+      <div className="go-order-button">
+        <button className="add-subcategory-button" onClick={handleAdd}>
+          <Link to="/proDash" className="go-order-link">
+            Go to Products Dashboard
+          </Link>
+        </button>
+      </div>
       <h1 className="orderdashboard-title">Users Who Ordered</h1>
       <br />
       <div className="table-wrapper-order">
@@ -69,7 +81,7 @@ const UserOrders = () => {
           </tbody>
         </table>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
