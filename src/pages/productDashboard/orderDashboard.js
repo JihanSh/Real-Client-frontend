@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./orderDashboard.css";
+import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+import { Footer } from "../../component/Header/footer/footer";
 
 const UserOrders = () => {
+  const [menubar, setMenuBar] = useState(false);
+
   const [users, setUsers] = useState([]);
   const [product, setProduct] = useState([]);
   console.log(product);
@@ -22,9 +26,12 @@ const UserOrders = () => {
 
   return (
     <>
-      <h1>Users Who Ordered</h1>
+      <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
+      <MenuBar menubar={menubar} />
+      <h1 className="orderdashboard-title">Users Who Ordered</h1>
+      <br />
       <div className="table-wrapper-order">
-        <table className="Order-dash-table-wrapper">
+        <table className="Orderdash-table">
           <thead>
             <td>Username</td>
             <td>Phone Number</td>
@@ -62,6 +69,7 @@ const UserOrders = () => {
           </tbody>
         </table>
       </div>
+      <Footer/>
     </>
   );
 };

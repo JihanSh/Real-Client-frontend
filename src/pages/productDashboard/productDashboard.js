@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./productDashboard.css";
-import ReactLoading from "react-loading";
+
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,13 +12,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import edit from "./images/icons8-create-64.png";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
-import CategoryDash from "./categoryDash";
+import CategoryDash from './categoryDash.js';
+import Swal from "sweetalert2";
 
 function ProductDashboard() {
-  const [loading, setLoading] = useState(true);
+ 
   const [products, setProducts] = useState([]);
   const [menubar, setMenuBar] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -54,7 +55,7 @@ function ProductDashboard() {
       .get(`http://localhost:5000/products`)
       .then((response) => {
         setProducts(response.data);
-        setLoading(false);
+       
       })
       .catch((error) => {
         console.log(error);
@@ -62,18 +63,28 @@ function ProductDashboard() {
   }, []);
 
   const handleDelete = async (id) => {
-    const confirm = window.confirm(
-      "Are you sure you want to delete this item?"
-    );
-    if (!confirm) {
-      return;
-    }
-    try {
-      await axios.delete(`http://localhost:5000/products/${id}`);
-      window.location.reload(); // Reload the page
-    } catch (error) {
-      console.error(error);
-    }
+    Swal.fire({
+      title: "Are you sure you want to delete?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      customClass: {
+        popup: "custom-style",
+        title: "custom-style",
+        confirmButton: "custom-style",
+        cancelButton: "custom-style",
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`http://localhost:5000/products/${id}`);
+          window.location.reload(); // Reload the page
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    });
   };
 
   // Fetch the product data on component mount
@@ -147,7 +158,17 @@ function ProductDashboard() {
           "Content-Type": "multipart/form-data",
         },
       });
-      alert("You have updated the product info!");
+      Swal.fire({
+        title: "Product updated successfully!",
+        icon: "success",
+        showCancelButton: false,
+        confirmButtonText: "OK",
+        customClass: {
+          popup: "custom-style",
+          title: "custom-style",
+          confirmButton: "custom-style",
+        },
+      });
       setEditMode(false);
       // Fetch the updated list of products
       const response = await axios.get(`http://localhost:5000/products`);
@@ -184,7 +205,17 @@ function ProductDashboard() {
           "Content-Type": "multipart/form-data",
         },
       });
-      alert("You have Added a new product");
+      Swal.fire({
+        title: "Product added successfully!",
+        icon: "success",
+        showCancelButton: false,
+        confirmButtonText: "OK",
+        customClass: {
+          popup: "custom-style",
+          title: "custom-style",
+          confirmButton: "custom-style",
+        },
+      });
       setAddMode(false);
 
       // Fetch the updated list of products
@@ -202,22 +233,21 @@ function ProductDashboard() {
     <>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
-      {loading ? (
-        <ReactLoading
-          className="loading-container"
-          type="spinningBubbles"
-          color="#FF7D00"
-          height={200}
-          width={100}
-        />
-      ) : (
-        <div className="prodash-section">
+      <div className="go-order-button">
+                <button
+                  className="add-subcategory-button"
+                  onClick={handleAdd}
+                ><Link to="/dashorder" className="go-order-link">
+                  Go to Orders Dashboard
+                  </Link></button>
+      </div>
+      <div className="prodash-section">
           <div className="cart-wrapper-prodash">
             <div className="cart-header-prodash">
               <h1 className="cart-title-prodash">Product Dashboard</h1>
               <div className="cart-totals-second">
                 <button
-                  className="cart-totals-second-button"
+                  className="add-subcategory-button"
                   onClick={handleAdd}
                 >
                   Add Product
@@ -295,8 +325,7 @@ function ProductDashboard() {
               </Paper>
             </div>
           </div>
-        </div>
-      )}
+      </div>
       <div className="forms-section">
         {addMode && (
           <div className="product-form-container">
@@ -568,13 +597,9 @@ function ProductDashboard() {
           </div>
         )}
       </div>
-    <CategoryDash/>
+      <CategoryDash />
     </>
   );
 }
-
 export default ProductDashboard;
 
-// setTimeout(() => {
-//     setLoading(false);
-//   }, 2000);

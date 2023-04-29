@@ -9,11 +9,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import ReactLoading from "react-loading";
+
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
 import { Link } from "react-router-dom";
@@ -24,7 +22,8 @@ const Cart = () => {
   const [tableData, setTableData] = useState([]);
   const [totalData, settotalData] = useState([]);
   const [orderStatus, setOrderStatus] = useState(null);
-  const [loading, setLoading] = useState(true);
+ 
+  const [hasItems, setHasItems] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,9 +32,10 @@ const Cart = () => {
         const data = await response.json();
         setTableData(data.items);
         settotalData(data);
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
+    
+        if (data.items.length > 0) {
+          setHasItems(true);
+        }
       } catch (err) {
         console.log(err.message);
       }
@@ -53,32 +53,34 @@ const Cart = () => {
   ];
 
   const handleRemove = async (userId, productId) => {
-    confirmAlert({
-      title: "Confirm Deletion",
-      message: "Are you sure you want to delete this item from your cart?",
-      buttons: [
-        {
-          label: "Yes",
-          onClick: async () => {
-            const response = await fetch(
-              `http://localhost:5000/cart/${userId}/${productId}`,
-              {
-                method: "DELETE",
-              }
-            );
-            if (response.ok) {
-              const data = response.json();
-              setTableData(data);
-              window.location.reload(); // Reload the page
-            } else {
-              console.error("Failed to remove item");
-            }
-          },
-        },
-        {
-          label: "No",
-        },
-      ],
+    await Swal.fire({
+      title: "Are you sure you want to delete this item from your cart?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      customClass: {
+        popup: "custom-style",
+        title: "custom-style",
+        confirmButton: "custom-style",
+        cancelButton: "custom-style",
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await fetch(
+          `http://localhost:5000/cart/${userId}/${productId}`,
+          {
+            method: "DELETE",
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setTableData(data);
+          window.location.reload(); // Reload the page
+        } else {
+          console.error("Failed to remove item");
+        }
+      }
     });
   };
 
@@ -115,7 +117,7 @@ const Cart = () => {
             timer: 1500,
           });
         }
-        console.log(orderStatus);
+        console.log("rana", orderStatus);
       })
       .catch((error) => {
         // set order status to failure
@@ -144,19 +146,20 @@ const Cart = () => {
             </Link>
           </div>
         </div>
-      ) : loading ? (
-        <ReactLoading
-          className="loading-container"
-          type="spinningBubbles"
-          color="#FF7D00"
-          height={200}
-          width={100}
-        />
-      ) : (
+      ) : hasItems ? (
+      //   <ReactLoading
+      //     className="loading-container"
+      //     type="spinningBubbles"
+      //     color="#FF7D00"
+      //     height={200}
+      //     width={100}
+      //   />
+      // ) : (
         <div className="cart-wrapper">
           <div className="cart-header">
             <h1 className="cart-title">Cart</h1>
           </div>
+          
           <div className="cart-table">
             <Paper
               sx={{
@@ -228,6 +231,10 @@ const Cart = () => {
               </button>
             </div>
           </div>
+        </div>
+      ):(
+        <div className="cart-wrapper-empty">
+          <h1 className="text-empty">Your cart is empty.</h1>
         </div>
       )}
       <Footer />
