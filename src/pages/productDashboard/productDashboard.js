@@ -14,11 +14,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import edit from "./images/icons8-create-64.png";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
-import CategoryDash from './categoryDash.js';
+import CategoryDash from "./categoryDash.js";
 import Swal from "sweetalert2";
 
-function ProductDashboard() {
- 
+function ProductDashboard(props) {
   const [products, setProducts] = useState([]);
   const [menubar, setMenuBar] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -50,12 +49,19 @@ function ProductDashboard() {
     { id: "edit", label: "edit", minWidth: 100 },
   ];
 
+  const column = [
+    { id: "location", label: "Location", minWidth: 100 },
+    { id: "phone", label: "Phone Number", minWidth: 100 },
+    { id: "email", label: "Email", minWidth: 100 },
+    { id: "followUs", label: "Follow Us", minWidth: 100 },
+    { id: "edit", label: "edit", minWidth: 100 },
+  ];
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/products`)
       .then((response) => {
         setProducts(response.data);
-       
       })
       .catch((error) => {
         console.log(error);
@@ -229,102 +235,148 @@ function ProductDashboard() {
     }
   };
 
+  // About us dashboard
+  const [aboutinfo, setAboutinfo] = useState(
+    JSON.parse(localStorage.getItem("aboutinfo")) || {
+      location: "Pick up available from Saida",
+      phone: "+961 71958446",
+      email: "zone.outlet.00@gmail.com",
+      followUs: "Stay connected with us on social media!",
+    }
+  );
+  const [editMode5, setEditMode5] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const handleEdit = () => {
+    setEditMode5(true);
+  };
+
+  const handleSave = () => {
+    // validate the input fields
+    const newErrors = {};
+    if (!aboutinfo.location) {
+      newErrors.location = "Location is required";
+    }
+    if (!aboutinfo.phone) {
+      newErrors.phone = "Phone is required";
+    }
+    if (!aboutinfo.email) {
+      newErrors.email = "Email is required";
+    }
+    if (!aboutinfo.followUs) {
+      newErrors.followUs = "Social media links are required";
+    }
+    if (Object.keys(newErrors).length === 0) {
+      setAboutinfo({ ...aboutinfo });
+      setEditMode5(false);
+      localStorage.setItem("aboutinfo", JSON.stringify(aboutinfo));
+      if (typeof props.updateContact === "function") {
+        props.updateContact(aboutinfo);
+      }
+    } else {
+      setErrors(newErrors);
+    }
+  };
+
+  const handleInputChange1 = (event) => {
+    setAboutinfo({
+      ...aboutinfo,
+      [event.target.name]: event.target.value,
+    });
+    setErrors({
+      ...errors,
+      [event.target.name]: "",
+    });
+  };
+
   return (
     <>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
       <div className="go-order-button">
-                <button
-                  className="add-subcategory-button"
-                  onClick={handleAdd}
-                ><Link to="/dashorder" className="go-order-link">
-                  Go to Orders Dashboard
-                  </Link></button>
+        <button className="add-subcategory-button" onClick={handleAdd}>
+          <Link to="/dashorder" className="go-order-link">
+            Go to Orders Dashboard
+          </Link>
+        </button>
       </div>
       <div className="prodash-section">
-          <div className="cart-wrapper-prodash">
-            <div className="cart-header-prodash">
-              <h1 className="cart-title-prodash">Product Dashboard</h1>
-              <div className="cart-totals-second">
-                <button
-                  className="add-subcategory-button"
-                  onClick={handleAdd}
-                >
-                  Add Product
-                </button>
-              </div>
-            </div>
-            <div className="cart-table-prodash">
-              <Paper
-                sx={{
-                  width: "75%",
-
-                  overflow: "hidden",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  border: "#0B486A solid 1px",
-                }}
-              >
-                <TableContainer sx={{ maxHeight: "600px" }}>
-                  <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                      <TableRow>
-                        {columns.map((column) => (
-                          <TableCell
-                            key={column.id}
-                            align={column.align}
-                            style={{ minWidth: column.minWidth }}
-                          >
-                            {column.label}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {products.map((product, i) => (
-                        <TableRow key={i}>
-                          <TableCell>
-                            <button
-                              className="cart-button-icon"
-                              onClick={() => handleDelete(product._id)}
-                            >
-                              <FontAwesomeIcon
-                                icon={faCircleXmark}
-                                className="cart-Xicon"
-                              />
-                            </button>
-                          </TableCell>
-                          <TableCell className="cart-item-image">
-                            <img
-                              src={`http://localhost:5000/${product.images[0]}`}
-                              alt={product.product}
-                            />
-                          </TableCell>
-                          <TableCell>{product.name}</TableCell>
-                          <TableCell>{product.size}</TableCell>
-                          <TableCell>{product.price}</TableCell>
-                          <TableCell>{product.category.title}</TableCell>
-                          <TableCell>{product.subcategory.title}</TableCell>
-                          <TableCell>
-                            <button
-                              className="prodash-button"
-                              onClick={() => getProductById(product._id)}
-                            >
-                              <img
-                                className="prodash-icon"
-                                src={edit}
-                                alt="#"
-                              />
-                            </button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Paper>
+        <div className="cart-wrapper-prodash">
+          <div className="cart-header-prodash">
+            <h1 className="cart-title-prodash">Product Dashboard</h1>
+            <div className="cart-totals-second">
+              <button className="add-subcategory-button" onClick={handleAdd}>
+                Add Product
+              </button>
             </div>
           </div>
+          <div className="cart-table-prodash">
+            <Paper
+              sx={{
+                width: "75%",
+
+                overflow: "hidden",
+                marginLeft: "auto",
+                marginRight: "auto",
+                border: "#0B486A solid 1px",
+              }}
+            >
+              <TableContainer sx={{ maxHeight: "600px" }}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          style={{ minWidth: column.minWidth }}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {products.map((product, i) => (
+                      <TableRow key={i}>
+                        <TableCell>
+                          <button
+                            className="cart-button-icon"
+                            onClick={() => handleDelete(product._id)}
+                          >
+                            <FontAwesomeIcon
+                              icon={faCircleXmark}
+                              className="cart-Xicon"
+                            />
+                          </button>
+                        </TableCell>
+                        <TableCell className="cart-item-image">
+                          <img
+                            src={`http://localhost:5000/${product.images[0]}`}
+                            alt={product.product}
+                          />
+                        </TableCell>
+                        <TableCell>{product.name}</TableCell>
+                        <TableCell>{product.size}</TableCell>
+                        <TableCell>{product.price}</TableCell>
+                        <TableCell>{product.category.title}</TableCell>
+                        <TableCell>{product.subcategory.title}</TableCell>
+                        <TableCell>
+                          <button
+                            className="prodash-button"
+                            onClick={() => getProductById(product._id)}
+                          >
+                            <img className="prodash-icon" src={edit} alt="#" />
+                          </button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </div>
+        </div>
       </div>
       <div className="forms-section">
         {addMode && (
@@ -336,7 +388,7 @@ function ProductDashboard() {
               ref={form}
             >
               <div className="username">
-                <label className="label-auth">Product name:</label> <br />
+                <label className="About_username">Product name:</label> <br />
                 <input
                   className="product-edit-input"
                   type="text"
@@ -348,7 +400,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Description:</label> <br />
+                <label className="About_username">Description:</label> <br />
                 <textarea
                   className="product-edit-input"
                   type="text"
@@ -360,7 +412,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Category:</label> <br />
+                <label className="About_username">Category:</label> <br />
                 <select
                   id="category"
                   name="categoryTitle"
@@ -376,7 +428,7 @@ function ProductDashboard() {
                 </select>
               </div>
               <div className="username">
-                <label className="label-auth">Subcategory:</label> <br />
+                <label className="About_username">Subcategory:</label> <br />
                 <select
                   id="subcategory"
                   name="subcategoryTitle"
@@ -392,7 +444,7 @@ function ProductDashboard() {
                 </select>
               </div>
               <div className="username">
-                <label className="label-auth">Price:</label> <br />
+                <label className="About_username">Price:</label> <br />
                 <input
                   className="product-edit-input"
                   type="number"
@@ -406,7 +458,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Discount Percentage:</label>{" "}
+                <label className="About_username">Discount Percentage:</label>{" "}
                 <br />
                 <input
                   className="product-edit-input"
@@ -422,7 +474,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Size:</label> <br />
+                <label className="About_username">Size:</label> <br />
                 <input
                   className="product-edit-input"
                   type="text"
@@ -434,7 +486,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
+                <label className="About_username">Uplaod images:</label> <br />
                 <input
                   className="product-edit-input"
                   id="username"
@@ -445,7 +497,8 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Uplaod main image:</label> <br />
+                <label className="About_username">Uplaod main image:</label>{" "}
+                <br />
                 <input
                   className="product-edit-input"
                   id="username"
@@ -470,7 +523,7 @@ function ProductDashboard() {
               ref={form}
             >
               <div className="username">
-                <label className="label-auth">Product name:</label> <br />
+                <label className="About_username">Product name:</label> <br />
                 <input
                   className="product-edit-input"
                   type="text"
@@ -482,7 +535,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Description:</label> <br />
+                <label className="About_username">Description:</label> <br />
                 <textarea
                   className="product-edit-input"
                   type="text"
@@ -494,7 +547,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Category:</label> <br />
+                <label className="About_username">Category:</label> <br />
                 <select
                   id="category"
                   name="categoryTitle"
@@ -510,7 +563,7 @@ function ProductDashboard() {
                 </select>
               </div>
               <div className="username">
-                <label className="label-auth">Subcategory:</label> <br />
+                <label className="About_username">Subcategory:</label> <br />
                 <select
                   id="subcategory"
                   name="subcategoryTitle"
@@ -526,7 +579,7 @@ function ProductDashboard() {
                 </select>
               </div>
               <div className="username">
-                <label className="label-auth">Price:</label> <br />
+                <label className="About_username">Price:</label> <br />
                 <input
                   className="product-edit-input"
                   type="number"
@@ -540,7 +593,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Discount Percentage:</label>{" "}
+                <label className="About_username">Discount Percentage:</label>{" "}
                 <br />
                 <input
                   className="product-edit-input"
@@ -556,7 +609,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Size:</label> <br />
+                <label className="About_username">Size:</label> <br />
                 <input
                   className="product-edit-input"
                   type="text"
@@ -568,7 +621,7 @@ function ProductDashboard() {
                 />
               </div>
               <div className="username">
-                <label className="label-auth">Uplaod images:</label> <br />
+                <label className="About_username">Uplaod images:</label> <br />
                 <input
                   className="product-edit-input"
                   id="username"
@@ -580,7 +633,8 @@ function ProductDashboard() {
               </div>
 
               <div className="username">
-                <label className="label-auth">Uplaod main image:</label> <br />
+                <label className="About_username">Uplaod main image:</label>{" "}
+                <br />
                 <input
                   className="product-edit-input"
                   id="username"
@@ -598,8 +652,120 @@ function ProductDashboard() {
         )}
       </div>
       <CategoryDash />
+      <div className="about-prodash-section">
+        <div className="cart-wrapper-prodash">
+          <div className="cart-header-prodash">
+            <h1 className="cart-title-prodash">About us</h1>
+          </div>
+
+          <div className="cart-table-prodash">
+            <Paper
+              sx={{
+                width: "75%",
+                overflow: "hidden",
+                marginLeft: "auto",
+                marginRight: "auto",
+                border: "#0B486A solid 1px",
+              }}
+            >
+              <TableContainer sx={{ maxHeight: "600px" }}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {column.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          style={{ minWidth: column.minWidth }}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>{aboutinfo.location}</TableCell>
+                      <TableCell>{aboutinfo.phone}</TableCell>
+                      <TableCell>{aboutinfo.email}</TableCell>
+                      <TableCell>{aboutinfo.followUs}</TableCell>
+                      <TableCell>
+                        <button className="prodash-button" onClick={handleEdit}>
+                          <img src={edit} alt="edit" className="prodash-icon" />
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </div>
+          <div className="Aboutusdash_section">
+            <div className="Aaboutusdash_section">
+              {editMode5 && (
+                <div className="subcat-form-container">
+                  <h1>Update About Us</h1>
+                  <form
+                    className="cat-edit-form-about"
+                    onSubmit={handleSave}
+                    ref={form}
+                  >
+                    <div className="username">
+                      <label className="About_username">Location:</label> <br />
+                      <input
+                        className="product-edit-input"
+                        type="text"
+                        placeholder="Location"
+                        name="location"
+                        value={aboutinfo.location}
+                        onChange={handleInputChange1}
+                      />
+                    </div>
+                    <div className="username">
+                      <label className="About_username">Phone:</label> <br />
+                      <input
+                        className="product-edit-input"
+                        type="text"
+                        placeholder="Phone"
+                        name="phone"
+                        value={aboutinfo.phone}
+                        onChange={handleInputChange1}
+                      />
+                    </div>
+                    <div className="username">
+                      <label className="About_username">Email:</label> <br />
+                      <input
+                        className="product-edit-input"
+                        type="text"
+                        placeholder="Email"
+                        name="email"
+                        value={aboutinfo.email}
+                        onChange={handleInputChange1}
+                      />
+                    </div>
+                    <div className="username">
+                      <label className="About_username">Follow Us:</label>{" "}
+                      <br />
+                      <input
+                        className="product-edit-input"
+                        type="text"
+                        placeholder="Follow Us"
+                        name="followUs"
+                        value={aboutinfo.followUs}
+                        onChange={handleInputChange1}
+                      />
+                    </div>
+                    <button className="subcat-edit-button" type="submit">
+                      Update About Us
+                    </button>
+                  </form>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
 export default ProductDashboard;
-

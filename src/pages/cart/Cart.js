@@ -75,8 +75,12 @@ const Cart = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          setTableData(data);
-          window.location.reload(); // Reload the page
+          setTableData(tableData.filter(item => item.productId._id !== productId));
+          settotalData(data);
+          // Check if there are any items left in the cart
+          if (data.items.length === 0) {
+            setHasItems(false);
+          }
         } else {
           console.error("Failed to remove item");
         }

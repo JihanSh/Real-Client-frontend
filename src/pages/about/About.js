@@ -5,7 +5,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
 
@@ -15,6 +15,8 @@ const About = () => {
   const variant = theme.breakpoints.down("sm") ? "h6" : "subtitle2";
 
   const [menubar, setMenuBar] = useState(false);
+
+  const storedAboutinfo = JSON.parse(localStorage.getItem("aboutinfo"));
 
   return (
     <>
@@ -34,7 +36,7 @@ const About = () => {
             About Us
           </Typography>
         </Box>
-        <Box textAlign={"center"} style={{ height: "71px" }} >
+        <Box textAlign={"center"} style={{ height: "71px" }}>
           {" "}
           <Typography variant="h5" mt={{ xs: 3, sm: 1 }} gutterBottom>
             FEEL FREE TO CONTACT US
@@ -76,7 +78,7 @@ const About = () => {
                     Location
                   </Typography>
                   <Typography variant="body1">
-                    Pick up available from Saida
+                    {storedAboutinfo?.location || "No location available"}
                   </Typography>
                 </Box>
               </Box>
@@ -94,7 +96,7 @@ const About = () => {
                     Email
                   </Typography>
                   <Typography variant="body1">
-                    zone.outlet.00@gmail.com
+                    {storedAboutinfo?.email || "No email available"}
                   </Typography>
                 </Box>
               </Box>
@@ -111,7 +113,7 @@ const About = () => {
                   <Typography variant={variant} gutterBottom>
                     Phone
                   </Typography>
-                  <Typography variant="body1">+961 71958446</Typography>
+                  <Typography variant="body1">{storedAboutinfo?.phone || 'No phone number available'}</Typography>
                 </Box>
               </Box>
             </Grid>
@@ -141,7 +143,7 @@ const About = () => {
                     Follow Us
                   </Typography>
                   <Typography variant="body1">
-                    Stay connected with us on social media!
+                  {storedAboutinfo?.followUs || 'No social media available'}
                   </Typography>
                 </Box>
               </Box>
@@ -149,7 +151,7 @@ const About = () => {
           </Grid>
         </Box>
       </>
-      <Footer/>
+      <Footer />
     </>
   );
 };
