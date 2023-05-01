@@ -102,7 +102,7 @@ const Sale = () => {
                     <CardContent>
                       <Link
                         className="product-link"
-                        to={`product/${product._id}`}
+                        to={`/product/${product._id}`}
                       >
                         <Typography gutterBottom variant="h5" component="div">
                           {product.name.slice(0, 15)}...

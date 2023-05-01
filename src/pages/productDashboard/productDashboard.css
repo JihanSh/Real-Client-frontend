@@ -197,7 +197,7 @@
 }
 .cat-edit-form{
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr ;
   align-items: center;
   border:1px solid #0b486a;
   box-shadow:  10px 15px #0b486a ;
@@ -205,6 +205,21 @@
   margin: 50px auto;
   width: 500px;
   height:150px;
+  color:#0b486a;
+  font-size: larger;
+  justify-content: center;
+ 
+}
+.timer-edit-form{
+  display: grid;
+  grid-template-rows:1fr 1fr 1fr;
+  align-items: center;
+  border:1px solid #0b486a;
+  box-shadow:  10px 15px #0b486a ;
+  border-radius: 30px;
+  margin: 50px auto;
+  width: 500px;
+  height:200px;
   color:#0b486a;
   font-size: larger;
   justify-content: center;
@@ -273,7 +288,14 @@
 }
 
 @media (max-width: 414px) {
-
+  .product-edit-button{
+    width: 300px;
+    margin: 0px auto 0px auto;
+  }
+  .subcat-edit-button{
+    width: 300px;
+    margin: 0px auto 0px auto;
+  }
 
   .prodash-section{
     width: 380px;
@@ -335,7 +357,22 @@
   .cat-edit-form{
     width: 350px;
   }
+  .timer-edit-form{
+    width: 350px;
+  }
   .subcat-edit-form{
     width: 350px;
+  }
+  .button-addsubcategory{
+
+    padding: 10px;
+    width: 250px;
+    background-color: #0B486A;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    border-radius: 5px;
+    margin: 10px;
   }
 }
