@@ -1,6 +1,4 @@
-
 .user-form {
- 
   display: flex;
   flex-direction: column;
   margin: 74px auto;
@@ -41,8 +39,7 @@
   border: transparent;
   font-size: larger;
   margin-top: 20px;
-    border-radius: 10px;
-
+  border-radius: 10px;
 }
 .update-label {
   display: flex;
@@ -57,7 +54,7 @@
   padding-top: 15px;
 }
 @media (max-width: 600px) {
-  .user-form{
+  .user-form {
     width: 90%;
   }
 }

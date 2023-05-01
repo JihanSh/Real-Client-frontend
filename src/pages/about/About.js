@@ -22,12 +22,13 @@ const About = () => {
       <MenuBar menubar={menubar} />
       <>
         <Box
-        style={{ height: "75px" }}
+          style={{ height: "75px" }}
           textAlign={"center"}
           p={{ xs: 2, sm: 3, md: 5 }}
           mt={{ xs: 3, sm: 4, md: 1 }}
           width={{ xs: "100%", sm: "80%", md: "65%" }}
-          ml={{ xs: -1, sm: 4, md: 35 }}
+          ml={{ xs: -4, sm: 4, md: 35 }}
+          color={"#0B486A"}
         >
           <Typography variant="h2" ml={{ xs: 2, sm: 3, md: 5 }} gutterBottom>
             About Us
