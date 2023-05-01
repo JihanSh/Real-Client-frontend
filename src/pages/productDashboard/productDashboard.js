@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./productDashboard.css";
-
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -17,7 +16,7 @@ import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import CategoryDash from "./categoryDash.js";
 import Swal from "sweetalert2";
 
-function ProductDashboard(props) {
+function ProductDashboard({ setCountdownDate, props }) {
   const [products, setProducts] = useState([]);
   const [menubar, setMenuBar] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -37,6 +36,20 @@ function ProductDashboard(props) {
   const [selectedImages, setSelectedImages] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
+  const [countdownInput, setCountdownInput] = useState("");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setCountdownDate(countdownInput);
+    localStorage.setItem("countdownDate", countdownInput); // Store the countdown date in localStorage
+    // Show SweetAlert popup
+    Swal.fire({
+      title: "Countdown date set!",
+      icon: "success",
+      timer: 2000, // Popup will automatically close after 2 seconds
+      showConfirmButton: false,
+    });
+  }
 
   const columns = [
     { id: "remove", label: " ", minWidth: 100 },
@@ -299,6 +312,21 @@ function ProductDashboard(props) {
             Go to Orders Dashboard
           </Link>
         </button>
+      </div>
+      <div>
+        <form className="timer-edit-form" onSubmit={handleSubmit}>
+          <label htmlFor="countdown">Set Countdown Date:</label>
+          <input
+            className="product-edit-input"
+            id="countdown"
+            type="datetime-local"
+            value={countdownInput}
+            onChange={(event) => setCountdownInput(event.target.value)}
+          />
+          <button className="product-edit-button" type="submit">
+            Submit
+          </button>
+        </form>
       </div>
       <div className="prodash-section">
         <div className="cart-wrapper-prodash">
@@ -657,7 +685,6 @@ function ProductDashboard(props) {
           <div className="cart-header-prodash">
             <h1 className="cart-title-prodash">About us</h1>
           </div>
-
           <div className="cart-table-prodash">
             <Paper
               sx={{

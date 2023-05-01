@@ -72,7 +72,7 @@ const CategoryDash = () => {
       setCategory(response.data);
       setIdCategory(id);
       setEditMode1(true);
-      console.log("get by id", category);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

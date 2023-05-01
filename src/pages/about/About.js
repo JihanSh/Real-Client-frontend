@@ -24,7 +24,7 @@ const About = () => {
       <MenuBar menubar={menubar} />
       <>
         <Box
-          style={{ height: "75px" }}
+          style={{ height: "100px" }}
           textAlign={"center"}
           p={{ xs: 2, sm: 3, md: 5 }}
           mt={{ xs: 3, sm: 4, md: 1 }}
