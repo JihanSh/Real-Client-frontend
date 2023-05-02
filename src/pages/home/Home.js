@@ -201,33 +201,33 @@ const Home = ({ countdownDate, setCountdownDate }) => {
         <section className="timer-container">
       <section className="timer">
         <div>
-          <h2>NEW ITEMS COMING IN!</h2>
+          <h2 className="timer-h2">NEW ITEMS COMING IN!</h2>
         </div>
-        <div>
+        <div className="timer-main">
           <section>
             <p>{timerDays}</p>
-            <p>
+            <p className="timer-p">
               <small>Days</small>
             </p>
           </section>
           <span>:</span>
           <section>
             <p className="two-numbers">{timerHours}</p>
-            <p>
+            <p className="timer-p">
               <small>Hours</small>
             </p>
           </section>
           <span>:</span>
           <section>
             <p className="two-numbers">{timerMinutes}</p>
-            <p>
+            <p className="timer-p">
               <small>Minutes</small>
             </p>
           </section>
           <span>:</span>
           <section>
             <p className="two-numbers">{timerSeconds}</p>
-            <p>
+            <p className="timer-p">
               <small>Seconds</small>
             </p>
           </section>
