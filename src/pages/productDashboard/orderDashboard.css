@@ -16,9 +16,9 @@ tr:hover {
 }
 
 .table-wrapper-order {
-  height: 600px;
+  height: 800px;
   overflow: auto;
-  width: 50%;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;
