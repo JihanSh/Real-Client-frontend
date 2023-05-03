@@ -5,14 +5,27 @@ import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
 import { Link } from "react-router-dom";
 
+
 const UserOrders = () => {
   const [menubar, setMenuBar] = useState(false);
 
   const [users, setUsers] = useState([]);
-  const [product, setProduct] = useState([]);
-    const [addMode, setAddMode] = useState(false);
+  // const [product, setProduct] = useState([]);
+  const [addMode, setAddMode] = useState(false);
+  // const [updateStatus, setUpdateStatus] = useState(false);
+  // const id = sessionStorage.getItem("Id");
+  // const [status, setStatus] = useState("");
+  // const [orderId, setOrderId] = useState("");
+  // const [response, setResponse] = useState(null);
 
-  console.log(product);
+  // const handleStatusChange = (event) => {
+  //   setStatus(event.target.value);
+  // };
+
+  // const handleOrderIdChange = (event) => {
+  //   setOrderId(event.target.value);
+  // };
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -29,6 +42,18 @@ const UserOrders = () => {
   const handleAdd = () => {
     setAddMode(true);
   };
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await axios.patch(`http://localhost:5000/${orderId}`, {
+  //       status,
+  //     });
+  //     setResponse(response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //     setResponse({ error: "Server error" });
+  //   }
+  // };
   return (
     <>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
