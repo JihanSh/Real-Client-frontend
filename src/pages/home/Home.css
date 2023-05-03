@@ -179,9 +179,62 @@
   display: flex;
    justify-content:space-evenly;
 }
+.timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45vh;
+  }
+  
+  .timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #0b486a;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+    color: #fff;
+    margin-top: 30px;
+  }
+  
+  .timer-h2 {
+    margin-top: 0;
+    font-size: 3rem;
+    text-align: center;
+  }
+  
+  .timer-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    margin-top: 2rem;
+  }
+  
+  .timer-main section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff7d00;
+    background-image: linear-gradient(#e64a1d, #ff7d00);
+    width: 8rem;
+    height: 8rem;
+    border-radius: 10px;
+    margin-right: 1rem;
+  }
+  
+  .two-numbers {
+    font-size: 4rem;
+  }
+ .timer-p {
+    font-size: 25px;
+ }
+
 @media (max-width: 768px){
     .home-section{
-        width: 768px;
+        width: 730px;
         margin: auto;
     }
     .sale-section{
@@ -204,12 +257,14 @@
         font-size: 25px;
     }
     .line-category-section{
+        width: 700px;
         margin-top: 30px;
         color:#0B486A;
         margin-right: 9px;
         font-family:'Times New Roman', Times, serif;
     }
     .line-category-section:after {
+        width: 700px;
         content: ""; /* This is necessary for the pseudo element to work. */ 
         display: block; /* This will put the pseudo element on its own line. */
         margin: 0 auto; /* This will center the border. */
@@ -218,12 +273,14 @@
         border-bottom: 2px solid #FF7D00; /* This creates the border. Replace black with whatever color you want. */
     }
     .line-latest-section{
+        width: 700px;
         margin-top: 20px;
         color:#0B486A;
         margin-left: 3px;
         font-family:'Times New Roman', Times, serif;
     }
     .line-latest-section:after {
+        width: 700px;
         content: ""; /* This is necessary for the pseudo element to work. */ 
         display: block; /* This will put the pseudo element on its own line. */
         margin: 0 auto; /* This will center the border. */
@@ -233,17 +290,19 @@
     }
     .category-section{
         width: 600px !important ;
-        margin-left: 85px;
+        margin-left: 70px;
         display: flex;
         align-items: center;
         justify-content: center;
+        gap:7%
     }
     .category1-section{
-        width: 600px !important ;
+        width: 550px !important ;
         margin-left: 85px;
         display: flex;
         align-items: center;
         justify-content: center;
+        gap:10%
     }
     .img1{
         border-radius: 50%;
@@ -269,16 +328,69 @@
         
     }
     .products-section{
-        width: 700px;
+        width: 600px;
         display: grid;
         grid-template-columns: 1fr 1fr ;
-        gap: 5px;
+        gap: 3px;
         text-align: center;
         justify-content: center;
         margin-left: 24px;
         
      }
-
+     .timer-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30vh;
+      }
+      
+      .timer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #0b486a;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+        color: #fff;
+        margin-top: 30px;
+      }
+      
+      .timer-h2 {
+        margin-top: 0;
+        font-size: 2rem;
+        text-align: center;
+      }
+      
+      .timer-main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+        margin-top: 2rem;
+      }
+      
+      .timer-main section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #ff7d00;
+        background-image: linear-gradient(#e64a1d, #ff7d00);
+        width: 6rem;
+        height: 6rem;
+        border-radius: 10px;
+        margin-right: 0.5rem;
+      }
+      
+      .two-numbers {
+        font-size: 3rem;
+      }
+     .timer-p {
+        font-size: 15px;
+     }
+   
+}
      @media (max-width: 414px) {
         .home-section{
             width: 390px;
@@ -304,6 +416,7 @@
             margin-right: 15px;
         }
         .line-category-section{
+            width: 350px;
             margin-top: 20px;
             color:#0B486A;
             margin-right: 9px;
@@ -311,14 +424,16 @@
             font-size: 25px;
         }
         .line-category-section:after {
+          
             content: ""; /* This is necessary for the pseudo element to work. */ 
             display: block; /* This will put the pseudo element on its own line. */
             margin: 0 auto; /* This will center the border. */
-            width: 30%; /* Change this to whatever width you want. */
+            width: 35%; /* Change this to whatever width you want. */
             padding-top: 5px; /* This creates some space between the element and the border. */
             border-bottom: 2px solid #FF7D00; /* This creates the border. Replace black with whatever color you want. */
         }
         .line-latest-section{
+            width: 350px;
             margin-top: 10px;
             color:#0B486A;
             margin-left: 3px;
@@ -326,10 +441,11 @@
             font-size: 25px;
         }
         .line-latest-section:after {
+            
             content: ""; /* This is necessary for the pseudo element to work. */ 
             display: block; /* This will put the pseudo element on its own line. */
             margin: 0 auto; /* This will center the border. */
-            width: 35%; /* Change this to whatever width you want. */
+            width: 42%; /* Change this to whatever width you want. */
             padding-top: 5px; /* This creates some space between the element and the border. */
             border-bottom: 2px solid #FF7D00; /* This creates the border. Replace black with whatever color you want. */
         }
@@ -377,5 +493,59 @@
             margin:-2px;
             padding-right: 5px;
         }
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 25vh;
+            width: 350px;
+          }
+          
+          .timer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #0b486a;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+            color: #fff;
+            margin-top: 0px;
+            margin-left: 40px;
+          }
+          
+          .timer-h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            text-align: center;
+          }
+          
+          .timer-main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            margin-top: 1rem;
+          }
+          
+          .timer-main section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ff7d00;
+            background-image: linear-gradient(#e64a1d, #ff7d00);
+            width: 4rem;
+            height: 4rem;
+            border-radius: 10px;
+            margin-right: 0rem;
+          }
+          
+          .two-numbers {
+            font-size: 2rem;
+          }
+         .timer-p {
+            font-size: 10px;
+         }
+      
      }
-}

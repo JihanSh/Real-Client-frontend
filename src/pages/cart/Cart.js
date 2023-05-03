@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import emailjs from '@emailjs/browser';
 
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
@@ -75,8 +76,12 @@ const Cart = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          setTableData(data);
-          window.location.reload(); // Reload the page
+          setTableData(tableData.filter(item => item.productId._id !== productId));
+          settotalData(data);
+             // Check if there are any items left in the cart
+          if (data.items.length === 0) {
+          setHasItems(false);
+        }
         } else {
           console.error("Failed to remove item");
         }
@@ -99,14 +104,40 @@ const Cart = () => {
         if (response.ok) {
           // set order status to success
           setOrderStatus("success");
+            // send email
+            
+        const serviceId = "service_fyhs1bs";
+        const templateId = "template_axzix4f";
+        const userId = "PiwL_rIX2-s0Sa9oC";
+        const templateParams = {
+          name: totalData.userId.username,
+          address: totalData.userId.address,
+          phonenumber: totalData.userId.phonenumber,
+          total: totalData.bill.toFixed(2),
+          items: tableData.map((item) => item.productId.name),
+          message: "You have a new order to prosses",
+        };
+        console.log("here",totalData);
+        console.log("here1111");
+        emailjs.send(serviceId, templateId, templateParams, userId).then(
+          function (response) {
+            console.log("SUCCESS!", response.status, response.text);
+            console.log("here22222");
+          },
+          function (error) {
+            console.log("FAILED...", error);
+            console.log("here3333");
+          }
+        );
           Swal.fire({
             icon: "success",
             title: "Order placed successfully!",
             showConfirmButton: false,
             timer: 1500,
           }).then(() => {
-            window.location.href = "/";
+            // window.location.href = "/";
           });
+          console.log("here4444");
         } else {
           // set order status to failure
           setOrderStatus("failure");
@@ -147,14 +178,6 @@ const Cart = () => {
           </div>
         </div>
       ) : hasItems ? (
-      //   <ReactLoading
-      //     className="loading-container"
-      //     type="spinningBubbles"
-      //     color="#FF7D00"
-      //     height={200}
-      //     width={100}
-      //   />
-      // ) : (
         <div className="cart-wrapper">
           <div className="cart-header">
             <h1 className="cart-title">Cart</h1>

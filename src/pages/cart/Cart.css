@@ -28,13 +28,6 @@
   .MuiTableContainer-root{
  max-height: 470px !important;
 }
-.loading-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Change this to whatever height you want */
-    margin: auto;
-  }
 .cart-header {
     width: 70%;
     display: flex;
@@ -55,7 +48,7 @@
     margin-right: auto;
 }
 .cart-wrapper-div1{
-    height: 504px;
+    height: 600px;
 }
 .cart-button-icon{
     background-color: transparent;
@@ -110,7 +103,7 @@
   }
   .cart-wrapper-empty{
     text-align: center;
-    height: 532px;
+    height: 600px;
     width:30%;
     margin: 50px auto 50px auto;
     

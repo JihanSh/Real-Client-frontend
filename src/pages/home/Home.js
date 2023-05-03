@@ -5,13 +5,13 @@ import men from "./images/male-looks-casual-wear-style.jpeg";
 import women from "./images/lp-header-m.jpeg";
 import child from "./images/istockphoto-674315022-612x612 .jpeg";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Box, Button, CardActionArea, CardActions } from "@mui/material";
+import { Box, CardActionArea, CardActions } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import icon1 from "./images/icons8-man-60.png";
@@ -19,13 +19,66 @@ import Swal from "sweetalert2";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
 
-const Home = () => {
+const Home = ({ countdownDate, setCountdownDate }) => {
   const [menubar, setMenuBar] = useState(false);
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1); // add state for totalPages
   const [cartStatus, setCartStatus] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [timerDays, setTimerDays] = useState("00");
+  const [timerHours, setTimerHours] = useState("00");
+  const [timerMinutes, setTimerMinutes] = useState("00");
+  const [timerSeconds, setTimerSeconds] = useState("00");
+ 
+
+  let interval = useRef();
+
+  const startTimer = () => {
+    // check if countdownDate exists and is not in the past
+    if (!countdownDate || new Date(countdownDate) < new Date()) {
+      return;
+    }
+    const countdownTime = new Date(countdownDate).getTime();
+
+    interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countdownTime - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      if (distance < 0) {
+        //stop our timer
+        clearInterval(interval.current);
+      } else {
+        //update timer
+        setTimerDays(days);
+        setTimerHours(hours);
+        setTimerMinutes(minutes);
+        setTimerSeconds(seconds);
+      }
+    }, 1000);
+  };
+
+  useEffect(() => {
+    const storedCountdownDate = localStorage.getItem("countdownDate");
+    if (storedCountdownDate) {
+      setCountdownDate(storedCountdownDate); // Set the countdown date from localStorage
+    }
+  }, []);
+
+  //componentDidMount
+  useEffect(() => {
+    startTimer();
+    return () => {
+      clearInterval(interval.current);
+    };
+  }, [countdownDate]);
 
   const userId = sessionStorage.getItem("Id");
   useEffect(() => {
@@ -144,6 +197,44 @@ const Home = () => {
             </button>
           ))}
         </div>
+        {countdownDate && new Date(countdownDate) >= new Date() && (
+        <section className="timer-container">
+      <section className="timer">
+        <div>
+          <h2 className="timer-h2">NEW ITEMS COMING IN!</h2>
+        </div>
+        <div className="timer-main">
+          <section>
+            <p>{timerDays}</p>
+            <p className="timer-p">
+              <small>Days</small>
+            </p>
+          </section>
+          <span>:</span>
+          <section>
+            <p className="two-numbers">{timerHours}</p>
+            <p className="timer-p">
+              <small>Hours</small>
+            </p>
+          </section>
+          <span>:</span>
+          <section>
+            <p className="two-numbers">{timerMinutes}</p>
+            <p className="timer-p">
+              <small>Minutes</small>
+            </p>
+          </section>
+          <span>:</span>
+          <section>
+            <p className="two-numbers">{timerSeconds}</p>
+            <p className="timer-p">
+              <small>Seconds</small>
+            </p>
+          </section>
+        </div>
+      </section>
+    </section>
+        )}
         <h1 className="line-latest-section">Latest Drops</h1>
         <div className="products-section">
           {products.map((product, id) => (

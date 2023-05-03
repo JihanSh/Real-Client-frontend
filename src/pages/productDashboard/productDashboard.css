@@ -1,5 +1,4 @@
 .button-addsubcategory{
-
   padding: 10px;
   width: 30%;
   background-color: #0B486A;
@@ -29,6 +28,11 @@
     text-align: center;
     margin: 30px auto 30px auto;
  }
+ .about-prodash-section{
+  width: 1700px;
+  text-align: center;
+  margin: 100px auto 30px auto;
+}
  .cart-header-prodash{
      display: flex;
      flex-direction: row;
@@ -197,7 +201,7 @@
 }
 .cat-edit-form{
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr ;
   align-items: center;
   border:1px solid #0b486a;
   box-shadow:  10px 15px #0b486a ;
@@ -209,6 +213,39 @@
   font-size: larger;
   justify-content: center;
  
+}
+.timer-edit-form{
+  display: grid;
+  grid-template-rows:1fr 1fr 1fr;
+  align-items: center;
+  border:1px solid #0b486a;
+  box-shadow:  10px 15px #0b486a ;
+  border-radius: 30px;
+  margin: 50px auto;
+  width: 500px;
+  height:200px;
+  color:#0b486a;
+  font-size: larger;
+  justify-content: center;
+ 
+}
+.cat-edit-form-about{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  border:1px solid #0b486a;
+  box-shadow:  10px 15px #0b486a ;
+  border-radius: 30px;
+  margin: 50px auto;
+  width: 500px;
+  height: 350px;
+  color:#0b486a;
+  font-size: larger;
+  justify-content: center;
+ 
+}
+.About_username{
+  color: #0B486A;
 }
 .add-subcategory-button{
   padding: 10px;
@@ -270,10 +307,26 @@
 .subcat-edit-form{
   width:500px;
 }
+.about-prodash-section{
+  width: 600px;
+}
 }
 
 @media (max-width: 414px) {
-
+  .timer-edit-form{
+    width: 350px;
+  }
+  .about-prodash-section{
+    width: 350px;
+  }
+  .product-edit-button{
+    width: 300px;
+    margin: 0px auto 0px auto;
+  }
+  .subcat-edit-button{
+    width: 300px;
+    margin: 0px auto 0px auto;
+  }
 
   .prodash-section{
     width: 380px;
@@ -337,5 +390,17 @@
   }
   .subcat-edit-form{
     width: 350px;
+  }
+  .button-addsubcategory{
+
+    padding: 10px;
+    width: 250px;
+    background-color: #0B486A;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    border-radius: 5px;
+    margin: 10px;
   }
 }
