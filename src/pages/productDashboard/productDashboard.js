@@ -16,7 +16,7 @@ import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import CategoryDash from "./categoryDash.js";
 import Swal from "sweetalert2";
 
-function ProductDashboard({ setCountdownDate, props }) {
+function ProductDashboard({ setCountdownDate }, props) {
   const [products, setProducts] = useState([]);
   const [menubar, setMenuBar] = useState(false);
   const [editMode, setEditMode] = useState(false);
