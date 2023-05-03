@@ -10,21 +10,8 @@ const UserOrders = () => {
   const [menubar, setMenuBar] = useState(false);
 
   const [users, setUsers] = useState([]);
-  // const [product, setProduct] = useState([]);
   const [addMode, setAddMode] = useState(false);
-  // const [updateStatus, setUpdateStatus] = useState(false);
-  // const id = sessionStorage.getItem("Id");
-  // const [status, setStatus] = useState("");
-  // const [orderId, setOrderId] = useState("");
-  // const [response, setResponse] = useState(null);
 
-  // const handleStatusChange = (event) => {
-  //   setStatus(event.target.value);
-  // };
-
-  // const handleOrderIdChange = (event) => {
-  //   setOrderId(event.target.value);
-  // };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -42,18 +29,26 @@ const UserOrders = () => {
   const handleAdd = () => {
     setAddMode(true);
   };
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const response = await axios.patch(`http://localhost:5000/${orderId}`, {
-  //       status,
-  //     });
-  //     setResponse(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //     setResponse({ error: "Server error" });
-  //   }
-  // };
+const updateOrderStatus = async (id, status) => {
+  try {
+    const response = await axios.patch(
+      `http://localhost:5000/orders/${id}`,
+      {
+        status: status,
+      }
+    );
+    console.log(response.data);
+    // If the request is successful, you can update the status of the order in your state
+    // For example, you can find the index of the order in your state array and update it like this:
+    const updatedUsers = [...users];
+    const index = updatedUsers.findIndex((user) => user._id === id);
+    updatedUsers[index].status = status;
+    setUsers(updatedUsers);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   return (
     <>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
@@ -86,7 +81,6 @@ const UserOrders = () => {
                 <td>
                   {user.products.map((item) => (
                     <tr key={item._id}>
-                      {/* {console.log(item)} */}
                       {item.product && (
                         <td>
                           <img
@@ -100,7 +94,18 @@ const UserOrders = () => {
                   ))}
                 </td>
                 <td>{user.total_price}</td>
-                <td>{user.status}</td>
+                <td>
+                  <select
+                    className="status-button"
+                    value={user.status}
+                    onChange={(e) =>
+                      updateOrderStatus(user._id, e.target.value)
+                    }
+                  >
+                    <option value="pending">Pending</option>
+                    <option value="processed">Processed</option>
+                  </select>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -110,5 +115,4 @@ const UserOrders = () => {
     </>
   );
 };
-
 export default UserOrders;

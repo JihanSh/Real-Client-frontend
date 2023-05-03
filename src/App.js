@@ -15,23 +15,38 @@ import { useState } from "react";
 
 function App() {
   const [countdownDate, setCountdownDate] = useState(undefined);
-
+  const role = sessionStorage.getItem("role");
   return (
     <>
       <BrowserRouter>
         <div className="App"></div>
         <Routes>
-          <Route path="/" element={<Home countdownDate={countdownDate} setCountdownDate={setCountdownDate} />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                countdownDate={countdownDate}
+                setCountdownDate={setCountdownDate}
+              />
+            }
+          />
           <Route path="about" element={<About />} />
           <Route path="cart" element={<Cart />} />
           <Route path="sale" element={<Sale />} />
           <Route path="product/:productId" element={<Product />} />
           <Route path="category/:categoryId" element={<Category />} />
-          <Route path="proDash" element={<ProductDashboard setCountdownDate={setCountdownDate} />} />
+          {role === "admin" && (
+            <Route
+              path="proDash"
+              element={<ProductDashboard setCountdownDate={setCountdownDate} />}
+            />
+          )}
+          {role === "admin" && (
+            <Route path="dashorder" element={<UserOrders />} />
+          )}
           <Route path="*" element={<NotFound />} />
           <Route path="auth" element={<Auth />} />
           <Route path="User" element={<User />} />
-          <Route path="dashorder" element={<UserOrders />} />
         </Routes>
       </BrowserRouter>
     </>

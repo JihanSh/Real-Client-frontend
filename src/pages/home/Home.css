@@ -81,12 +81,10 @@
     border-bottom: 2px solid #FF7D00; /* This creates the border. Replace black with whatever color you want. */
 }
 .category-section{
-    width: 1000px;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-left: 135px;
-    gap: 15%;
+    justify-content: space-around;
 }
 .img1{
     border-radius: 50%;
@@ -107,8 +105,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 13%;
+    justify-content: space-around;
 }
 .link1-category{
     text-decoration: none;
@@ -302,7 +299,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap:10%
+
     }
     .img1{
         border-radius: 50%;
