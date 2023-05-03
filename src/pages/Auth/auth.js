@@ -70,9 +70,10 @@ function Auth() {
       }
       sessionStorage.setItem("token", data.token);
       sessionStorage.setItem("Id", data.user);
-      if (data.role === "User") {
-        navigate("/");
-      }
+      sessionStorage.setItem("role", data.role);
+      // if (data.role === "User") {
+      navigate("/");
+      // }
       console.log("Login successful");
     } catch (error) {
       setError(error.message);

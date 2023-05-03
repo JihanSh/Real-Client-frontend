@@ -70,6 +70,14 @@ const HeaderNavbar = ({ setMenuBar, menubar }) => {
 };
 
 const MenuBar = ({ menubar }) => {
+    const authenticated = sessionStorage.getItem("token");
+
+    const handleLogout = () => {
+      console.log("Logout");
+      sessionStorage.clear("token");
+      window.location.reload();
+    };
+
   return (
     <div className={!menubar ? "navhidden_hidden" : "navhidden_show"}>
       <button className="navmenu-menu">
@@ -87,8 +95,8 @@ const MenuBar = ({ menubar }) => {
       <button className="navmenu-menu">
         <Link to="/cart">Cart</Link>
       </button>
-      <button className="navmenu-menu">
-        <Link to="/auth">Login</Link>
+      <button className="navmenu-menu" onClick={authenticated && handleLogout}>
+        {authenticated ? "Logout" : <Link to="/auth">Login</Link>}
       </button>
     </div>
   );
