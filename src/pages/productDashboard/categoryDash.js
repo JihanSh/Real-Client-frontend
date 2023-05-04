@@ -44,7 +44,7 @@ const CategoryDash = () => {
       try {
         const response = await axios.get("http://localhost:5000/categories");
         setCategories(response.data);
-        console.log(categories);
+       
       } catch (error) {
         console.error(error);
       }

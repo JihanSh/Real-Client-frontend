@@ -86,10 +86,11 @@ const updateOrderStatus = async (id, status) => {
                         <td>
                           <img
                             className="dashboard-product-image"
-                            src={`http://localhost:5000/${item.product.images[0]}`}
+                            src={`${item.product.image}`}
                           />
                           <td>{item.product.name}</td>
                         </td>
+                        
                       )}
                     </tr>
                   ))}

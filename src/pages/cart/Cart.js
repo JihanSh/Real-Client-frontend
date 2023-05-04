@@ -33,7 +33,8 @@ const Cart = () => {
         const data = await response.json();
         setTableData(data.items);
         settotalData(data);
-    
+         console.log("dfdf",totalData );
+         console.log("ssss", tableData);
         if (data.items.length > 0) {
           setHasItems(true);
         }
@@ -226,7 +227,7 @@ const Cart = () => {
                         </TableCell>
                         <TableCell className="cart-item-image">
                           <img
-                            src={`http://localhost:5000/${item.productId.images[0]}`}
+                            src={`${item.productId.image}`}
                             alt={item.product}
                           />
                         </TableCell>

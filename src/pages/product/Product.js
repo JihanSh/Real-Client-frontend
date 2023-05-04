@@ -122,7 +122,7 @@ const Product = () => {
                 images={
                   product.images &&
                   product.images.map(
-                    (image) => `http://localhost:5000/${image}`
+                    (image) => `${image}`
                   )
                 }
               />
@@ -196,7 +196,7 @@ const Product = () => {
                   <CardMedia
                     component="img"
                     height="260"
-                    image={`http://localhost:5000/${product.images[0]}`}
+                    image={`${product.image}`}
                     alt="product img"
                   />
 
