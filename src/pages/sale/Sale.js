@@ -90,7 +90,7 @@ const Sale = () => {
                   <CardMedia
                     component="img"
                     height="260"
-                    image={`http://localhost:5000/${product.images[0]}`}
+                    image={`${product.image}`}
                     alt="product img"
                   />
 
