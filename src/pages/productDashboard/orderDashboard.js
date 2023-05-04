@@ -48,6 +48,7 @@ const updateOrderStatus = async (id, status) => {
   } catch (error) {
     console.error(error);
   }
+  
 };
 
   return (
