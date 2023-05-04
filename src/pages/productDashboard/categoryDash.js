@@ -173,10 +173,9 @@ const CategoryDash = () => {
     {
       // Fetch the updated list of products
       const response = await axios.get(`http://localhost:5000/subcategories`);
-
       // Update the state of the products with the new list
-
-      setSubcategories(response.data).catch((error) => console.error(error));
+      setSubcategories(response.data)
+      .catch((error) => console.error(error));
     }
   };
 
@@ -350,6 +349,7 @@ const CategoryDash = () => {
         <div className="subdash-section">
           <h1 className="cart-title-catdash">Subcategory Dashboard</h1>
           <div className="cart-table-prodash">
+            <p>At least 3 subcategories in each category</p>
             <button
               className="button-addsubcategory"
               onClick={handleAddSubcategory}

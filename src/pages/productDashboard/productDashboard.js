@@ -71,10 +71,11 @@ function ProductDashboard({ setCountdownDate }, props) {
   ];
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/products`)
+   axios
+      .get('http://localhost:5000/products')
       .then((response) => {
         setProducts(response.data);
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
@@ -152,7 +153,9 @@ function ProductDashboard({ setCountdownDate }, props) {
   };
 
   const handleImageChange = (event) => {
+    console.log(event.target.files)
     setSelectedImages([...event.target.files]);
+   
   };
 
   const handleEditSubmit = async (event) => {
@@ -211,6 +214,7 @@ function ProductDashboard({ setCountdownDate }, props) {
       for (const image of selectedImages) {
         formData.append("images", image);
       }
+      console.log("sddad");
       formData.append("name", product.name);
       formData.append("description", product.description);
       formData.append("categoryTitle", product.categoryTitle);
@@ -219,11 +223,13 @@ function ProductDashboard({ setCountdownDate }, props) {
       formData.append("discountPercentage", product.discountPercentage);
       formData.append("size", product.size);
 
+
       await axios.post(`http://localhost:5000/products`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log("hhhh", formData);
       Swal.fire({
         title: "Product added successfully!",
         icon: "success",
@@ -242,7 +248,7 @@ function ProductDashboard({ setCountdownDate }, props) {
 
       // Update the state of the products with the new list
       setProducts(response.data);
-      console.log(formData);
+      console.log(products);
     } catch (error) {
       console.error(error);
     }
@@ -380,7 +386,7 @@ function ProductDashboard({ setCountdownDate }, props) {
                         </TableCell>
                         <TableCell className="cart-item-image">
                           <img
-                            src={`http://localhost:5000/${product.images[0]}`}
+                            src={`${product.image}`}
                             alt={product.product}
                           />
                         </TableCell>
@@ -486,7 +492,7 @@ function ProductDashboard({ setCountdownDate }, props) {
                 />
               </div>
               <div className="username">
-                <label className="About_username">Discount Percentage:</label>{" "}
+                <label className="About_username">Discount Percentage:</label>
                 <br />
                 <input
                   className="product-edit-input"
@@ -513,6 +519,7 @@ function ProductDashboard({ setCountdownDate }, props) {
                   onChange={handleInputChange}
                 />
               </div>
+
               <div className="username">
                 <label className="About_username">Uplaod images:</label> <br />
                 <input
@@ -524,18 +531,7 @@ function ProductDashboard({ setCountdownDate }, props) {
                   multiple
                 />
               </div>
-              <div className="username">
-                <label className="About_username">Uplaod main image:</label>{" "}
-                <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
+            
               <button className="product-edit-button" type="submit">
                 Add Product
               </button>

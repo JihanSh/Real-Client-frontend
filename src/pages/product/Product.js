@@ -10,11 +10,21 @@ import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { Box, CardActionArea, CardActions } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
 
 
 const Product = () => {
   const [menubar, setMenuBar] = useState(false);
   const productId = useParams();
+  const [totalPages, setTotalPages] = useState(1); // add state for totalPages
+  const [currentPage, setCurrentPage] = useState(1);
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -34,17 +44,19 @@ const Product = () => {
       });
   }, []);
 
-  // Fetch and sort the items on mount
   useEffect(() => {
-    async function fetchData() {
-      const response = await axios.get("http://localhost:5000/products");
-      const fetchedItems = response.data.sort(
-        (a, b) => new Date(b.date_added) - new Date(a.date_added)
-      );
-      setProducts(fetchedItems.slice(0, 3)); // get the first four items
-    }
-    fetchData();
-  }, []);
+    // console.log("jjjjj", currentPage);
+    axios
+      .get(`http://localhost:5000/products/pag?page=${currentPage}`)
+      .then((response) => {
+        setProducts(response.data.data);
+        setTotalPages(response.data.totalPages); // update totalPages state
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [currentPage]);
 
   const handleCart = async (event, productId) => {
     event.preventDefault();
@@ -102,6 +114,7 @@ const Product = () => {
           width={100}
         />
       ) : (
+        <div>
         <div className="product">
           <div className="product-section">
             <div className="carousel-product">
@@ -156,55 +169,111 @@ const Product = () => {
 
               <hr className="line-product1" />
               <p className="category-product">
-                Categorise: {product.category.title},{" "}
+                Categories: {product.category.title},{" "}
                 {product.subcategory.title}
               </p>
               <hr className="line-product2" />
-              <p className="des-product">size: {product.size}</p>
+              <p className="des-product">Size: {product.size}</p>
+              <hr className="line-product2" />
+              <p className="des-product"> 
+                Discription:{product.description}
+              </p>
             </div>
           </div>
           <div className="product-section2">
-            <div className="description-product">
-              <h4 className="description-product-h4">Description:</h4>
-              <p className="description-product-p"> 
-                {product.description}
-              </p>
-            </div>
-            <div className="recent-product-section">
-              <h4>
-                <span>Latest Drops</span>
-              </h4>
-              {products.map((each, i) => (
-                <React.Fragment key={i}>
-                  <div className="recent-product" key={i}>
-                    <img
-                      className="img-product-section"
-                      src={`http://localhost:5000/${each.images[0]}`}
-                      alt="#"
-                    ></img>
-                    <div className="recent-info">
-                      <a href={`/product/${each._id}`} className="R">
-                        <h6 className="K">{each.name.slice(0, 15)}...</h6>
+           
+          </div>
+        </div>
+        <h1 className="line-latest-section">Latest Drops</h1>
+        <div className="products-section-R">
+          {products.map((product, id) => (
+            <div className="product-card" key={id}>
+              <Card
+                key={id}
+                sx={{ maxWidth: 250, border: "solid 1px #0B486A" }}
+              >
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="260"
+                    image={`http://localhost:5000/${product.images[0]}`}
+                    alt="product img"
+                  />
+
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                  >
+                    <CardContent>
+                      <a
+                        className="product-link"
+                        href={`/product/${product._id}`}
+                      >
+                        <Typography gutterBottom variant="h5" component="div">
+                          {product.name.slice(0, 15)}...
+                        </Typography>
                       </a>
-                      {each.discountPercentage ? (
+                      {product.discountPercentage ? (
                         <>
-                          <h6 className="original-price2">${each.price}</h6>
-                          <h6 className="discounted-price2">
-                            ${each.discountedPrice} ({each.discountPercentage}%
-                            off)
-                          </h6>
+                          <div className="raneem">
+                            <Typography
+                              className="original-price3"
+                              variant="body2"
+                              color="text.secondary"
+                              mb="-20px"
+                              fontSize="20px"
+                            >
+                              ${product.price}
+                            </Typography>
+                            <Typography
+                              className="discounted-price3"
+                              variant="body2"
+                              color="text.secondary"
+                              mb="-20px"
+                              fontSize="20px"
+                            >
+                              ${product.discountedPrice}
+                            </Typography>
+                          </div>
                         </>
                       ) : (
-                        <h6>${each.price}</h6>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          mb="-20px"
+                          fontSize="20px"
+                        >
+                          ${product.price}
+                        </Typography>
                       )}
-                    </div>
-                  </div>
-                  {i !== each.length - 1 && <hr className="line-product3" />}{" "}
-                  {/* Add <hr/> for all items except the last */}
-                </React.Fragment>
-              ))}
+                    </CardContent>
+                    <CardActions>
+                      <div
+                        size="small"
+                        onClick={(event) => handleCart(event, product._id)}
+                        className="addto-cart"
+                      >
+                        ADD TO CART
+                      </div>
+                    </CardActions>
+                  </Box>
+                </CardActionArea>
+              </Card>
             </div>
-          </div>
+          ))}
+        </div>
+        <div className="stack-pagination">
+          <Stack spacing={2}>
+            <Pagination
+              count={totalPages} // pass totalPages as prop
+              shape="rounded"
+              page={currentPage} // set the current active page
+              onChange={(event, value) => setCurrentPage(value)} // update the currentPage when user clicks on a different page
+              className="pagination"
+            />
+          </Stack>
+        </div>
         </div>
       )}
       <Footer/>
