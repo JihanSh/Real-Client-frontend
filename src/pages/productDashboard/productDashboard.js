@@ -655,19 +655,6 @@ function ProductDashboard({ setCountdownDate }, props) {
                   multiple
                 />
               </div>
-
-              <div className="username">
-                <label className="About_username">Uplaod main image:</label>{" "}
-                <br />
-                <input
-                  className="product-edit-input"
-                  id="username"
-                  type="file"
-                  name="images"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </div>
               <button className="product-edit-button" type="submit">
                 Update Product
               </button>
