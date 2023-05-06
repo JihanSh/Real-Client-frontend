@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./categorycarousel.css";
 import {
   Box,
-  Button,
+ 
   Card,
   CardActionArea,
   CardActions,
@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const TitleCarousel = () => {
   const [title, setTitle] = useState([]);
@@ -238,14 +239,14 @@ const TitleCarousel = () => {
                     alignItems="center"
                   >
                     <CardContent>
-                      <a
+                      <Link
                         className="product-link"
-                        href={`/product/${product._id}`}
+                        to={`/product/${product._id}`}
                       >
                         <Typography gutterBottom variant="h5" component="div">
                           {product.name.slice(0, 15)}...
                         </Typography>
-                      </a>
+                      </Link>
                       {product.discountPercentage ? (
                         <>
                           <div className="raneem">

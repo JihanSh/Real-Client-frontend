@@ -39,7 +39,7 @@ const Product = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [productId]);
 
   useEffect(() => {
     // console.log("jjjjj", currentPage);
@@ -188,7 +188,7 @@ const Product = () => {
                     <CardMedia
                       component="img"
                       height="260"
-                      image={`https://zoneoutlet.onrender.com/${product.image}`}
+                      image={`${product.image}`}
                       alt="product img"
                     />
 
@@ -198,14 +198,14 @@ const Product = () => {
                       alignItems="center"
                     >
                       <CardContent>
-                        <a
+                        <Link
                           className="product-link"
-                          href={`/product/${product._id}`}
+                          to={`/product/${product._id}`}
                         >
                           <Typography gutterBottom variant="h5" component="div">
                             {product.name.slice(0, 15)}...
                           </Typography>
-                        </a>
+                        </Link>
                         {product.discountPercentage ? (
                           <>
                             <div className="raneem">
