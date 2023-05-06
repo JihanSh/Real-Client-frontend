@@ -188,7 +188,7 @@ const Product = () => {
                     <CardMedia
                       component="img"
                       height="260"
-                      image={`${product.image}`}
+                      image={`https://zoneoutlet.onrender.com/${product.image}`}
                       alt="product img"
                     />
 
