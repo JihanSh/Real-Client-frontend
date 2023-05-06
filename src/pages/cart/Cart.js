@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
@@ -23,18 +23,20 @@ const Cart = () => {
   const [tableData, setTableData] = useState([]);
   const [totalData, settotalData] = useState([]);
   const [orderStatus, setOrderStatus] = useState(null);
- 
+
   const [hasItems, setHasItems] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/cart/${userId}`);
+        const response = await fetch(
+          `https://zoneoutlet.onrender.com/cart/${userId}`
+        );
         const data = await response.json();
         setTableData(data.items);
         settotalData(data);
-         console.log("dfdf",totalData );
-         console.log("ssss", tableData);
+        console.log("dfdf", totalData);
+        console.log("ssss", tableData);
         if (data.items.length > 0) {
           setHasItems(true);
         }
@@ -70,19 +72,21 @@ const Cart = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const response = await fetch(
-          `http://localhost:5000/cart/${userId}/${productId}`,
+          `https://zoneoutlet.onrender.com/cart/${userId}/${productId}`,
           {
             method: "DELETE",
           }
         );
         if (response.ok) {
           const data = await response.json();
-          setTableData(tableData.filter(item => item.productId._id !== productId));
+          setTableData(
+            tableData.filter((item) => item.productId._id !== productId)
+          );
           settotalData(data);
-             // Check if there are any items left in the cart
+          // Check if there are any items left in the cart
           if (data.items.length === 0) {
-          setHasItems(false);
-        }
+            setHasItems(false);
+          }
         } else {
           console.error("Failed to remove item");
         }
@@ -92,7 +96,7 @@ const Cart = () => {
 
   const handleOrder = () => {
     // send POST request to place order function
-    fetch("http://localhost:5000/orders", {
+    fetch("https://zoneoutlet.onrender.com/orders", {
       method: "POST",
       body: JSON.stringify({
         userId: userId,
@@ -105,31 +109,31 @@ const Cart = () => {
         if (response.ok) {
           // set order status to success
           setOrderStatus("success");
-            // send email
-            
-        const serviceId = "service_fyhs1bs";
-        const templateId = "template_axzix4f";
-        const userId = "PiwL_rIX2-s0Sa9oC";
-        const templateParams = {
-          name: totalData.userId.username,
-          address: totalData.userId.address,
-          phonenumber: totalData.userId.phonenumber,
-          total: totalData.bill.toFixed(2),
-          items: tableData.map((item) => item.productId.name),
-          message: "You have a new order to prosses",
-        };
-        console.log("here",totalData);
-        console.log("here1111");
-        emailjs.send(serviceId, templateId, templateParams, userId).then(
-          function (response) {
-            console.log("SUCCESS!", response.status, response.text);
-            console.log("here22222");
-          },
-          function (error) {
-            console.log("FAILED...", error);
-            console.log("here3333");
-          }
-        );
+          // send email
+
+          const serviceId = "service_fyhs1bs";
+          const templateId = "template_axzix4f";
+          const userId = "PiwL_rIX2-s0Sa9oC";
+          const templateParams = {
+            name: totalData.userId.username,
+            address: totalData.userId.address,
+            phonenumber: totalData.userId.phonenumber,
+            total: totalData.bill.toFixed(2),
+            items: tableData.map((item) => item.productId.name),
+            message: "You have a new order to prosses",
+          };
+          console.log("here", totalData);
+          console.log("here1111");
+          emailjs.send(serviceId, templateId, templateParams, userId).then(
+            function (response) {
+              console.log("SUCCESS!", response.status, response.text);
+              console.log("here22222");
+            },
+            function (error) {
+              console.log("FAILED...", error);
+              console.log("here3333");
+            }
+          );
           Swal.fire({
             icon: "success",
             title: "Order placed successfully!",
@@ -183,7 +187,7 @@ const Cart = () => {
           <div className="cart-header">
             <h1 className="cart-title">Cart</h1>
           </div>
-          
+
           <div className="cart-table">
             <Paper
               sx={{
@@ -256,7 +260,7 @@ const Cart = () => {
             </div>
           </div>
         </div>
-      ):(
+      ) : (
         <div className="cart-wrapper-empty">
           <h1 className="text-empty">Your cart is empty.</h1>
         </div>

@@ -5,18 +5,18 @@ import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
 import { Footer } from "../../component/Header/footer/footer";
 import { Link } from "react-router-dom";
 
-
 const UserOrders = () => {
   const [menubar, setMenuBar] = useState(false);
 
   const [users, setUsers] = useState([]);
   const [addMode, setAddMode] = useState(false);
 
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/orders/");
+        const response = await axios.get(
+          "https://zoneoutlet.onrender.com/orders/"
+        );
         console.log(response.data);
         setUsers(response.data);
       } catch (error) {
@@ -29,26 +29,25 @@ const UserOrders = () => {
   const handleAdd = () => {
     setAddMode(true);
   };
-const updateOrderStatus = async (id, status) => {
-  try {
-    const response = await axios.patch(
-      `http://localhost:5000/orders/${id}`,
-      {
-        status: status,
-      }
-    );
-    console.log(response.data);
-    // If the request is successful, you can update the status of the order in your state
-    // For example, you can find the index of the order in your state array and update it like this:
-    const updatedUsers = [...users];
-    const index = updatedUsers.findIndex((user) => user._id === id);
-    updatedUsers[index].status = status;
-    setUsers(updatedUsers);
-  } catch (error) {
-    console.error(error);
-  }
-  
-};
+  const updateOrderStatus = async (id, status) => {
+    try {
+      const response = await axios.patch(
+        `https://zoneoutlet.onrender.com/orders/${id}`,
+        {
+          status: status,
+        }
+      );
+      console.log(response.data);
+      // If the request is successful, you can update the status of the order in your state
+      // For example, you can find the index of the order in your state array and update it like this:
+      const updatedUsers = [...users];
+      const index = updatedUsers.findIndex((user) => user._id === id);
+      updatedUsers[index].status = status;
+      setUsers(updatedUsers);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -90,7 +89,6 @@ const updateOrderStatus = async (id, status) => {
                           />
                           <td>{item.product.name}</td>
                         </td>
-                        
                       )}
                     </tr>
                   ))}

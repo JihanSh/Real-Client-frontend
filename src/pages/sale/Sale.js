@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { HeaderNavbar, MenuBar } from '../../component/Header/HeaderNavbar'
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import { Box, Card, CardActionArea, CardActions, CardContent, CardMedia, Pagination, Stack, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
-import './Sale.css'
+import React, { useEffect, useState } from "react";
+import { HeaderNavbar, MenuBar } from "../../component/Header/HeaderNavbar";
+import axios from "axios";
+import Swal from "sweetalert2";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Pagination,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import "./Sale.css";
 import { Footer } from "../../component/Header/footer/footer";
 
 const Sale = () => {
@@ -15,12 +25,11 @@ const Sale = () => {
   const [cartStatus, setCartStatus] = useState([]);
 
   const userId = sessionStorage.getItem("Id");
-  
 
   useEffect(() => {
     // console.log("jjjjj", currentPage);
     axios
-      .get(`http://localhost:5000/products/sale/?page=${currentPage}`)
+      .get(`https://zoneoutlet.onrender.com/products/sale/?page=${currentPage}`)
       .then((response) => {
         setProducts(response.data.data);
         setTotalPages(response.data.totalPages); // update totalPages state
@@ -37,7 +46,7 @@ const Sale = () => {
     if (userId) {
       try {
         const response = await axios.post(
-          `http://localhost:5000/cart/${userId}`,
+          `https://zoneoutlet.onrender.com/cart/${userId}`,
           {
             productId: productId,
           }
@@ -76,10 +85,10 @@ const Sale = () => {
 
   return (
     <>
-    <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
+      <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
-      <div className='sale-product-section'>
-      <div className="products-section">
+      <div className="sale-product-section">
+        <div className="products-section">
           {products.map((product, id) => (
             <div className="product-card" key={id}>
               <Card
@@ -158,20 +167,20 @@ const Sale = () => {
           ))}
         </div>
         <div className="stack-pagination">
-        <Stack spacing={2}>
-          <Pagination
-            count={totalPages} // pass totalPages as prop
-            shape="rounded"
-            page={currentPage} // set the current active page
-            onChange={(event, value) => setCurrentPage(value)} // update the currentPage when user clicks on a different page
-            className="pagination"
-          />
-        </Stack>
+          <Stack spacing={2}>
+            <Pagination
+              count={totalPages} // pass totalPages as prop
+              shape="rounded"
+              page={currentPage} // set the current active page
+              onChange={(event, value) => setCurrentPage(value)} // update the currentPage when user clicks on a different page
+              className="pagination"
+            />
+          </Stack>
         </div>
-        </div>
-        <Footer />
+      </div>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Sale
+export default Sale;

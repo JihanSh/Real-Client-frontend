@@ -20,7 +20,6 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
 
-
 const TitleCarousel = () => {
   const [title, setTitle] = useState([]);
   const [product, setProduct] = useState([]);
@@ -38,7 +37,7 @@ const TitleCarousel = () => {
     const fetchTitle = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/subcategories/list/${categoryId.categoryId}`
+          `https://zoneoutlet.onrender.com/subcategories/list/${categoryId.categoryId}`
         );
         const data = await response.json();
         setTitle(data.subcategories);
@@ -65,7 +64,7 @@ const TitleCarousel = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/list2/${categoryId.categoryId}?page=${currentPage}`
+          `https://zoneoutlet.onrender.com/products/list2/${categoryId.categoryId}?page=${currentPage}`
         );
         const data = await response.json();
         setProduct(data.data);
@@ -88,7 +87,7 @@ const TitleCarousel = () => {
     const fetchProductsBySubcategory = async (subcategoryId) => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/list1/${subcategoryId}?page=${currentPage}`
+          `https://zoneoutlet.onrender.com/products/list1/${subcategoryId}?page=${currentPage}`
         );
         const data = await response.json();
         setProduct(data.data);
@@ -105,7 +104,7 @@ const TitleCarousel = () => {
       const fetchProducts = async () => {
         try {
           const response = await fetch(
-            `http://localhost:5000/products/list2/${categoryId.categoryId}?page=${currentPage}`
+            `https://zoneoutlet.onrender.com/products/list2/${categoryId.categoryId}?page=${currentPage}`
           );
           const data = await response.json();
           setProduct(data.data);
@@ -127,7 +126,7 @@ const TitleCarousel = () => {
     console.log(productId);
     if (userId) {
       try {
-        const url = `http://localhost:5000/cart/${userId}`;
+        const url = `https://zoneoutlet.onrender.com/cart/${userId}`;
         const response = await fetch(url, {
           method: "POST",
           body: JSON.stringify({
@@ -295,18 +294,18 @@ const TitleCarousel = () => {
               </Card>
             </div>
           ))}
-          </div>
-          <div className="stack-pagination">
-          <Stack spacing={2}>
-            <Pagination
-              count={totalPages} // pass totalPages as prop
-              shape="rounded"
-              page={currentPage} // set the current active page
-              onChange={(event, value) => setCurrentPage(value)} // update the currentPage when user clicks on a different page
-              className="pagination"
-            />
-          </Stack>
-        </div>
+      </div>
+      <div className="stack-pagination">
+        <Stack spacing={2}>
+          <Pagination
+            count={totalPages} // pass totalPages as prop
+            shape="rounded"
+            page={currentPage} // set the current active page
+            onChange={(event, value) => setCurrentPage(value)} // update the currentPage when user clicks on a different page
+            className="pagination"
+          />
+        </Stack>
+      </div>
     </>
   );
 };
