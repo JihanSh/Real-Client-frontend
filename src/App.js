@@ -37,12 +37,12 @@ function App() {
           <Route path="category/:categoryId" element={<Category />} />
           {role === "admin" && (
             <Route
-              path="proDash"
+              path="/proDash"
               element={<ProductDashboard setCountdownDate={setCountdownDate} />}
             />
           )}
           {role === "admin" && (
-            <Route path="dashorder" element={<UserOrders />} />
+            <Route path="/dashorder" element={<UserOrders />} />
           )}
           <Route path="*" element={<NotFound />} />
           <Route path="auth" element={<Auth />} />

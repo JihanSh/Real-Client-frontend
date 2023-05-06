@@ -78,8 +78,8 @@ function Auth() {
       sessionStorage.setItem("Id", data.user);
       sessionStorage.setItem("role", data.role);
       // if (data.role === "User") {
-        navigate("/");
-        // }
+      window.location.href = "/";
+      // }
       console.log("Login successful");
     } catch (error) {
       setError(error.message);
