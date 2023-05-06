@@ -93,7 +93,7 @@ const TitleCarousel = () => {
         const data = await response.json();
         setProduct(data.data);
         setTotalPages(data.totalPages); // update totalPages state
-        console.log(data);
+       
       } catch (err) {
         console.log(err.message);
       }

@@ -123,15 +123,15 @@ const Cart = () => {
             message: "You have a new order to prosses",
           };
           console.log("here", totalData);
-          console.log("here1111");
+         
           emailjs.send(serviceId, templateId, templateParams, userId).then(
             function (response) {
               console.log("SUCCESS!", response.status, response.text);
-              console.log("here22222");
+              
             },
             function (error) {
               console.log("FAILED...", error);
-              console.log("here3333");
+              
             }
           );
           Swal.fire({
@@ -142,7 +142,7 @@ const Cart = () => {
           }).then(() => {
             window.location.href = "/cart";
           });
-          console.log("here4444");
+         
         } else {
           // set order status to failure
           setOrderStatus("failure");

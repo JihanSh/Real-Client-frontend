@@ -30,11 +30,11 @@ function App() {
               />
             }
           />
-          <Route path="about" element={<About />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="sale" element={<Sale />} />
-          <Route path="product/:productId" element={<Product />} />
-          <Route path="category/:categoryId" element={<Category />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/sale" element={<Sale />} />
+          <Route path="/product/:productId" element={<Product />} />
+          <Route path="/category/:categoryId" element={<Category />} />
           {role === "admin" && (
             <Route
               path="/proDash"
@@ -45,8 +45,8 @@ function App() {
             <Route path="/dashorder" element={<UserOrders />} />
           )}
           <Route path="*" element={<NotFound />} />
-          <Route path="auth" element={<Auth />} />
-          <Route path="User" element={<User />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/User" element={<User />} />
         </Routes>
       </BrowserRouter>
     </>
