@@ -75,7 +75,7 @@ const MenuBar = ({ menubar }) => {
     const handleLogout = () => {
       console.log("Logout");
       sessionStorage.clear("token");
-      window.location.reload();
+      window.location.href = "/";
     };
 
   return (

@@ -98,7 +98,7 @@ function ProductDashboard({ setCountdownDate }, props) {
       if (result.isConfirmed) {
         try {
           await axios.delete(`https://zoneoutlet.onrender.com/products/${id}`);
-          window.location.reload(); // Reload the page
+          window.location.href = "/proDash"
         } catch (error) {
           console.error(error);
         }
