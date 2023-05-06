@@ -29,11 +29,14 @@ function Auth() {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:5000/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password, address, phonenumber }),
-      });
+      const response = await fetch(
+        "https://zoneoutlet.onrender.com/api/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password, address, phonenumber }),
+        }
+      );
 
       if (!response.ok) {
         const data = await response.json();
@@ -58,11 +61,14 @@ function Auth() {
     event.preventDefault();
     setError(null);
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await fetch(
+        "https://zoneoutlet.onrender.com/api/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        }
+      );
       const data = await response.json();
       console.log(data);
       if (!response.ok) {

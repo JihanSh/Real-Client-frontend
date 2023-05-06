@@ -30,7 +30,6 @@ const Home = ({ countdownDate, setCountdownDate }) => {
   const [timerHours, setTimerHours] = useState("00");
   const [timerMinutes, setTimerMinutes] = useState("00");
   const [timerSeconds, setTimerSeconds] = useState("00");
- 
 
   let interval = useRef();
 
@@ -83,7 +82,7 @@ const Home = ({ countdownDate, setCountdownDate }) => {
   const userId = sessionStorage.getItem("Id");
   useEffect(() => {
     axios
-      .get("http://localhost:5000/categories")
+      .get("https://zoneoutlet.onrender.com/categories")
       .then((response) => {
         setCategories(response.data);
       })
@@ -95,7 +94,7 @@ const Home = ({ countdownDate, setCountdownDate }) => {
   useEffect(() => {
     // console.log("jjjjj", currentPage);
     axios
-      .get(`http://localhost:5000/products/pag?page=${currentPage}`)
+      .get(`https://zoneoutlet.onrender.com/products/pag?page=${currentPage}`)
       .then((response) => {
         setProducts(response.data.data);
         setTotalPages(response.data.totalPages); // update totalPages state
@@ -115,7 +114,7 @@ const Home = ({ countdownDate, setCountdownDate }) => {
     if (userId) {
       try {
         const response = await axios.post(
-          `http://localhost:5000/cart/${userId}`,
+          `https://zoneoutlet.onrender.com/cart/${userId}`,
           {
             productId: productId,
           }
@@ -163,7 +162,9 @@ const Home = ({ countdownDate, setCountdownDate }) => {
           <div className="line-sale-section">
             <h2 className="line">Special Sale !!</h2>
             <h2>GET UP TO 20% OFF</h2>
-            <Link className="sale-link" to={'/sale'}>SHOP NOW</Link>
+            <Link className="sale-link" to={"/sale"}>
+              SHOP NOW
+            </Link>
           </div>
         </div>
         <h1 className="line-category-section">Categories</h1>
@@ -198,42 +199,42 @@ const Home = ({ countdownDate, setCountdownDate }) => {
           ))}
         </div>
         {countdownDate && new Date(countdownDate) >= new Date() && (
-        <section className="timer-container">
-      <section className="timer">
-        <div>
-          <h2 className="timer-h2">NEW ITEMS COMING IN!</h2>
-        </div>
-        <div className="timer-main">
-          <section>
-            <p>{timerDays}</p>
-            <p className="timer-p">
-              <small>Days</small>
-            </p>
+          <section className="timer-container">
+            <section className="timer">
+              <div>
+                <h2 className="timer-h2">NEW ITEMS COMING IN!</h2>
+              </div>
+              <div className="timer-main">
+                <section>
+                  <p>{timerDays}</p>
+                  <p className="timer-p">
+                    <small>Days</small>
+                  </p>
+                </section>
+                <span>:</span>
+                <section>
+                  <p className="two-numbers">{timerHours}</p>
+                  <p className="timer-p">
+                    <small>Hours</small>
+                  </p>
+                </section>
+                <span>:</span>
+                <section>
+                  <p className="two-numbers">{timerMinutes}</p>
+                  <p className="timer-p">
+                    <small>Minutes</small>
+                  </p>
+                </section>
+                <span>:</span>
+                <section>
+                  <p className="two-numbers">{timerSeconds}</p>
+                  <p className="timer-p">
+                    <small>Seconds</small>
+                  </p>
+                </section>
+              </div>
+            </section>
           </section>
-          <span>:</span>
-          <section>
-            <p className="two-numbers">{timerHours}</p>
-            <p className="timer-p">
-              <small>Hours</small>
-            </p>
-          </section>
-          <span>:</span>
-          <section>
-            <p className="two-numbers">{timerMinutes}</p>
-            <p className="timer-p">
-              <small>Minutes</small>
-            </p>
-          </section>
-          <span>:</span>
-          <section>
-            <p className="two-numbers">{timerSeconds}</p>
-            <p className="timer-p">
-              <small>Seconds</small>
-            </p>
-          </section>
-        </div>
-      </section>
-    </section>
         )}
         <h1 className="line-latest-section">Latest Drops</h1>
         <div className="products-section">

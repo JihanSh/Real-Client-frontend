@@ -14,7 +14,9 @@ const User = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/user/${id}`);
+        const response = await fetch(
+          `https://zoneoutlet.onrender.com/api/user/${id}`
+        );
         const data = await response.json();
         setUser(data);
         setPhoneNumber(data.phonenumber);
@@ -29,17 +31,20 @@ const User = () => {
   const updateUser = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/update", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: id,
-          address: address,
-          phonenumber: phoneNumber,
-        }),
-      });
+      const response = await fetch(
+        "https://zoneoutlet.onrender.com/api/update",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: id,
+            address: address,
+            phonenumber: phoneNumber,
+          }),
+        }
+      );
       const data = await response.json();
       console.log("Updated Successfully");
 
