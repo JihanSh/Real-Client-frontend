@@ -16,9 +16,7 @@ const UserOrders = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(
-          "https://sensational-beignet-752668.netlify.app/"
-        );
+        const response = await axios.get("http://localhost:5000/orders/");
         console.log(response.data);
         sessionStorage.getItem(response.data)
         setUsers(response.data);
