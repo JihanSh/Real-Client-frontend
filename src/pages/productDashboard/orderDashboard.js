@@ -18,6 +18,7 @@ const UserOrders = () => {
           "https://zoneoutlet.onrender.com/orders/"
         );
         console.log(response.data);
+        sessionStorage.getItem(response.data)
         setUsers(response.data);
       } catch (error) {
         console.error(error);
