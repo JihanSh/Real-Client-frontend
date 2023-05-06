@@ -30,6 +30,7 @@ const Home = ({ countdownDate, setCountdownDate }) => {
   const [timerHours, setTimerHours] = useState("00");
   const [timerMinutes, setTimerMinutes] = useState("00");
   const [timerSeconds, setTimerSeconds] = useState("00");
+  const [dash, setDash] = useState(false);
 
   let interval = useRef();
 
@@ -150,10 +151,28 @@ const Home = ({ countdownDate, setCountdownDate }) => {
       }
     }
   };
+
+  useEffect(() => {
+    const role = sessionStorage.getItem('role');
+    if (role === 'admin') {
+      setDash(true); // update `dash` state to true if the user role is admin
+    }
+  }, []); 
+
   return (
     <>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
+      {dash && (
+      <div className="go-order-button">
+        <button
+          className="add-subcategory-button">
+          <Link to="/proDash" className="go-order-link">
+            Go to Dashboard
+          </Link>
+        </button>
+      </div>
+      )}
       <div className="home-section">
         <div className="sale-section">
           <div className="img-sale-section">

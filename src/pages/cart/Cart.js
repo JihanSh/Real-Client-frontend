@@ -140,7 +140,7 @@ const Cart = () => {
             showConfirmButton: false,
             timer: 1500,
           }).then(() => {
-            // window.location.href = "/";
+            window.location.href = "/cart";
           });
           console.log("here4444");
         } else {
