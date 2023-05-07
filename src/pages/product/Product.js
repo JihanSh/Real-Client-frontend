@@ -31,7 +31,9 @@ const Product = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/products/${productId.productId}`)
+      .get(
+        `https://zoneoutlet-ckb5.onrender.com/products/${productId.productId}`
+      )
       .then((response) => {
         setProduct(response.data);
         setLoading(false);
@@ -45,7 +47,9 @@ const Product = () => {
   useEffect(() => {
     // console.log("jjjjj", currentPage);
     axios
-      .get(`http://localhost:5000/products/pag?page=${currentPage}`)
+      .get(
+        `https://zoneoutlet-ckb5.onrender.com/products/pag?page=${currentPage}`
+      )
       .then((response) => {
         setProducts(response.data.data);
         setTotalPages(response.data.totalPages); // update totalPages state
@@ -62,7 +66,7 @@ const Product = () => {
     if (userId) {
       try {
         const response = await axios.post(
-          `http://localhost:5000/cart/${userId}`,
+          `https://zoneoutlet-ckb5.onrender.com/cart/${userId}`,
           {
             productId: productId,
           }
@@ -118,7 +122,8 @@ const Product = () => {
               <div className="carousel-product">
                 <ProductCarousel
                   images={
-                    product.images && product.images.map((item) => `${item.url}`)
+                    product.images &&
+                    product.images.map((item) => `${item.url}`)
                   }
                 />
               </div>

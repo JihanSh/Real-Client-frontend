@@ -83,7 +83,7 @@ const Home = ({ countdownDate, setCountdownDate }) => {
   const userId = sessionStorage.getItem("Id");
   useEffect(() => {
     axios
-      .get("http://localhost:5000/categories")
+      .get("https://zoneoutlet-ckb5.onrender.com/categories")
       .then((response) => {
         setCategories(response.data);
       })
@@ -95,7 +95,9 @@ const Home = ({ countdownDate, setCountdownDate }) => {
   useEffect(() => {
     // console.log("jjjjj", currentPage);
     axios
-      .get(`http://localhost:5000/products/pag?page=${currentPage}`)
+      .get(
+        `https://zoneoutlet-ckb5.onrender.com/products/pag?page=${currentPage}`
+      )
       .then((response) => {
         setProducts(response.data.data);
         setTotalPages(response.data.totalPages); // update totalPages state
@@ -115,7 +117,7 @@ const Home = ({ countdownDate, setCountdownDate }) => {
     if (userId) {
       try {
         const response = await axios.post(
-          `http://localhost:5000/cart/${userId}`,
+          `https://zoneoutlet-ckb5.onrender.com/cart/${userId}`,
           {
             productId: productId,
           }
@@ -153,25 +155,24 @@ const Home = ({ countdownDate, setCountdownDate }) => {
   };
 
   useEffect(() => {
-    const role = sessionStorage.getItem('role');
-    if (role === 'admin') {
+    const role = sessionStorage.getItem("role");
+    if (role === "admin") {
       setDash(true); // update `dash` state to true if the user role is admin
     }
-  }, []); 
+  }, []);
 
   return (
     <>
       <HeaderNavbar setMenuBar={setMenuBar} menubar={menubar} />
       <MenuBar menubar={menubar} />
       {dash && (
-      <div className="go-order-button">
-        <button
-          className="add-subcategory-button">
-          <Link to="/proDash" className="go-order-link">
-            Go to Dashboard
-          </Link>
-        </button>
-      </div>
+        <div className="go-order-button">
+          <button className="add-subcategory-button">
+            <Link to="/proDash" className="go-order-link">
+              Go to Dashboard
+            </Link>
+          </button>
+        </div>
       )}
       <div className="home-section">
         <div className="sale-section">

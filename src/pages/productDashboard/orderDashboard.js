@@ -15,10 +15,10 @@ const UserOrders = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/orders/"
+          "https://zoneoutlet-ckb5.onrender.com/orders/"
         );
         console.log(response.data);
-        sessionStorage.getItem(response.data)
+        sessionStorage.getItem(response.data);
         setUsers(response.data);
       } catch (error) {
         console.error(error);
@@ -33,7 +33,7 @@ const UserOrders = () => {
   const updateOrderStatus = async (id, status) => {
     try {
       const response = await axios.patch(
-        `http://localhost:5000/orders/${id}`,
+        `https://zoneoutlet-ckb5.onrender.com/orders/${id}`,
         {
           status: status,
         }

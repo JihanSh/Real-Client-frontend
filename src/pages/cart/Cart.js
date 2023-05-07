@@ -30,7 +30,7 @@ const Cart = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/cart/${userId}`
+          `https://zoneoutlet-ckb5.onrender.com/cart/${userId}`
         );
         const data = await response.json();
         setTableData(data.items);
@@ -72,7 +72,7 @@ const Cart = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const response = await fetch(
-          `http://localhost:5000/cart/${userId}/${productId}`,
+          `https://zoneoutlet-ckb5.onrender.com/cart/${userId}/${productId}`,
           {
             method: "DELETE",
           }
@@ -96,7 +96,7 @@ const Cart = () => {
 
   const handleOrder = () => {
     // send POST request to place order function
-    fetch("http://localhost:5000/orders", {
+    fetch("https://zoneoutlet-ckb5.onrender.com/orders", {
       method: "POST",
       body: JSON.stringify({
         userId: userId,
@@ -123,15 +123,13 @@ const Cart = () => {
             message: "You have a new order to prosses",
           };
           console.log("here", totalData);
-         
+
           emailjs.send(serviceId, templateId, templateParams, userId).then(
             function (response) {
               console.log("SUCCESS!", response.status, response.text);
-              
             },
             function (error) {
               console.log("FAILED...", error);
-              
             }
           );
           Swal.fire({
@@ -142,7 +140,6 @@ const Cart = () => {
           }).then(() => {
             window.location.href = "/cart";
           });
-         
         } else {
           // set order status to failure
           setOrderStatus("failure");
