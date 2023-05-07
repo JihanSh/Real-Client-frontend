@@ -15,7 +15,7 @@ const User = () => {
     const fetchUser = async () => {
       try {
         const response = await fetch(
-          `https://zoneoutlet.onrender.com/api/user/${id}`
+          `http://localhost:5000/api/user/${id}`
         );
         const data = await response.json();
         setUser(data);
@@ -32,7 +32,7 @@ const User = () => {
     event.preventDefault();
     try {
       const response = await fetch(
-        "https://zoneoutlet.onrender.com/api/update",
+        "http://localhost:5000/api/update",
         {
           method: "PUT",
           headers: {

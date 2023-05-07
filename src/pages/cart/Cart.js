@@ -30,7 +30,7 @@ const Cart = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://zoneoutlet.onrender.com/cart/${userId}`
+          `http://localhost:5000/cart/${userId}`
         );
         const data = await response.json();
         setTableData(data.items);
@@ -72,7 +72,7 @@ const Cart = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const response = await fetch(
-          `https://zoneoutlet.onrender.com/cart/${userId}/${productId}`,
+          `http://localhost:5000/cart/${userId}/${productId}`,
           {
             method: "DELETE",
           }
@@ -96,7 +96,7 @@ const Cart = () => {
 
   const handleOrder = () => {
     // send POST request to place order function
-    fetch("https://zoneoutlet.onrender.com/orders", {
+    fetch("http://localhost:5000/orders", {
       method: "POST",
       body: JSON.stringify({
         userId: userId,

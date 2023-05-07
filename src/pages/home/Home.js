@@ -83,7 +83,7 @@ const Home = ({ countdownDate, setCountdownDate }) => {
   const userId = sessionStorage.getItem("Id");
   useEffect(() => {
     axios
-      .get("https://zoneoutlet.onrender.com/categories")
+      .get("http://localhost:5000/categories")
       .then((response) => {
         setCategories(response.data);
       })
@@ -95,7 +95,7 @@ const Home = ({ countdownDate, setCountdownDate }) => {
   useEffect(() => {
     // console.log("jjjjj", currentPage);
     axios
-      .get(`https://zoneoutlet.onrender.com/products/pag?page=${currentPage}`)
+      .get(`http://localhost:5000/products/pag?page=${currentPage}`)
       .then((response) => {
         setProducts(response.data.data);
         setTotalPages(response.data.totalPages); // update totalPages state
@@ -115,7 +115,7 @@ const Home = ({ countdownDate, setCountdownDate }) => {
     if (userId) {
       try {
         const response = await axios.post(
-          `https://zoneoutlet.onrender.com/cart/${userId}`,
+          `http://localhost:5000/cart/${userId}`,
           {
             productId: productId,
           }

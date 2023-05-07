@@ -29,7 +29,7 @@ const Sale = () => {
   useEffect(() => {
     // console.log("jjjjj", currentPage);
     axios
-      .get(`https://zoneoutlet.onrender.com/products/sale/?page=${currentPage}`)
+      .get(`http://localhost:5000/products/sale/?page=${currentPage}`)
       .then((response) => {
         setProducts(response.data.data);
         setTotalPages(response.data.totalPages); // update totalPages state
@@ -46,7 +46,7 @@ const Sale = () => {
     if (userId) {
       try {
         const response = await axios.post(
-          `https://zoneoutlet.onrender.com/cart/${userId}`,
+          `http://localhost:5000/cart/${userId}`,
           {
             productId: productId,
           }

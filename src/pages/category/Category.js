@@ -14,7 +14,7 @@ const Category = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `https://zoneoutlet.onrender.com/categories/${categoryId.categoryId}`
+          `http://localhost:5000/categories/${categoryId.categoryId}`
         );
         const data = await response.json();
         setCategory(data);

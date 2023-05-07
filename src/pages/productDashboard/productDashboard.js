@@ -72,7 +72,7 @@ function ProductDashboard({ setCountdownDate }, props) {
 
   useEffect(() => {
     axios
-      .get("https://zoneoutlet.onrender.com/products")
+      .get("http://localhost:5000/products")
       .then((response) => {
         setProducts(response.data);
       })
@@ -97,9 +97,9 @@ function ProductDashboard({ setCountdownDate }, props) {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`https://zoneoutlet.onrender.com/products/${id}`);
+          await axios.delete(`http://localhost:5000/products/${id}`);
           // Refetch the products list
-        const response = await axios.get("https://zoneoutlet.onrender.com/products");
+        const response = await axios.get("http://localhost:5000/products");
         setProducts(response.data);
         } catch (error) {
           console.error(error);
@@ -114,7 +114,7 @@ function ProductDashboard({ setCountdownDate }, props) {
     console.log(id);
     try {
       const response = await axios.get(
-        `https://zoneoutlet.onrender.com/products/${id}`
+        `http://localhost:5000/products/${id}`
       );
       setProduct(response.data);
       setId(id);
@@ -130,7 +130,7 @@ function ProductDashboard({ setCountdownDate }, props) {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "https://zoneoutlet.onrender.com/categories"
+          "http://localhost:5000/categories"
         );
         setCategories(response.data);
       } catch (error) {
@@ -141,7 +141,7 @@ function ProductDashboard({ setCountdownDate }, props) {
     const fetchSubcategories = async () => {
       try {
         const response = await axios.get(
-          "https://zoneoutlet.onrender.com/subcategories"
+          "http://localhost:5000/subcategories"
         );
         setSubcategories(response.data);
       } catch (error) {
@@ -182,7 +182,7 @@ function ProductDashboard({ setCountdownDate }, props) {
       formData.append("size", product.size);
 
       await axios.put(
-        `https://zoneoutlet.onrender.com/products/${id}`,
+        `http://localhost:5000/products/${id}`,
         formData,
         {
           headers: {
@@ -204,7 +204,7 @@ function ProductDashboard({ setCountdownDate }, props) {
       setEditMode(false);
       // Fetch the updated list of products
       const response = await axios.get(
-        `https://zoneoutlet.onrender.com/products`
+        `http://localhost:5000/products`
       );
 
       // Update the state of the products with the new list
@@ -235,7 +235,7 @@ function ProductDashboard({ setCountdownDate }, props) {
       formData.append("discountPercentage", product.discountPercentage);
       formData.append("size", product.size);
 
-      await axios.post(`https://zoneoutlet.onrender.com/products`, formData, {
+      await axios.post(`http://localhost:5000/products`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -256,7 +256,7 @@ function ProductDashboard({ setCountdownDate }, props) {
 
       // Fetch the updated list of products
       const response = await axios.get(
-        `https://zoneoutlet.onrender.com/products`
+        `http://localhost:5000/products`
       );
 
       // Update the state of the products with the new list

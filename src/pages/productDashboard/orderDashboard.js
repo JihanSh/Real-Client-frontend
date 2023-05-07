@@ -15,7 +15,7 @@ const UserOrders = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "https://zoneoutlet.onrender.com/orders/"
+          "http://localhost:5000/orders/"
         );
         console.log(response.data);
         sessionStorage.getItem(response.data)
@@ -33,7 +33,7 @@ const UserOrders = () => {
   const updateOrderStatus = async (id, status) => {
     try {
       const response = await axios.patch(
-        `https://zoneoutlet.onrender.com/orders/${id}`,
+        `http://localhost:5000/orders/${id}`,
         {
           status: status,
         }

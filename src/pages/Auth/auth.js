@@ -30,7 +30,7 @@ function Auth() {
 
     try {
       const response = await fetch(
-        "https://zoneoutlet.onrender.com/api/register",
+        "http://localhost:5000/api/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -62,7 +62,7 @@ function Auth() {
     setError(null);
     try {
       const response = await fetch(
-        "https://zoneoutlet.onrender.com/api/login",
+        "http://localhost:5000/api/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

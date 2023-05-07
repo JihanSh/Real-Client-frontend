@@ -43,7 +43,7 @@ const CategoryDash = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "https://zoneoutlet.onrender.com/categories"
+          "http://localhost:5000/categories"
         );
         setCategories(response.data);
       } catch (error) {
@@ -54,7 +54,7 @@ const CategoryDash = () => {
     const fetchSubcategories = async () => {
       try {
         const response = await axios.get(
-          "https://zoneoutlet.onrender.com/subcategories"
+          "http://localhost:5000/subcategories"
         );
         setSubcategories(response.data);
       } catch (error) {
@@ -70,7 +70,7 @@ const CategoryDash = () => {
     console.log(id);
     try {
       const response = await axios.get(
-        `https://zoneoutlet.onrender.com/categories/${id}`
+        `http://localhost:5000/categories/${id}`
       );
       setCategory(response.data);
       setIdCategory(id);
@@ -84,7 +84,7 @@ const CategoryDash = () => {
     console.log(id);
     try {
       const response = await axios.get(
-        `https://zoneoutlet.onrender.com/subcategories/${id}`
+        `http://localhost:5000/subcategories/${id}`
       );
       setSubcategory(response.data);
       setIdSubCategory(id);
@@ -105,7 +105,7 @@ const CategoryDash = () => {
   const handleEditSubmitCategory = async (event) => {
     console.log(idCategory);
     event.preventDefault();
-    fetch(`https://zoneoutlet.onrender.com/categories/${idCategory}`, {
+    fetch(`http://localhost:5000/categories/${idCategory}`, {
       method: "PUT",
       headers: {
         // "Content-Type": "application/x-www-form-urlencoded"
@@ -133,7 +133,7 @@ const CategoryDash = () => {
 
     // Fetch the updated list of products
     const response = await axios.get(
-      `https://zoneoutlet.onrender.com/categories`
+      `http://localhost:5000/categories`
     );
 
     // Update the state of the products with the new list
@@ -150,7 +150,7 @@ const CategoryDash = () => {
 
   const handleEditSubmitSubCategory = async (event) => {
     event.preventDefault();
-    fetch(`https://zoneoutlet.onrender.com/subcategories/${idSubCategory}`, {
+    fetch(`http://localhost:5000/subcategories/${idSubCategory}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -178,7 +178,7 @@ const CategoryDash = () => {
     {
       // Fetch the updated list of products
       const response = await axios.get(
-        `https://zoneoutlet.onrender.com/subcategories`
+        `http://localhost:5000/subcategories`
       );
       // Update the state of the products with the new list
       setSubcategories(response.data).catch((error) => console.error(error));
@@ -203,7 +203,7 @@ const CategoryDash = () => {
       if (result.isConfirmed) {
         try {
           const response = await fetch(
-            `https://zoneoutlet.onrender.com/subcategories/${id}`,
+            `http://localhost:5000/subcategories/${id}`,
             {
               method: "DELETE",
             }
@@ -219,7 +219,7 @@ const CategoryDash = () => {
         }
         // Fetch the updated list of products
         const response = await axios.get(
-          `https://zoneoutlet.onrender.com/subcategories`
+          `http://localhost:5000/subcategories`
         );
 
         // Update the state of the products with the new list
@@ -235,7 +235,7 @@ const CategoryDash = () => {
 
   const handleAddSubmit = async (event) => {
     event.preventDefault();
-    await fetch("https://zoneoutlet.onrender.com/subcategories", {
+    await fetch("http://localhost:5000/subcategories", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -271,7 +271,7 @@ const CategoryDash = () => {
       });
     // Fetch the updated list of products
     const response = await axios.get(
-      "https://zoneoutlet.onrender.com/subcategories"
+      "http://localhost:5000/subcategories"
     );
 
     // Update the state of the products with the new list
