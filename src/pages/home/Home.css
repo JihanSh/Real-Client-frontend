@@ -398,8 +398,9 @@
             background-color: #e8e5e5 ;
             align-items: center;
             justify-content: space-evenly;
-            width: 350px;
+            width: 300px;
             height: 200px;
+           margin-left: 40px;
         }
         .img-sale-section img{
            display: none;
@@ -461,9 +462,11 @@
         display: none;
     }   
       .list-category-section{
+        border:#0B486A solid 1px;
+        width:300px;
         display: flex;
         flex-direction: column;
-        margin: 10px 10px 10px 20px;
+        margin: 10px 10px 10px 40px;
         }
         .list-category-section .link-category{
             text-decoration: none;
