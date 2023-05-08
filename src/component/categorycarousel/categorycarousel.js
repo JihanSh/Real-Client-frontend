@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "./categorycarousel.css";
 import {
   Box,
- 
   Card,
   CardActionArea,
   CardActions,
@@ -38,7 +37,7 @@ const TitleCarousel = () => {
     const fetchTitle = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/subcategories/list/${categoryId.categoryId}`
+          `https://zoneoutlet-ckb5.onrender.com/subcategories/list/${categoryId.categoryId}`
         );
         const data = await response.json();
         setTitle(data.subcategories);
@@ -65,7 +64,7 @@ const TitleCarousel = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/list2/${categoryId.categoryId}?page=${currentPage}`
+          `https://zoneoutlet-ckb5.onrender.com/products/list2/${categoryId.categoryId}?page=${currentPage}`
         );
         const data = await response.json();
         setProduct(data.data);
@@ -88,12 +87,11 @@ const TitleCarousel = () => {
     const fetchProductsBySubcategory = async (subcategoryId) => {
       try {
         const response = await fetch(
-          `http://localhost:5000/products/list1/${subcategoryId}?page=${currentPage}`
+          `https://zoneoutlet-ckb5.onrender.com/products/list1/${subcategoryId}?page=${currentPage}`
         );
         const data = await response.json();
         setProduct(data.data);
         setTotalPages(data.totalPages); // update totalPages state
-       
       } catch (err) {
         console.log(err.message);
       }
@@ -105,7 +103,7 @@ const TitleCarousel = () => {
       const fetchProducts = async () => {
         try {
           const response = await fetch(
-            `http://localhost:5000/products/list2/${categoryId.categoryId}?page=${currentPage}`
+            `https://zoneoutlet-ckb5.onrender.com/products/list2/${categoryId.categoryId}?page=${currentPage}`
           );
           const data = await response.json();
           setProduct(data.data);
@@ -127,7 +125,7 @@ const TitleCarousel = () => {
     console.log(productId);
     if (userId) {
       try {
-        const url = `http://localhost:5000/cart/${userId}`;
+        const url = `https://zoneoutlet-ckb5.onrender.com/cart/${userId}`;
         const response = await fetch(url, {
           method: "POST",
           body: JSON.stringify({
